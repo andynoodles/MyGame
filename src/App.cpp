@@ -5,19 +5,24 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 
+#include "BackgroundImage.hpp"
+
+#include<iostream>
+
 void App::Start() {
     LOG_TRACE("Start");
+	std::shared_ptr<BackgroundImage> backgroundImage = std::make_shared<BackgroundImage>();
+
+
+	m_Root.AddChild(backgroundImage);
+	m_Root.Update();
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
-    
-    //TODO: do your things here and delete this line <3
-    
-    /*
-     * Do not touch the code below as they serve the purpose for
-     * closing the window.
-     */
+
+	m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
         m_CurrentState = State::END;
