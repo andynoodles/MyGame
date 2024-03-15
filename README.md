@@ -3,6 +3,6 @@
 
 
 ## Getting Start
-'''
+```
 git clone https://github.com/andynoodles/MyGame --recursive
-'''
+```
