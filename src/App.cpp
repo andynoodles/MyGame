@@ -11,13 +11,8 @@
 
 void App::Start() {
     LOG_TRACE("Start");
-	std::shared_ptr<BackgroundImage> backgroundImage=std::make_shared<BackgroundImage>();
-	backgroundImage->SetVisible(true);
+	std::shared_ptr<BackgroundImage> backgroundImage = std::make_shared<BackgroundImage>();
 
-	std::cout<<backgroundImage->GetScaledSize().y;
-
-//	std::shared_ptr<Util::Image> backgroundImage=std::make_shared<Util::Image>(RESOURCE_DIR"/Image/a.png");
-//	backgroundImage->Draw();
 
 	m_Root.AddChild(backgroundImage);
 	m_Root.Update();
@@ -26,17 +21,6 @@ void App::Start() {
 }
 
 void App::Update() {
-    
-    //TODO: do your things here and delete this line <3
-    
-    /*
-     * Do not touch the code below as they serve the purpose for
-     * closing the window.
-     */
-	
-//	if(Util::Input::IsKeyPressed(Util::Keycode::MOUSE_LB)){
-//		std::cout<<Util::Image::GetSize();
-//	}
 
 	m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
