@@ -17,7 +17,7 @@ void App::Start() {
     std::vector<std::string> pacmanImage;
     pacmanImage.reserve(3);
     for (int i = 0; i < 3; ++i) {
-        pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite" + std::to_string(i + 1) + ".png");
+        pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
     }
 
     m_Pacman = std::make_shared<AnimatedCharacter>(pacmanImage);
