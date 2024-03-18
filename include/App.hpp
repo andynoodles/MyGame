@@ -3,6 +3,7 @@
 
 #include "pch.hpp" // IWYU pragma: export
 #include "Util/Root.hpp"
+#include "BackgroundImage.hpp"
 
 class App {
 public:
@@ -26,6 +27,7 @@ private:
 private:
     State m_CurrentState = State::START;
 	Util::Root m_Root;
+	std::shared_ptr<Util::GameObject> backgroundImage;
 };
 
 #endif

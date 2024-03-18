@@ -1,0 +1,3 @@
+/home/user/MyGame/_deps/sdl2-subbuild/CMakeFiles/sdl2-populate.dir
+/home/user/MyGame/_deps/sdl2-subbuild/CMakeFiles/edit_cache.dir
+/home/user/MyGame/_deps/sdl2-subbuild/CMakeFiles/rebuild_cache.dir
