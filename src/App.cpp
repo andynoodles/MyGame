@@ -1,9 +1,14 @@
 #include "App.hpp"
 
+#include "AnimatedCharacter.hpp"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+#include "Util/Animation.hpp"
+
+
+#include<iostream>
 
 #include "BackgroundImage.hpp"
 
@@ -11,32 +16,30 @@
 
 void App::Start() {
     LOG_TRACE("Start");
-	std::shared_ptr<BackgroundImage> backgroundImage=std::make_shared<BackgroundImage>();
-	backgroundImage->SetVisible(true);
+    backgroundImage = std::make_shared<BackgroundImage>();
+    
+    std::vector<std::string> pacmanImage;
+    pacmanImage.reserve(3);
+    for (int i = 0; i < 3; ++i) {
+        pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
+    }
 
-	std::cout<<backgroundImage->GetScaledSize().y;
-
-//	std::shared_ptr<Util::Image> backgroundImage=std::make_shared<Util::Image>(RESOURCE_DIR"/Image/a.png");
-//	backgroundImage->Draw();
-
-	m_Root.AddChild(backgroundImage);
-	m_Root.Update();
+    m_Pacman = std::make_shared<AnimatedCharacter>(pacmanImage);
+    m_Pacman->SetZIndex(5);
+    m_Pacman->SetVisible(true);
+    m_Pacman->SetLooping(true);
+    m_Pacman->SetPlaying(true);
+    
+    m_Root.AddChild(m_Pacman);  
+	  m_Root.AddChild(backgroundImage);
+	  m_Root.Update();
 
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
-    
-    //TODO: do your things here and delete this line <3
-    
-    /*
-     * Do not touch the code below as they serve the purpose for
-     * closing the window.
-     */
-	
-//	if(Util::Input::IsKeyPressed(Util::Keycode::MOUSE_LB)){
-//		std::cout<<Util::Image::GetSize();
-//	}
+
+
 
 	m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
