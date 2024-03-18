@@ -8,7 +8,7 @@ class BackgroundImage : public Util::GameObject{
 
 public:
     BackgroundImage() : GameObject(
-            std::make_unique<Util::Image>(RESOURCE_DIR"/image/Background.png"), -10) {
+      std::make_unique<Util::Image>(RESOURCE_DIR"/image/Background.png"), -10) {
                 m_Transform.scale = {2,2};
     }
 

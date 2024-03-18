@@ -10,9 +10,13 @@
 
 #include<iostream>
 
+#include "BackgroundImage.hpp"
+
+#include<iostream>
+
 void App::Start() {
     LOG_TRACE("Start");
-	backgroundImage = std::make_shared<BackgroundImage>();
+    backgroundImage = std::make_shared<BackgroundImage>();
     
     std::vector<std::string> pacmanImage;
     pacmanImage.reserve(3);
@@ -25,16 +29,17 @@ void App::Start() {
     m_Pacman->SetVisible(true);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(true);
-
     
-    m_Root.AddChild(m_Pacman);
-	m_Root.AddChild(backgroundImage);
-	m_Root.Update();
+    m_Root.AddChild(m_Pacman);  
+	  m_Root.AddChild(backgroundImage);
+	  m_Root.Update();
 
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+
+
 
 	m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
