@@ -6,7 +6,6 @@
 #include "AnimatedCharacter.hpp"
 #include "BackgroundImage.hpp"
 
-
 class App {
 public:
     enum class State {
@@ -32,10 +31,10 @@ private:
     
     std::shared_ptr<BackgroundImage> backgroundImage;
     std::shared_ptr<AnimatedCharacter> m_Pacman;
-    // std::shared_ptr<AnimatedCharacter> m_Red;
-    // std::shared_ptr<AnimatedCharacter> m_Pink;
-    // std::shared_ptr<AnimatedCharacter> m_Cyan;
-    // std::shared_ptr<AnimatedCharacter> m_Orange;
+    std::shared_ptr<AnimatedCharacter> m_Red;
+    std::shared_ptr<AnimatedCharacter> m_Pink;
+    std::shared_ptr<AnimatedCharacter> m_Cyan;
+    std::shared_ptr<AnimatedCharacter> m_Orange;
 };
 
 #endif
