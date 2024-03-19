@@ -494,3 +494,4 @@ lib/
 
 # Doxygen generated files
 docs/html/
+.DS_Store
