@@ -24,7 +24,6 @@ public:
     void SetLooping(bool looping) {
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
-        temp->Play();
     }
 
     void SetPlaying(bool play) {
@@ -33,6 +32,14 @@ public:
     }
 
     [[nodiscard]] bool IfAnimationEnds() const;
+    
+    void FaceNorth();
+    void FaceSouth();
+    void FaceWest();
+    void FaceEast();
+    void SetPosition(const glm::vec2& Position);
+    void Move(const glm::vec2& Speed, float SpeedMultiplier);
+    
 
 };
 
