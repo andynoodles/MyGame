@@ -1,5 +1,7 @@
 set(SRC_FILES
-    App.cpp
+    AppUpdate.cpp
+    AppStart.cpp
+    AppEnd.cpp
   	BackgroundImage.cpp
     AnimatedCharacter.cpp
 )
