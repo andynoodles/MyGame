@@ -39,4 +39,3 @@ void AnimatedCharacter::Move(const glm::vec2& Speed, float SpeedMultiplier = 1){
 glm::vec2 AnimatedCharacter::GetPosition(){
     return m_Transform.translation;
 }
-
