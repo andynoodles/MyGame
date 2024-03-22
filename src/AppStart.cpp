@@ -6,15 +6,15 @@ void App::Start() {
     
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(3);
-    cyanImage.reserve(2);
-    orangeImage.reserve(2);
-    pinkImage.reserve(2);
-    redImage.reserve(2);
+    cyanImage.reserve(8);
+    orangeImage.reserve(8);
+    pinkImage.reserve(8);
+    redImage.reserve(8);
     for (int i = 0; i < 3; ++i) {
         pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
     }
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 8; i++) {
         cyanImage.emplace_back(RESOURCE_DIR"/image/Cyan/Sprite (" + std::to_string(i + 85) + ").png");
         orangeImage.emplace_back(RESOURCE_DIR"/image/Orange/Sprite (" + std::to_string(i + 99) + ").png");
         pinkImage.emplace_back(RESOURCE_DIR"/image/Pink/Sprite (" + std::to_string(i + 71) + ").png");
