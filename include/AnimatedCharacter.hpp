@@ -1,6 +1,7 @@
 #ifndef ANIMATED_CHARACTER_HPP
 #define ANIMATED_CHARACTER_HPP
 
+#include <cstddef>
 #include <vector>
 #include <string>
 
@@ -30,13 +31,6 @@ public:
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         if(play) temp->Play();
     }
-
-    void SetStart(std::size_t StartIndex){
-        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-        temp->SetCurrentFrame(StartIndex);
-    }   
-    
-
     [[nodiscard]] bool IfAnimationEnds() const;
     
     void FaceNorth();
@@ -46,6 +40,7 @@ public:
     void SetPosition(const glm::vec2& Position);
     glm::vec2 GetPosition();
     void Move(const glm::vec2& Speed, float SpeedMultiplier);
+    void GhostMove(const glm::vec2& Speed, float SpeedMultiplier);
 
 //variables
     float SpeedMultiplier = 1;

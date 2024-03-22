@@ -6,15 +6,15 @@ void App::Start() {
     
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(3);
-    cyanImage.reserve(8);
-    orangeImage.reserve(8);
-    pinkImage.reserve(8);
-    redImage.reserve(8);
+    cyanImage.reserve(9);
+    orangeImage.reserve(9);
+    pinkImage.reserve(9);
+    redImage.reserve(9);
     for (int i = 0; i < 3; ++i) {
         pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
     }
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 9; i++) {
         cyanImage.emplace_back(RESOURCE_DIR"/image/Cyan/Sprite (" + std::to_string(i + 85) + ").png");
         orangeImage.emplace_back(RESOURCE_DIR"/image/Orange/Sprite (" + std::to_string(i + 99) + ").png");
         pinkImage.emplace_back(RESOURCE_DIR"/image/Pink/Sprite (" + std::to_string(i + 71) + ").png");
@@ -35,7 +35,7 @@ void App::Start() {
     m_Cyan->SetVisible(true);
     m_Cyan->SetLooping(true);
     m_Cyan->SetPlaying(true);
-    m_Cyan->SetPosition({0, 10});
+    m_Cyan->SetPosition({0, 0});
 
     m_Orange = std::make_shared<AnimatedCharacter>(orangeImage);
     m_Orange->SetZIndex(52);
@@ -49,14 +49,14 @@ void App::Start() {
     m_Pink->SetVisible(true);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(true);
-    m_Pink->SetPosition({0, 50});
+    m_Pink->SetPosition({0, 60});
 
     m_Red = std::make_shared<AnimatedCharacter>(redImage);
     m_Red->SetZIndex(54);
     m_Red->SetVisible(true);
     m_Red->SetLooping(true);
     m_Red->SetPlaying(true);
-    m_Red->SetPosition({0, 70});
+    m_Red->SetPosition({0, 90});
 
     m_Root.AddChild(m_Cyan);
     m_Root.AddChild(m_Orange);
