@@ -7,7 +7,7 @@
 
 class BackgroundImage : public Util::GameObject{
 public:
-    BackgroundImage(const std::string imagePath);
+    	BackgroundImage(const std::string imagePath);
 	const unsigned char typeOfPixel(float pixelX ,float pixelY);
 
 private:
