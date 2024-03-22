@@ -28,8 +28,15 @@ void AnimatedCharacter::SetPosition(const glm::vec2& Position){
     m_Transform.translation = Position; 
 }
 
-void AnimatedCharacter::Move(const glm::vec2& Position, float SpeedMultiplier = 1){ 
-    m_Transform.translation = m_Transform.translation + (Position * SpeedMultiplier); 
+void AnimatedCharacter::Move(const glm::vec2& Speed, float SpeedMultiplier = 1){ 
+    if(Speed.x > 0 && Speed.y == 0) FaceEast();
+    else if(Speed.x < 0 && Speed.y == 0) FaceWest();
+    else if(Speed.x == 0 && Speed.y > 0) FaceNorth();
+    else if(Speed.x == 0 && Speed.y < 0) FaceSouth();
+    m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
+glm::vec2 AnimatedCharacter::GetPosition(){
+    return m_Transform.translation;
+}
 

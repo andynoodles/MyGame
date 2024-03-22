@@ -15,6 +15,7 @@ void App::Start() {
     m_Pacman->SetVisible(true);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(true);
+    m_Pacman->FaceEast();
 
     m_Root.AddChild(m_Pacman);  
 	m_Root.AddChild(backgroundImage);
