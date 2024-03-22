@@ -38,6 +38,7 @@ public:
     void FaceWest();
     void FaceEast();
     void SetPosition(const glm::vec2& Position);
+    glm::vec2 GetPosition();
     void Move(const glm::vec2& Speed, float SpeedMultiplier);
     
 
