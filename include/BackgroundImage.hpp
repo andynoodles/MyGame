@@ -8,8 +8,8 @@
 class BackgroundImage : public Util::GameObject{
 public:
     BackgroundImage(const std::string imagePath);
-	int typeOfPixel(float pixelX ,float pixelY);
-
+	  int typeOfPixel(float pixelX ,float pixelY);
+  
 private:
 	static const int NumberOfTilesX=28 ,NumberOfTilesY=31;
 	int pixelPerTile;
