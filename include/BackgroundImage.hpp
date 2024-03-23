@@ -8,13 +8,13 @@
 class BackgroundImage : public Util::GameObject{
 public:
     BackgroundImage(const std::string imagePath);
-	const unsigned char typeOfPixel(float pixelX ,float pixelY);
+	int typeOfPixel(float pixelX ,float pixelY);
 
 private:
-	static const char NumberOfTilesX=28 ,NumberOfTilesY=31;
-	unsigned char pixelPerTile;
+	static const int NumberOfTilesX=28 ,NumberOfTilesY=31;
+	int pixelPerTile;
 	// 0 = Road(with point) ,1 = Wall ,2 = Ghost Spawn Point ,3 = Big point ,5 = Road but have no point
-	const unsigned char mapDesign[NumberOfTilesY][NumberOfTilesX] = { 
+	const unsigned int mapDesign[NumberOfTilesY][NumberOfTilesX] = { 
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
