@@ -1,5 +1,4 @@
 #include "App.hpp"
-#include <string>
 
 void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
