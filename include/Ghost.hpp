@@ -1,5 +1,5 @@
-#ifndef ANIMATED_CHARACTER_HPP
-#define ANIMATED_CHARACTER_HPP
+#ifndef GHOST_HPP
+#define GHOST_HPP
 
 #include <cstddef>
 #include <vector>
@@ -9,10 +9,10 @@
 #include "Util/GameObject.hpp"
 
 
-class AnimatedCharacter : public Util::GameObject {
+class Ghost : public Util::GameObject {
 
 public:
-    explicit AnimatedCharacter(const std::vector<std::string>& AnimationPaths);
+    explicit Ghost(const std::vector<std::string>& AnimationPaths);
 
     [[nodiscard]] bool IsLooping() const {
         return std::dynamic_pointer_cast<Util::Animation>(m_Drawable)->GetLooping();
@@ -32,14 +32,9 @@ public:
         if(play) temp->Play();
     }
     [[nodiscard]] bool IfAnimationEnds() const;
-    
-    void FaceNorth();
-    void FaceSouth();
-    void FaceWest();
-    void FaceEast();
+
     void SetPosition(const glm::vec2& Position);
     glm::vec2 GetPosition();
-    void Move(const glm::vec2& Speed, float SpeedMultiplier);
     void GhostMove(const glm::vec2& Speed, float SpeedMultiplier);
 
 //variables

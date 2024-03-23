@@ -11,7 +11,8 @@
 #include "Util/Logger.hpp"
 #include "Util/Animation.hpp"
 
-#include "AnimatedCharacter.hpp"
+#include "Pacman.hpp"
+#include "Ghost.hpp"
 #include "BackgroundImage.hpp"
 
 class App {
@@ -38,11 +39,11 @@ private:
 	Util::Root m_Root;
 
   std::shared_ptr<BackgroundImage> backgroundImage;
-    std::shared_ptr<AnimatedCharacter> m_Pacman;
-    std::shared_ptr<AnimatedCharacter> m_Red;
-    std::shared_ptr<AnimatedCharacter> m_Pink;
-    std::shared_ptr<AnimatedCharacter> m_Cyan;
-    std::shared_ptr<AnimatedCharacter> m_Orange;
+    std::shared_ptr<Pacman> m_Pacman;
+    std::shared_ptr<Ghost> m_Red;
+    std::shared_ptr<Ghost> m_Pink;
+    std::shared_ptr<Ghost> m_Cyan;
+    std::shared_ptr<Ghost> m_Orange;
 };
 
 #endif

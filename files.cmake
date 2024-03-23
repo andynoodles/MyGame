@@ -3,13 +3,15 @@ set(SRC_FILES
     AppStart.cpp
     AppEnd.cpp
   	BackgroundImage.cpp
-    AnimatedCharacter.cpp
+    Pacman.cpp
+    Ghost.cpp
 )
 
 set(INCLUDE_FILES
     App.hpp
   	BackgroundImage.hpp
-    AnimatedCharacter.hpp
+    Pacman.hpp
+    Ghost.hpp
 )
 
 set(TEST_FILES

@@ -23,35 +23,35 @@ void App::Start() {
 
 
 
-    m_Pacman = std::make_shared<AnimatedCharacter>(pacmanImage);
+    m_Pacman = std::make_shared<Pacman>(pacmanImage);
     m_Pacman->SetZIndex(59);
     m_Pacman->SetVisible(true);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(true);
     m_Pacman->FaceEast();
 
-    m_Cyan = std::make_shared<AnimatedCharacter>(cyanImage);
+    m_Cyan = std::make_shared<Ghost>(cyanImage);
     m_Cyan->SetZIndex(51);
     m_Cyan->SetVisible(true);
     m_Cyan->SetLooping(true);
     m_Cyan->SetPlaying(true);
     m_Cyan->SetPosition({0, 0});
 
-    m_Orange = std::make_shared<AnimatedCharacter>(orangeImage);
+    m_Orange = std::make_shared<Ghost>(orangeImage);
     m_Orange->SetZIndex(52);
     m_Orange->SetVisible(true);
     m_Orange->SetLooping(true);
     m_Orange->SetPlaying(true);
     m_Orange->SetPosition({0, 30});
 
-    m_Pink = std::make_shared<AnimatedCharacter>(pinkImage);
+    m_Pink = std::make_shared<Ghost>(pinkImage);
     m_Pink->SetZIndex(53);
     m_Pink->SetVisible(true);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(true);
     m_Pink->SetPosition({0, 60});
 
-    m_Red = std::make_shared<AnimatedCharacter>(redImage);
+    m_Red = std::make_shared<Ghost>(redImage);
     m_Red->SetZIndex(54);
     m_Red->SetVisible(true);
     m_Red->SetLooping(true);
