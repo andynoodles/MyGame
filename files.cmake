@@ -12,6 +12,7 @@ set(INCLUDE_FILES
   	BackgroundImage.hpp
     Pacman.hpp
     Ghost.hpp
+    ShowText.hpp
 )
 
 set(TEST_FILES

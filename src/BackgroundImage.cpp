@@ -10,7 +10,7 @@ BackgroundImage::BackgroundImage(const std::string imagePath) : GameObject(std::
 	pixelPerTile = GetScaledSize().x/NumberOfTilesX;
 }
 
-const unsigned char BackgroundImage::typeOfPixel(float pixelX ,float pixelY){
+int BackgroundImage::typeOfPixel(float pixelX ,float pixelY){
 	int newX = pixelX+GetScaledSize().x/2 ,newY = GetScaledSize().y/2 - pixelY;
 	return mapDesign[newY/pixelPerTile][newX/pixelPerTile];	
 }
