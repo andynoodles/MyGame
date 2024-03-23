@@ -5,7 +5,7 @@
 
 BackgroundImage::BackgroundImage(const std::string imagePath) : GameObject(std::make_unique<Util::Image>(RESOURCE_DIR+imagePath), -10) { 
 	m_Transform.scale = {2,2};
-
+	m_Transform.translation = {0, 2};
 	assert(GetScaledSize().x/NumberOfTilesX == GetScaledSize().y/NumberOfTilesY);
 	pixelPerTile = GetScaledSize().x/NumberOfTilesX;
 }

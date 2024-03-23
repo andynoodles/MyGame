@@ -1,4 +1,6 @@
 #include "App.hpp"
+#include "Util/Input.hpp"
+#include <string>
 
 void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
@@ -18,14 +20,15 @@ void App::Update() {
         m_Pacman->SpeedMultiplier = 1;
     }
 
-    m_Cyan->GhostMove({0,-5}, 0.5);
+    m_Cyan->GhostMove({0,0}, 1);
     m_Pacman->Move(m_Pacman->Speed, m_Pacman->SpeedMultiplier);
 
-    // m_Text->SetText(std::to_string(m_Pacman->GetPosition().x) + 
-    //                 ", " +
-    //                 std::to_string(m_Pacman->GetPosition().y));
-
-    m_Text->SetText(std::to_string(backgroundImage->typeOfPixel(m_Pacman->GetPosition().x, m_Pacman->GetPosition().y)));
+    
+    m_Text->SetText(
+        std::to_string(Util::Input::GetCursorPosition().x + 224) + 
+        std::to_string(Util::Input::GetCursorPosition().y - 248) +
+        "\n" +
+        std::to_string(backgroundImage->typeOfPixel(Util::Input::GetCursorPosition().x, Util::Input::GetCursorPosition().y)));
 
     m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
