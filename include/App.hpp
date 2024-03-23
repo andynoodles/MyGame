@@ -14,6 +14,7 @@
 #include "Pacman.hpp"
 #include "Ghost.hpp"
 #include "BackgroundImage.hpp"
+#include "ShowText.hpp"
 
 class App {
 public:
@@ -38,7 +39,9 @@ private:
     State m_CurrentState = State::START;
 	Util::Root m_Root;
 
-  std::shared_ptr<BackgroundImage> backgroundImage;
+    std::shared_ptr<ShowText> m_Text;
+
+    std::shared_ptr<BackgroundImage> backgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red;
     std::shared_ptr<Ghost> m_Pink;

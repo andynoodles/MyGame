@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include <memory>
 
 void App::Start() {
     LOG_TRACE("Start");
@@ -58,6 +59,12 @@ void App::Start() {
     m_Red->SetPlaying(true);
     m_Red->SetPosition({0, 90});
 
+    m_Text = std::make_shared<ShowText>(RESOURCE_DIR"/Font/all.ttf",
+    20,
+    "Press Enter To Start",
+    Util::Color(255, 255, 255));
+
+    m_Root.AddChild(m_Text);
     m_Root.AddChild(m_Cyan);
     m_Root.AddChild(m_Orange);
     m_Root.AddChild(m_Pink);
