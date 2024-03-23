@@ -1,5 +1,4 @@
 #include "App.hpp"
-#include <memory>
 
 void App::Start() {
     LOG_TRACE("Start");
@@ -21,8 +20,6 @@ void App::Start() {
         pinkImage.emplace_back(RESOURCE_DIR"/image/Pink/Sprite (" + std::to_string(i + 71) + ").png");
         redImage.emplace_back(RESOURCE_DIR"/image/Red/Sprite (" + std::to_string(i + 57) + ").png");
     }
-
-
 
     m_Pacman = std::make_shared<Pacman>(pacmanImage);
     m_Pacman->SetZIndex(59);
