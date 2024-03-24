@@ -15,6 +15,7 @@
 #include "Ghost.hpp"
 #include "BackgroundImage.hpp"
 #include "ShowText.hpp"
+#include "Food.hpp"
 
 class App {
 public:
@@ -41,6 +42,9 @@ private:
 
     std::shared_ptr<ShowText> m_Text;
 
+    std::shared_ptr<Food> m_SmallFood[240];
+    std::shared_ptr<Food> m_LargeFood[4];
+    
     std::shared_ptr<BackgroundImage> backgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red;

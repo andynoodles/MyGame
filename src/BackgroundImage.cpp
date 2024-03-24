@@ -14,3 +14,7 @@ int BackgroundImage::typeOfPixel(float pixelX ,float pixelY){
 	int newX = pixelX+GetScaledSize().x/2 ,newY = GetScaledSize().y/2 - pixelY;
 	return mapDesign[newY/pixelPerTile][newX/pixelPerTile];	
 }
+
+unsigned int BackgroundImage::GetLayout(int x, int y){
+	return mapDesign[x][y];
+}

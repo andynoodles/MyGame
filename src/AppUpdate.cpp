@@ -25,8 +25,8 @@ void App::Update() {
 
     
     m_Text->SetText(
-        std::to_string(Util::Input::GetCursorPosition().x + 224) + 
-        std::to_string(Util::Input::GetCursorPosition().y - 248) +
+        std::to_string(Util::Input::GetCursorPosition().x) + 
+        std::to_string(Util::Input::GetCursorPosition().y) +
         "\n" +
         std::to_string(backgroundImage->typeOfPixel(Util::Input::GetCursorPosition().x, Util::Input::GetCursorPosition().y)));
 
