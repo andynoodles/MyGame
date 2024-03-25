@@ -9,6 +9,7 @@ class BackgroundImage : public Util::GameObject{
 public:
     BackgroundImage(const std::string imagePath);
 	int typeOfPixel(float pixelX ,float pixelY);
+	int GetPixelPerTile();
 	unsigned int GetLayout(int x, int y);
   
 private:
