@@ -36,3 +36,23 @@ void Ghost::GhostMove(const glm::vec2 &Speed, float SpeedMultiplier){
     }
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
+
+void Ghost::GhostMoveScared(const glm::vec2 &Speed, float SpeedMultiplier){
+    auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+    size_t StartIndex = 8;
+    
+    if(temp->GetCurrentFrameIndex() == StartIndex + 2){
+        temp->SetCurrentFrame(StartIndex);
+    }
+    m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
+}
+
+void Ghost::GhostMoveScaredFlash(const glm::vec2 &Speed, float SpeedMultiplier){
+    auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+    size_t StartIndex = 10;
+    
+    if(temp->GetCurrentFrameIndex() == StartIndex + 2){
+        temp->SetCurrentFrame(StartIndex);
+    }
+    m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
+}

@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include "Util/Time.hpp"
 #include <iostream>
 #include <stddef.h>
 
@@ -7,6 +8,7 @@ void App::Start() {
     LOG_TRACE("Start");
     backgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 
+    
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(3);
     cyanImage.reserve(9);
@@ -93,7 +95,7 @@ void App::Start() {
     20,
     "Press Enter To Start",
     Util::Color(255, 255, 255));
-
+   
     m_Root.AddChild(m_Text);
     m_Root.AddChild(m_Cyan);
     m_Root.AddChild(m_Orange);

@@ -10,7 +10,7 @@ public:
     BackgroundImage(const std::string imagePath);
 	int typeOfPixel(float pixelX ,float pixelY);
 	unsigned int GetLayout(int x, int y);
-  
+	
 private:
 	static const int NumberOfTilesX=28 ,NumberOfTilesY=31;
 	int pixelPerTile;
