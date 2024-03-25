@@ -5,6 +5,7 @@ set(SRC_FILES
   	BackgroundImage.cpp
     Pacman.cpp
     Ghost.cpp
+    Food.cpp
 )
 
 set(INCLUDE_FILES
@@ -13,6 +14,7 @@ set(INCLUDE_FILES
     Pacman.hpp
     Ghost.hpp
     ShowText.hpp
+    Food.hpp
 )
 
 set(TEST_FILES
