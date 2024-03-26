@@ -44,7 +44,10 @@ public:
     unsigned long GetElapsedTime();
     unsigned long GetDeltaTime();
     unsigned long GetMarker();
-    
+
+    bool IfCollides(const std::shared_ptr<Food>& other);
+    bool IfCollides(const std::shared_ptr<Ghost>& other);
+ 
 private:
     void ValidTask();
 

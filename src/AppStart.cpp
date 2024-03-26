@@ -8,7 +8,6 @@ void App::Start() {
     LOG_TRACE("Start");
     backgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 
-    
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(3);
     cyanImage.reserve(9);
@@ -30,13 +29,13 @@ void App::Start() {
     int LargeFoodCount = 0, SmallFoodCount = 0;
     for (int i = 0; i < 4; i++) {
         m_LargeFood[i] = std::make_shared<Food>(RESOURCE_DIR"/image/Food/LargeFood.png"); 
-        m_LargeFood[i]->SetZIndex(10 + LargeFoodCount);
+        m_LargeFood[i]->SetZIndex(10);
         m_LargeFood[i]->SetVisible(true);
         m_Root.AddChild(m_LargeFood[i]);
     }
     for (int i = 0; i < 240; i++) {
         m_SmallFood[i] = std::make_shared<Food>(RESOURCE_DIR"/image/Food/SmallFood.png"); 
-        m_SmallFood[i]->SetZIndex(10 + SmallFoodCount);
+        m_SmallFood[i]->SetZIndex(10);
         m_SmallFood[i]->SetVisible(true);
         m_Root.AddChild(m_SmallFood[i]);
     }
@@ -56,7 +55,7 @@ void App::Start() {
     }
 
     m_Pacman = std::make_shared<Pacman>(pacmanImage);
-    m_Pacman->SetZIndex(59);
+    m_Pacman->SetZIndex(19);
     m_Pacman->SetVisible(showCharacter);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(true);
@@ -64,28 +63,28 @@ void App::Start() {
     m_Pacman->FaceEast();
 
     m_Cyan = std::make_shared<Ghost>(cyanImage);
-    m_Cyan->SetZIndex(51);
+    m_Cyan->SetZIndex(18);
     m_Cyan->SetVisible(showCharacter);
     m_Cyan->SetLooping(true);
     m_Cyan->SetPlaying(true);
     m_Cyan->SetPosition({0, 0});
 
     m_Orange = std::make_shared<Ghost>(orangeImage);
-    m_Orange->SetZIndex(52);
+    m_Orange->SetZIndex(17);
     m_Orange->SetVisible(showCharacter);
     m_Orange->SetLooping(true);
     m_Orange->SetPlaying(true);
     m_Orange->SetPosition({0, 30});
 
     m_Pink = std::make_shared<Ghost>(pinkImage);
-    m_Pink->SetZIndex(53);
+    m_Pink->SetZIndex(16);
     m_Pink->SetVisible(showCharacter);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(true);
     m_Pink->SetPosition({0, 60});
 
     m_Red = std::make_shared<Ghost>(redImage);
-    m_Red->SetZIndex(54);
+    m_Red->SetZIndex(15);
     m_Red->SetVisible(showCharacter);
     m_Red->SetLooping(true);
     m_Red->SetPlaying(true);

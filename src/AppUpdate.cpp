@@ -20,13 +20,13 @@ void App::Update() {
     }
 
     for (int i = 0; i < 240; i++) {
-        if(m_SmallFood[i]->IfCollides(m_Pacman)){ 
+        if(IfCollides(m_SmallFood[i])){ 
             m_SmallFood[i]->SetVisible(false); 
         }
     }
 
     for (int i = 0; i < 4; i++) {
-        if(m_LargeFood[i]->IfCollides(m_Pacman)){
+        if(IfCollides(m_LargeFood[i])){
             m_LargeFood[i]->SetVisible(false); 
             SetTimeMarker();
             onPill = true;
