@@ -6,6 +6,7 @@ set(SRC_FILES
     Pacman.cpp
     Ghost.cpp
     Food.cpp
+    App.cpp
 )
 
 set(INCLUDE_FILES

@@ -36,7 +36,8 @@ public:
     void SetPosition(const glm::vec2& Position);
     glm::vec2 GetPosition();
     void GhostMove(const glm::vec2& Speed, float SpeedMultiplier);
-
+    void GhostMoveScared(const glm::vec2& Speed, float SpeedMultiplier);
+    void GhostMoveScaredFlash(const glm::vec2 &Speed, float SpeedMultiplier);
 //variables
     float SpeedMultiplier = 1;
     glm::vec2 Speed;

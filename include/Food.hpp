@@ -4,6 +4,7 @@
 #include <glm/fwd.hpp>
 #include <string>
 
+#include "Pacman.hpp"
 #include "Util/GameObject.hpp"
 
 class Food : public Util::GameObject {
@@ -27,19 +28,6 @@ public:
     void SetImage(const std::string& ImagePath);
 
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
-
-    
-    [[nodiscard]] bool IfCollides(const std::shared_ptr<Food>& other) const {
-        (void) other;
-        int size = 25;
-        glm::vec2 OtherPostion = other->GetPosition();
-        glm::vec2 ThisPostiom = this->GetPosition();
-        if( ThisPostiom.x > OtherPostion.x - size &&
-            ThisPostiom.x < OtherPostion.x + size &&
-            ThisPostiom.y > OtherPostion.y - size &&
-            ThisPostiom.y < OtherPostion.y + size){ return true;}
-        return false;
-    }
 
 private:
     void ResetPosition() { m_Transform.translation = {0, 0}; }

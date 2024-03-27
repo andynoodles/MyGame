@@ -2,6 +2,7 @@
 #define APP_HPP
 
 #include <iostream>
+#include <string>
 #include "pch.hpp" // IWYU pragma: export
 
 #include "Util/Root.hpp"
@@ -10,12 +11,17 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Animation.hpp"
+#include "Util/Time.hpp"
 
 #include "Pacman.hpp"
 #include "Ghost.hpp"
 #include "BackgroundImage.hpp"
 #include "ShowText.hpp"
 #include "Food.hpp"
+
+#define PACMAN_SPEED 15
+#define GHOST_SPEED 15
+#define PILL_DURATION 15000
 
 class App {
 public:
@@ -33,13 +39,24 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
+    void TimeUpdate();
+    void SetTimeMarker();
+    unsigned long GetElapsedTime();
+    unsigned long GetDeltaTime();
+    unsigned long GetMarker();
+
+    bool IfCollides(const std::shared_ptr<Food>& other);
+    bool IfCollides(const std::shared_ptr<Ghost>& other);
+ 
 private:
     void ValidTask();
 
 private:
     State m_CurrentState = State::START;
 	Util::Root m_Root;
-
+    Util::Time m_Time;
+    unsigned long Marker = 0;
+    bool onPill = false;
     std::shared_ptr<ShowText> m_Text;
 
     std::shared_ptr<Food> m_SmallFood[240];

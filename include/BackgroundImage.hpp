@@ -11,7 +11,7 @@ public:
 	int typeOfPixel(float pixelX ,float pixelY);
 	int GetPixelPerTile();
 	unsigned int GetLayout(int x, int y);
-  
+	
 private:
 	static const int NumberOfTilesX=28 ,NumberOfTilesY=31;
 	int pixelPerTile;
