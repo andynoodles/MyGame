@@ -15,6 +15,10 @@ int BackgroundImage::typeOfPixel(float pixelX ,float pixelY){
 	return mapDesign[newY/pixelPerTile][newX/pixelPerTile];	
 }
 
+int BackgroundImage::GetPixelPerTile(){
+	return this->pixelPerTile;
+}
+
 unsigned int BackgroundImage::GetLayout(int x, int y){
 	return mapDesign[x][y];
 }
