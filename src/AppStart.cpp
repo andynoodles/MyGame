@@ -41,9 +41,10 @@ void App::Start() {
     }
 
 	int pixelPerTile = backgroundImage->GetPixelPerTile();
-	float upperLeftX = -(backgroundImage->GetScaledSize().x/2)+pixelPerTile/2 ,upperLeftY = backgroundImage->GetScaledSize().y/2-pixelPerTile/2;
-    for (int i = 0; i < 31; i++) {
-        for (int j = 0; j < 28; j++) {
+	float upperLeftX = backgroundImage->GetUpperLeftX() ,upperLeftY = backgroundImage->GetUpperLeftY();
+	int numOfTilesX = backgroundImage->GetNumberOfTilesX() ,numOfTilesY = backgroundImage->GetNumberOfTilesY();
+    for (int i = 0; i < numOfTilesY ;i++) {
+        for (int j = 0; j < numOfTilesX ;j++) {
             int currentDot = backgroundImage->GetLayout(i, j);
             if (currentDot == 0) {
                 m_SmallFood[SmallFoodCount]->SetPosition({upperLeftX + (pixelPerTile * j), upperLeftY - (pixelPerTile * i)});
