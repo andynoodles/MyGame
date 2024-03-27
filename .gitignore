@@ -495,3 +495,8 @@ lib/
 # Doxygen generated files
 docs/html/
 .DS_Store
+
+## ctag and game building script
+tags
+con.sh
+
