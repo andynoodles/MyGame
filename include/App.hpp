@@ -21,8 +21,6 @@
 #include "Food.hpp"
 
 
-#define GHOST_SPEED 15
-#define PILL_DURATION 15000
 
 class App {
 public:
@@ -62,10 +60,10 @@ private:
     bool onPill = false;
     std::shared_ptr<ShowText> m_Text;
 
-    std::shared_ptr<Food> m_SmallFood[240];
-    std::shared_ptr<Food> m_LargeFood[4];
+    std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
+    std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     
-    std::shared_ptr<BackgroundImage> backgroundImage;
+    std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red;
     std::shared_ptr<Ghost> m_Pink;

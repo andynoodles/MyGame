@@ -6,19 +6,19 @@
 void App::Start() {
     bool showCharacter = true;
     LOG_TRACE("Start");
-    backgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
+    m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
-    pacmanImage.reserve(3);
-    cyanImage.reserve(9);
-    orangeImage.reserve(9);
-    pinkImage.reserve(9);
-    redImage.reserve(9);
-    for (int i = 0; i < 3; ++i) {
+    pacmanImage.reserve(PACMAN_ASSETS_NUM);
+    cyanImage.reserve(GHOST_ASSETS_NUM);
+    orangeImage.reserve(GHOST_ASSETS_NUM);
+    pinkImage.reserve(GHOST_ASSETS_NUM);
+    redImage.reserve(GHOST_ASSETS_NUM);
+    for (int i = 0; i < PACMAN_ASSETS_NUM; ++i) {
         pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
     }
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < GHOST_ASSETS_NUM; i++) {
         cyanImage.emplace_back(RESOURCE_DIR"/image/Cyan/Sprite (" + std::to_string(i + 85) + ").png");
         orangeImage.emplace_back(RESOURCE_DIR"/image/Orange/Sprite (" + std::to_string(i + 99) + ").png");
         pinkImage.emplace_back(RESOURCE_DIR"/image/Pink/Sprite (" + std::to_string(i + 71) + ").png");
@@ -27,23 +27,23 @@ void App::Start() {
 
     //SPAWN FOOD
     int LargeFoodCount = 0, SmallFoodCount = 0;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < LARGE_FOOD_NUM; i++) {
         m_LargeFood[i] = std::make_shared<Food>(RESOURCE_DIR"/image/Food/LargeFood.png"); 
         m_LargeFood[i]->SetZIndex(10);
         m_LargeFood[i]->SetVisible(true);
         m_Root.AddChild(m_LargeFood[i]);
     }
-    for (int i = 0; i < 240; i++) {
+    for (int i = 0; i < SMALL_FOOD_NUM; i++) {
         m_SmallFood[i] = std::make_shared<Food>(RESOURCE_DIR"/image/Food/SmallFood.png"); 
         m_SmallFood[i]->SetZIndex(10);
         m_SmallFood[i]->SetVisible(true);
         m_Root.AddChild(m_SmallFood[i]);
     }
 
-	float upperLeftX = backgroundImage->GetUpperLeftX() ,upperLeftY = backgroundImage->GetUpperLeftY();
+	float upperLeftX = m_BackgroundImage->GetUpperLeftX() ,upperLeftY = m_BackgroundImage->GetUpperLeftY();
     for (int i = 0; i <NUMBEROFTILESY ;i++) {
         for (int j = 0; j < NUMBEROFTILESX ;j++) {
-            int currentDot = backgroundImage->GetLayout(i, j);
+            int currentDot = m_BackgroundImage->GetLayout(i, j);
             if (currentDot == 0) {
                 m_SmallFood[SmallFoodCount]->SetPosition({upperLeftX + (PIXELPERTILE * j), upperLeftY - (PIXELPERTILE * i)});
                 SmallFoodCount++;
@@ -102,7 +102,7 @@ void App::Start() {
     m_Root.AddChild(m_Pink);
     m_Root.AddChild(m_Red);
     m_Root.AddChild(m_Pacman);  
-	m_Root.AddChild(backgroundImage);
+	m_Root.AddChild(m_BackgroundImage);
 	m_Root.Update();
 
     m_CurrentState = State::UPDATE;
