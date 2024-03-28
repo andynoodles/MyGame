@@ -3,20 +3,21 @@
 
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-
+#include "config.hpp"
 
 class BackgroundImage : public Util::GameObject{
 public:
     BackgroundImage(const std::string imagePath);
+
+	//Getter
 	int typeOfPixel(float pixelX ,float pixelY);
-	int GetPixelPerTile();
+	float GetUpperLeftX();
+	float GetUpperLeftY();
 	unsigned int GetLayout(int x, int y);
 	
 private:
-	static const int NumberOfTilesX=28 ,NumberOfTilesY=31;
-	int pixelPerTile;
 	// 0 = Road(with point) ,1 = Wall ,2 = Ghost Spawn Point ,3 = Big point ,5 = Road but have no point
-	const unsigned int mapDesign[NumberOfTilesY][NumberOfTilesX] = { 
+	const unsigned int mapDesign[NUMBEROFTILESY][NUMBEROFTILESX] = { 
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},

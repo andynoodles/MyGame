@@ -6,17 +6,19 @@
 BackgroundImage::BackgroundImage(const std::string imagePath) : GameObject(std::make_unique<Util::Image>(RESOURCE_DIR+imagePath), -10) { 
 	m_Transform.scale = {2,2};
 	m_Transform.translation = {0, 2};
-	assert(GetScaledSize().x/NumberOfTilesX == GetScaledSize().y/NumberOfTilesY);
-	pixelPerTile = GetScaledSize().x/NumberOfTilesX;
 }
 
 int BackgroundImage::typeOfPixel(float pixelX ,float pixelY){
 	int newX = pixelX+GetScaledSize().x/2 ,newY = GetScaledSize().y/2 - pixelY;
-	return mapDesign[newY/pixelPerTile][newX/pixelPerTile];	
+	return mapDesign[newY/PIXELPERTILE][newX/PIXELPERTILE];	
 }
 
-int BackgroundImage::GetPixelPerTile(){
-	return this->pixelPerTile;
+float BackgroundImage::GetUpperLeftX(){
+	return -(GetScaledSize().x/2)+PIXELPERTILE/2;
+}
+
+float BackgroundImage::GetUpperLeftY(){
+	return GetScaledSize().y/2-PIXELPERTILE/2;
 }
 
 unsigned int BackgroundImage::GetLayout(int x, int y){
