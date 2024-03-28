@@ -7,7 +7,7 @@
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
 
-#define PACMAN_SPEED 15
+
 
 class Pacman : public Util::GameObject {
 
