@@ -20,7 +20,7 @@
 #include "ShowText.hpp"
 #include "Food.hpp"
 
-#define PACMAN_SPEED 15
+
 #define GHOST_SPEED 15
 #define PILL_DURATION 15000
 
@@ -48,6 +48,8 @@ public:
 
     bool IfCollides(const std::shared_ptr<Food>& other);
     bool IfCollides(const std::shared_ptr<Ghost>& other);
+
+    void InputManager();
  
 private:
     void ValidTask();

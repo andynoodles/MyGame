@@ -1,12 +1,12 @@
 #ifndef PACMAN_HPP
 #define PACMAN_HPP
 
-#include <cstddef>
 #include <vector>
 #include <string>
-
+#include "config.hpp"
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
+
 
 
 class Pacman : public Util::GameObject {
@@ -38,12 +38,13 @@ public:
     void FaceWest();
     void FaceEast();
     void SetPosition(const glm::vec2& Position);
+    void SetDirection(std::string Direction);
+    std::string GetDirection();
     glm::vec2 GetPosition();
-    void Move(const glm::vec2& Speed, float SpeedMultiplier);
+    void Move(const std::string Direction, float SpeedMultiplier);
 
-
-//variables
-    float SpeedMultiplier = 1;
+private:
+    std::string MoveDirection;
     glm::vec2 Speed;
 
 };

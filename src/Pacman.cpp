@@ -28,11 +28,31 @@ void Pacman::SetPosition(const glm::vec2& Position){
     m_Transform.translation = Position; 
 }
 
-void Pacman::Move(const glm::vec2& Speed, float SpeedMultiplier = 1){ 
-    if(Speed.x > 0 && Speed.y == 0) FaceEast();
-    else if(Speed.x < 0 && Speed.y == 0) FaceWest();
-    else if(Speed.x == 0 && Speed.y > 0) FaceNorth();
-    else if(Speed.x == 0 && Speed.y < 0) FaceSouth();
+void Pacman::SetDirection(std::string Direction){
+    MoveDirection = Direction;
+}
+
+std::string Pacman::GetDirection(){
+    return MoveDirection;
+}
+
+void Pacman::Move(const std::string Direction, float SpeedMultiplier = 1){ 
+    if(Direction == "East") {
+        FaceEast();
+        Speed = {PACMAN_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        FaceWest();
+        Speed = {-PACMAN_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        FaceNorth();
+        Speed = {0, PACMAN_SPEED};
+    }
+    else if(Direction == "South") {
+        FaceSouth();
+        Speed = {0, -PACMAN_SPEED};
+    }
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 

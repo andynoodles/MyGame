@@ -43,3 +43,18 @@ bool App::IfCollides(const std::shared_ptr<Ghost>& other){
             ThisPostiom.y < OtherPostion.y + size){ return true;}
         return false;
 }
+
+void App::InputManager(){
+    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+        m_Pacman->SetDirection("North");
+    } 
+    else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_Pacman->SetDirection("West");
+    } 
+    else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_Pacman->SetDirection("South");
+    } 
+    else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        m_Pacman->SetDirection("East");
+    }
+}
