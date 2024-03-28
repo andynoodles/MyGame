@@ -13,6 +13,7 @@
 #include "Util/Animation.hpp"
 #include "Util/Time.hpp"
 
+#include "config.hpp"
 #include "Pacman.hpp"
 #include "Ghost.hpp"
 #include "BackgroundImage.hpp"
