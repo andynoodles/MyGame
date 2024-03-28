@@ -4,13 +4,13 @@ void App::Update() {
     TimeUpdate();
     InputManager();
 
-    for (int i = 0; i < 240; i++) {
+    for (int i = 0; i < SMALL_FOOD_NUM; i++) {
         if(IfCollides(m_SmallFood[i])){ 
             m_SmallFood[i]->SetVisible(false); 
         }
     }
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < LARGE_FOOD_NUM; i++) {
         if(IfCollides(m_LargeFood[i])){
             m_LargeFood[i]->SetVisible(false); 
             SetTimeMarker();
