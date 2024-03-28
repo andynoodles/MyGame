@@ -40,18 +40,16 @@ void App::Start() {
         m_Root.AddChild(m_SmallFood[i]);
     }
 
-	int pixelPerTile = backgroundImage->GetPixelPerTile();
 	float upperLeftX = backgroundImage->GetUpperLeftX() ,upperLeftY = backgroundImage->GetUpperLeftY();
-	int numOfTilesX = backgroundImage->GetNumberOfTilesX() ,numOfTilesY = backgroundImage->GetNumberOfTilesY();
-    for (int i = 0; i < numOfTilesY ;i++) {
-        for (int j = 0; j < numOfTilesX ;j++) {
+    for (int i = 0; i <NUMBEROFTILESY ;i++) {
+        for (int j = 0; j < NUMBEROFTILESX ;j++) {
             int currentDot = backgroundImage->GetLayout(i, j);
             if (currentDot == 0) {
-                m_SmallFood[SmallFoodCount]->SetPosition({upperLeftX + (pixelPerTile * j), upperLeftY - (pixelPerTile * i)});
+                m_SmallFood[SmallFoodCount]->SetPosition({upperLeftX + (PIXELPERTILE * j), upperLeftY - (PIXELPERTILE * i)});
                 SmallFoodCount++;
             }
             else if (currentDot == 3) {
-                m_LargeFood[LargeFoodCount]->SetPosition({upperLeftX + (pixelPerTile * j), upperLeftY - (pixelPerTile * i)});
+                m_LargeFood[LargeFoodCount]->SetPosition({upperLeftX + (PIXELPERTILE * j), upperLeftY - (PIXELPERTILE * i)});
                 LargeFoodCount++;
             }
         }
@@ -109,7 +107,3 @@ void App::Start() {
 
     m_CurrentState = State::UPDATE;
 }
-
-
-
-
