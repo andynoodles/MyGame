@@ -20,7 +20,11 @@ void App::Update() {
     
     if(GetElapsedTime() - GetMarker() < PILL_DURATION && onPill){
         m_Pacman->Move(m_Pacman->GetDirection(), 1);
-        m_Cyan->GhostMoveScared({0, 0}, 1);
+        if(GetElapsedTime() - GetMarker() < FLASH_DURATION)
+            m_Cyan->GhostMoveScared({0, 0}, 1);
+        else
+            m_Cyan->GhostMoveScaredFlash({0, 0}, 1);
+            
         m_Text->SetText("I'm high");
     }
     else{
@@ -29,8 +33,6 @@ void App::Update() {
         m_Pacman->Move(m_Pacman->GetDirection(), 1);
         m_Text->SetText("I'm trash");
     }
-
-
 
     m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
