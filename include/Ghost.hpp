@@ -1,8 +1,6 @@
 #ifndef GHOST_HPP
 #define GHOST_HPP
 
-#include <cstddef>
-#include <glm/fwd.hpp>
 #include <vector>
 #include <string>
 
