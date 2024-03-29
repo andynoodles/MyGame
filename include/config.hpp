@@ -4,7 +4,7 @@
 #define PIXELPERTILE 16
 
 //Pacman Settings
-#define PACMAN_SPEED 15
+#define PACMAN_SPEED 5
 
 //Ghost setting
 #define GHOST_SPEED 15

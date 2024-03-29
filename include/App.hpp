@@ -46,6 +46,7 @@ public:
 
     bool IfCollides(const std::shared_ptr<Food>& other);
     bool IfCollides(const std::shared_ptr<Ghost>& other);
+    bool Collides(glm::vec2 position);
 
     void InputManager();
  

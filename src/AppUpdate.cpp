@@ -19,14 +19,46 @@ void App::Update() {
     }
     
     if(GetElapsedTime() - GetMarker() < PILL_DURATION && onPill){
-        m_Pacman->Move(m_Pacman->GetDirection(), 1);
+    	glm::vec2 S;
+		std::string Direction = m_Pacman->GetDirection();
+	if(Direction == "East") {
+		
+        S = {PACMAN_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        S = {-PACMAN_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        S = {0, PACMAN_SPEED};
+    }
+    else if(Direction == "South") {
+        S = {0, -PACMAN_SPEED};
+    }
+	if(Collides(m_Pacman->GetPosition()+S) == false)
+        	m_Pacman->Move(m_Pacman->GetDirection(), 1);
         m_Cyan->GhostMoveScared({0, 0}, 1);
         m_Text->SetText("I'm high");
     }
     else{
+	glm::vec2 S;
+		std::string Direction = m_Pacman->GetDirection();
+	if(Direction == "East") {
+        S = {PACMAN_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        S = {-PACMAN_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        S = {0, PACMAN_SPEED};
+    }
+    else if(Direction == "South") {
+        S = {0, -PACMAN_SPEED};
+    }
+	if(Collides(m_Pacman->GetPosition()+S) == false)
+
+        m_Pacman->Move(m_Pacman->GetDirection(), 1);
         onPill = false;
         m_Cyan->GhostMove({0,0}, 1);
-        m_Pacman->Move(m_Pacman->GetDirection(), 1);
         m_Text->SetText("I'm trash");
     }
 

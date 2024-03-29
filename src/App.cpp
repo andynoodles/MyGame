@@ -44,6 +44,13 @@ bool App::IfCollides(const std::shared_ptr<Ghost>& other){
         return false;
 }
 
+bool App::Collides(glm::vec2 position){
+    int size = PIXELPERTILE/2;
+	if(m_BackgroundImage->typeOfPixel(position.x ,position.y) == 1)	
+		return true;
+	return false;
+}
+
 void App::InputManager(){
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
         m_Pacman->SetDirection("North");
