@@ -53,8 +53,8 @@ void Pacman::Move(const std::string Direction, float SpeedMultiplier = 1){
         FaceSouth();
         Speed = {0, -PACMAN_SPEED};
     }
-    m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
-}
+	SetPosition(m_Transform.translation + (Speed * SpeedMultiplier)); 
+   
 
 glm::vec2 Pacman::GetPosition(){
     return m_Transform.translation;

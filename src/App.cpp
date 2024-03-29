@@ -22,7 +22,7 @@ unsigned long App::GetMarker(){
 
 bool App::IfCollides(const std::shared_ptr<Food>& other){
         (void) other;
-        int size = 8;
+        int size = PIXELPERTILE/2;
         glm::vec2 OtherPostion = other->GetPosition();
         glm::vec2 ThisPostiom = m_Pacman->GetPosition();
         if( ThisPostiom.x > OtherPostion.x - size &&
@@ -34,7 +34,7 @@ bool App::IfCollides(const std::shared_ptr<Food>& other){
 
 bool App::IfCollides(const std::shared_ptr<Ghost>& other){
         (void) other;
-        int size = 8;
+        int size = PIXELPERTILE/2;
         glm::vec2 OtherPostion = other->GetPosition();
         glm::vec2 ThisPostiom = m_Pacman->GetPosition();
         if( ThisPostiom.x > OtherPostion.x - size &&
