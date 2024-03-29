@@ -31,6 +31,9 @@ void Ghost::GhostMove(const glm::vec2 &Speed, float SpeedMultiplier){
     else if(Speed.x == 0 && Speed.y > 0) StartIndex = 4;
     //South
     else if(Speed.x == 0 && Speed.y < 0) StartIndex = 6;
+    if(temp->GetCurrentFrameIndex() > StartIndex + 1 || temp->GetCurrentFrameIndex() < StartIndex){
+        temp->SetCurrentFrame(StartIndex);
+    }
     if(temp->GetCurrentFrameIndex() == StartIndex + 2){
         temp->SetCurrentFrame(StartIndex);
     }
@@ -40,7 +43,9 @@ void Ghost::GhostMove(const glm::vec2 &Speed, float SpeedMultiplier){
 void Ghost::GhostMoveScared(const glm::vec2 &Speed, float SpeedMultiplier){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
-    
+    if(temp->GetCurrentFrameIndex() > StartIndex + 1 || temp->GetCurrentFrameIndex() < StartIndex){
+        temp->SetCurrentFrame(StartIndex);
+    }
     if(temp->GetCurrentFrameIndex() == StartIndex + 2){
         temp->SetCurrentFrame(StartIndex);
     }
@@ -49,9 +54,11 @@ void Ghost::GhostMoveScared(const glm::vec2 &Speed, float SpeedMultiplier){
 
 void Ghost::GhostMoveScaredFlash(const glm::vec2 &Speed, float SpeedMultiplier){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-    size_t StartIndex = 10;
-    
-    if(temp->GetCurrentFrameIndex() == StartIndex + 2){
+    size_t StartIndex = 8;
+    if(temp->GetCurrentFrameIndex() > StartIndex + 4 || temp->GetCurrentFrameIndex() < StartIndex){
+        temp->SetCurrentFrame(StartIndex);
+    }
+    if(temp->GetCurrentFrameIndex() == StartIndex + 5){
         temp->SetCurrentFrame(StartIndex);
     }
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 

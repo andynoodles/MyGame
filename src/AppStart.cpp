@@ -25,6 +25,13 @@ void App::Start() {
         redImage.emplace_back(RESOURCE_DIR"/image/Red/Sprite (" + std::to_string(i + 57) + ").png");
     }
 
+    for (int i = 0; i < GHOST_SCARED_ASSETS_NUM; i++) {
+        cyanImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
+        orangeImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
+        pinkImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
+        redImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
+    }
+
     //SPAWN FOOD
     int LargeFoodCount = 0, SmallFoodCount = 0;
     for (int i = 0; i < LARGE_FOOD_NUM; i++) {
