@@ -40,6 +40,8 @@ public:
 
     void TimeUpdate();
     void SetTimeMarker();
+    void FoodCollision();
+    void FoodEffect();
     unsigned long GetElapsedTime();
     unsigned long GetDeltaTime();
     unsigned long GetMarker();

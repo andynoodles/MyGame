@@ -58,3 +58,34 @@ void App::InputManager(){
         m_Pacman->SetDirection("East");
     }
 }
+
+void App::FoodCollision(){
+    for (int i = 0; i < SMALL_FOOD_NUM; i++) {
+        if(IfCollides(m_SmallFood[i])){ 
+            m_SmallFood[i]->SetVisible(false); 
+        }
+    }
+    for (int i = 0; i < LARGE_FOOD_NUM; i++) {
+        if(IfCollides(m_LargeFood[i])){
+            m_LargeFood[i]->SetVisible(false); 
+            SetTimeMarker();
+            onPill = true;
+        }
+    }
+}
+
+void App::FoodEffect(){
+    if(GetElapsedTime() - GetMarker() < PILL_DURATION && onPill){
+        if(!(GetElapsedTime() - GetMarker() < FLASH_DURATION))
+            m_Cyan->GhostMoveScaredFlash("East", 0);
+        else
+            m_Cyan->GhostMoveScared("East", 0);
+
+        m_Text->SetText("I'm high");
+    }
+    else{
+        onPill = false;
+        m_Cyan->GhostMove("East", 0);
+        m_Text->SetText("I'm trash");
+    }
+}
