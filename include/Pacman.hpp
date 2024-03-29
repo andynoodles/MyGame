@@ -44,7 +44,7 @@ public:
     void Move(const std::string Direction, float SpeedMultiplier);
 
 private:
-    std::string MoveDirection;
+    std::string MoveDirection = "East";
     glm::vec2 Speed;
 
 };
