@@ -1,5 +1,4 @@
 #include "Pacman.hpp"
-#define PI 3.14159265358979323846
 
 Pacman::Pacman(const std::vector<std::string>& AnimationPaths) {
     m_Drawable = std::make_shared<Util::Animation>(AnimationPaths, false, 125, false, 0);
@@ -56,6 +55,28 @@ void Pacman::Move(const std::string Direction, float SpeedMultiplier = 1){
 	SetPosition(m_Transform.translation + (Speed * SpeedMultiplier)); 
 }
 
+void Pacman::MoveBack(const std::string Direction, float SpeedMultiplier = 1){
+    if(Direction == "East") {
+        FaceEast();
+        Speed = {-PACMAN_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        FaceWest();
+        Speed = {PACMAN_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        FaceNorth();
+        Speed = {0, -PACMAN_SPEED};
+    }
+    else if(Direction == "South") {
+        FaceSouth();
+        Speed = {0, PACMAN_SPEED};
+    }
+	SetPosition(m_Transform.translation + (Speed * SpeedMultiplier)); 
+
+}
 glm::vec2 Pacman::GetPosition(){
     return m_Transform.translation;
 }
+
+

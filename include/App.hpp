@@ -48,9 +48,12 @@ public:
 
     bool IfCollides(const std::shared_ptr<Food>& other);
     bool IfCollides(const std::shared_ptr<Ghost>& other);
+	bool IfPacmanCollidesWall();
 
-    void InputManager();
- 
+	void PacmanMoveProcess();
+	std::string InputManager();
+	void ChangeDirectionIfPossible();
+
 private:
     void ValidTask();
 
