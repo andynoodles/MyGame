@@ -1,5 +1,4 @@
 #include "Ghost.hpp"
-#define PI 3.14159265358979323846
 
 Ghost::Ghost(const std::vector<std::string>& AnimationPaths) {
     m_Drawable = std::make_shared<Util::Animation>(AnimationPaths, false, 125, false, 0);
@@ -20,17 +19,26 @@ glm::vec2 Ghost::GetPosition(){
     return m_Transform.translation;
 }
 
-void Ghost::GhostMove(const glm::vec2 &Speed, float SpeedMultiplier){
+void Ghost::GhostMove(std::string Direction, float SpeedMultiplier){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 0;
-    //East
-    if(Speed.x > 0 && Speed.y == 0) StartIndex = 0;
-    //West
-    else if(Speed.x < 0 && Speed.y == 0) StartIndex = 2;
-    //North
-    else if(Speed.x == 0 && Speed.y > 0) StartIndex = 4;
-    //South
-    else if(Speed.x == 0 && Speed.y < 0) StartIndex = 6;
+    if(Direction == "East") {
+        Speed = {GHOST_SPEED, 0};
+        StartIndex = 0;
+    }
+    else if(Direction == "West") {
+        Speed = {-GHOST_SPEED, 0};
+        StartIndex = 2;
+    }
+    else if(Direction == "North") {
+        Speed = {0, GHOST_SPEED};
+        StartIndex = 4;
+    }
+    else if(Direction == "South") {
+        Speed = {0, -GHOST_SPEED};
+        StartIndex = 6;
+    }
+
     if(temp->GetCurrentFrameIndex() > StartIndex + 1 || temp->GetCurrentFrameIndex() < StartIndex){
         temp->SetCurrentFrame(StartIndex);
     }
@@ -40,9 +48,21 @@ void Ghost::GhostMove(const glm::vec2 &Speed, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveScared(const glm::vec2 &Speed, float SpeedMultiplier){
+void Ghost::GhostMoveScared(std::string Direction, float SpeedMultiplier){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
+    if(Direction == "East") {
+        Speed = {GHOST_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        Speed = {-GHOST_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        Speed = {0, GHOST_SPEED};
+    }
+    else if(Direction == "South") {
+        Speed = {0, -GHOST_SPEED};
+    }
     if(temp->GetCurrentFrameIndex() > StartIndex + 1 || temp->GetCurrentFrameIndex() < StartIndex){
         temp->SetCurrentFrame(StartIndex);
     }
@@ -52,9 +72,21 @@ void Ghost::GhostMoveScared(const glm::vec2 &Speed, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveScaredFlash(const glm::vec2 &Speed, float SpeedMultiplier){
+void Ghost::GhostMoveScaredFlash(std::string Direction, float SpeedMultiplier){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
+    if(Direction == "East") {
+        Speed = {GHOST_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        Speed = {-GHOST_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        Speed = {0, GHOST_SPEED};
+    }
+    else if(Direction == "South") {
+        Speed = {0, -GHOST_SPEED};
+    }
     if(temp->GetCurrentFrameIndex() > StartIndex + 4 || temp->GetCurrentFrameIndex() < StartIndex){
         temp->SetCurrentFrame(StartIndex);
     }

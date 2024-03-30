@@ -1,13 +1,12 @@
 #ifndef GHOST_HPP
 #define GHOST_HPP
 
-#include <cstddef>
 #include <vector>
 #include <string>
 
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
-
+#include "config.hpp"
 
 class Ghost : public Util::GameObject {
 
@@ -35,10 +34,12 @@ public:
     
     void SetPosition(const glm::vec2& Position);
     glm::vec2 GetPosition();
-    void GhostMove(const glm::vec2& Speed, float SpeedMultiplier);
-    void GhostMoveScared(const glm::vec2& Speed, float SpeedMultiplier);
-    void GhostMoveScaredFlash(const glm::vec2 &Speed, float SpeedMultiplier);
+    void GhostMove(std::string Direction, float SpeedMultiplier);
+    void GhostMoveScared(std::string Direction, float SpeedMultiplier);
+    void GhostMoveScaredFlash(std::string Direction, float SpeedMultiplier);
 
+private:
+    glm::vec2 Speed;
 };
 
 #endif //ANIMATED_CHARACTER_HPP
