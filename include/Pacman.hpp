@@ -7,8 +7,6 @@
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
 
-
-
 class Pacman : public Util::GameObject {
 
 public:
@@ -42,7 +40,7 @@ public:
     std::string GetDirection();
     glm::vec2 GetPosition();
     void Move(const std::string Direction, float SpeedMultiplier);
-
+   	void MoveBack(const std::string Direction, float SpeedMultiplier);
 private:
     std::string MoveDirection = "East";
     glm::vec2 Speed;

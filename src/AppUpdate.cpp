@@ -2,12 +2,10 @@
 
 void App::Update() {
     TimeUpdate();
-    InputManager();
+	PacmanMoveProcess();
 
     FoodCollision();
     FoodEffect();
-
-    m_Pacman->Move(m_Pacman->GetDirection(), 1);
 
     m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
