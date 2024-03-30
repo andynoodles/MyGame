@@ -5,6 +5,9 @@
 #include "Util/Image.hpp"
 #include "config.hpp"
 
+#include <utility>
+	
+
 class BackgroundImage : public Util::GameObject{
 public:
     BackgroundImage(const std::string imagePath);
@@ -15,6 +18,8 @@ public:
 	float GetUpperLeftY();
 	unsigned int GetLayout(int x, int y);
 	
+	std::pair<int ,int> GetTileOfPosition(glm::vec2 position);
+	glm::vec2 GetCenterPositionOfTile(int x ,int y);
 private:
 	// 0 = Road(with point) ,1 = Wall ,2 = Ghost Spawn Point ,3 = Big point ,5 = Road but have no point
 	const unsigned int mapDesign[NUMBEROFTILESY][NUMBEROFTILESX] = { 
