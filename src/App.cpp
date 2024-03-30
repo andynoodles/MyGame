@@ -23,25 +23,24 @@ unsigned long App::GetMarker(){
 bool App::IfCollides(const std::shared_ptr<Food>& other){
         (void) other;
         int size = PIXELPERTILE/2;
-        glm::vec2 OtherPostion = other->GetPosition();
-        glm::vec2 ThisPostiom = m_Pacman->GetPosition();
-        if( ThisPostiom.x > OtherPostion.x - size &&
-            ThisPostiom.x < OtherPostion.x + size &&
-            ThisPostiom.y > OtherPostion.y - size &&
-            ThisPostiom.y < OtherPostion.y + size){ return true;}
+        glm::vec2 OtherPosition = other->GetPosition();
+        glm::vec2 ThisPosition = m_Pacman->GetPosition();
+        if( ThisPosition.x > OtherPosition.x - size &&
+            ThisPosition.x < OtherPosition.x + size &&
+            ThisPosition.y > OtherPosition.y - size &&
+            ThisPosition.y < OtherPosition.y + size){ return true;}
         return false;
 }
 
 bool App::IfCollides(const std::shared_ptr<Ghost>& other){
         (void) other;
-        int size = PIXELPERTILE/2;
-        glm::vec2 OtherPostion = other->GetPosition();
-        glm::vec2 ThisPostiom = m_Pacman->GetPosition();
-        if( ThisPostiom.x > OtherPostion.x - size &&
-            ThisPostiom.x < OtherPostion.x + size &&
-            ThisPostiom.y > OtherPostion.y - size &&
-            ThisPostiom.y < OtherPostion.y + size){ return true;}
-        return false;
+        glm::vec2 OtherPosition = other->GetPosition();
+        glm::vec2 ThisPosition = m_Pacman->GetPosition();
+		int pacmanTileX = ThisPosition.x/PIXELPERTILE ,pacmanTileY = ThisPosition.y/PIXELPERTILE;
+		int ghostTileX = OtherPosition.x/PIXELPERTILE ,ghostTileY = OtherPosition.y/PIXELPERTILE;
+		if(pacmanTileX == ghostTileX && pacmanTileY == ghostTileY)
+			return true;
+		return false;
 }
 
 void App::FoodCollision(){
