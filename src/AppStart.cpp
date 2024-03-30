@@ -67,7 +67,7 @@ void App::Start() {
     m_Pacman->SetVisible(showCharacter);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(true);
-    m_Pacman->SetPosition({-224 + 24, 248 - 24});
+    m_Pacman->SetPosition({upperLeftX + PIXELPERTILE, upperLeftY - PIXELPERTILE});
     m_Pacman->FaceEast();
 
     m_Cyan = std::make_shared<Ghost>(cyanImage);

@@ -79,4 +79,7 @@ glm::vec2 Pacman::GetPosition(){
     return m_Transform.translation;
 }
 
-
+void Pacman::Stop(){
+		
+	SetPosition(GetPosition()); 
+}
