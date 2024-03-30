@@ -24,3 +24,14 @@ float BackgroundImage::GetUpperLeftY(){
 unsigned int BackgroundImage::GetLayout(int x, int y){
 	return mapDesign[x][y];
 }
+
+std::pair<int ,int> BackgroundImage::GetTileOfPosition(glm::vec2 position){
+	int newX = position.x+GetScaledSize().x/2 ,newY = GetScaledSize().y/2 - position.y;
+		
+	return {newX/PIXELPERTILE ,newY/PIXELPERTILE};
+}
+
+glm::vec2 BackgroundImage::GetCenterPositionOfTile(int x ,int y){
+	glm::vec2 center = {GetUpperLeftX() + PIXELPERTILE*x ,GetUpperLeftY() - PIXELPERTILE*y};	
+	return center;
+}
