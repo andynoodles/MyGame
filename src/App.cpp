@@ -89,11 +89,6 @@ void App::ChangeDirectionIfPossible(){
 	glm::vec2 currentPosition = m_Pacman->GetPosition();
 	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(currentPosition);
 	std::pair<int ,int> upTile = {currentTile.first ,currentTile.second-1} ,downTile = {currentTile.first ,currentTile.second+1} ,leftTile = {currentTile.first-1 ,currentTile.second} ,rightTile = {currentTile.first+1 ,currentTile.second};
-	LOG_DEBUG("CURRENT_TILES:{} ,{}" ,currentTile.first ,currentTile.second);
-	LOG_DEBUG("U:{}" ,m_BackgroundImage->GetLayout(upTile.second ,upTile.first));
-	LOG_DEBUG("D:{}" ,m_BackgroundImage->GetLayout(downTile.second ,downTile.first));
-	LOG_DEBUG("L:{}" ,m_BackgroundImage->GetLayout(leftTile.second ,leftTile.first));
-	LOG_DEBUG("R:{}" ,m_BackgroundImage->GetLayout(rightTile.second ,rightTile.first));
 
 	std::pair<int ,int> tileintented;
 	if(newDirection == oldDirection) return;
