@@ -77,7 +77,6 @@ void App::FoodEffect(){
 void App::PacmanMoveProcess(){
 	ChangeDirectionIfPossible();
 	if(IfPacmanCollidesWall()){
-//		m_Pacman->MoveBack(m_Pacman->GetDirection() ,1);
 		Stop();
 	}
 	else 
@@ -104,19 +103,12 @@ void App::ChangeDirectionIfPossible(){
 		else if(newDirection =="West") tileintented = leftTile;
 		else if(newDirection =="East") tileintented = rightTile;
 	}
-	if(m_BackgroundImage->GetLayout(tileintented.second ,tileintented.first) == 1) return;
-	else m_Pacman->SetDirection(newDirection);
-	return;
-	/*
-    m_Pacman->Move(m_Pacman->GetDirection(), 1);
-	if(IfPacmanCollidesWall()){
-		m_Pacman->MoveBack(m_Pacman->GetDirection() ,1);
-		m_Pacman->SetDirection(oldDirection);
+	if(m_BackgroundImage->GetLayout(tileintented.second ,tileintented.first) == 1){
+		return;
 	}
 	else{
-		m_Pacman->MoveBack(m_Pacman->GetDirection(),1);
+		m_Pacman->SetDirection(newDirection);
 	}
-*/
 }
 
 std::string App::InputManager(){
@@ -143,7 +135,6 @@ bool App::IfPacmanCollidesWall(){
 	std::pair<int ,int> upTile = {currentTile.first ,currentTile.second-1} ,downTile = {currentTile.first ,currentTile.second+1} ,leftTile = {currentTile.first-1 ,currentTile.second} ,rightTile = {currentTile.first+1 ,currentTile.second};
 	std::pair<int ,int> tileintented;
 	std::string dirIntented = m_Pacman->GetDirection();	
-//	if(newDirection == oldDirection) return;
 	if(dirIntented =="North") tileintented = upTile;
 	else if(dirIntented =="South") tileintented = downTile;
 	else if(dirIntented =="West") tileintented = leftTile;
@@ -151,17 +142,6 @@ bool App::IfPacmanCollidesWall(){
 
 	if(m_BackgroundImage->GetLayout(tileintented.second,tileintented.first) ==1) return true;
 	return false;
-/*
-	int size = PIXELPERTILE/2 - 2.5; //need fine-tune
-	glm::vec2 currentPosition = m_Pacman->GetPosition();
-	int upperLeft =  m_BackgroundImage->typeOfPixel(currentPosition.x - size ,currentPosition.y + size);
-	int upperRight =  m_BackgroundImage->typeOfPixel(currentPosition.x + size ,currentPosition.y + size);
-	int lowerLeft =  m_BackgroundImage->typeOfPixel(currentPosition.x - size ,currentPosition.y - size);
-	int lowerRight =  m_BackgroundImage->typeOfPixel(currentPosition.x + size ,currentPosition.y - size);
-	if(upperLeft == 1 || upperRight == 1 || lowerLeft == 1 || lowerRight ==1)
-		return true;
-	return false;
-	*/
 }
 
 void App::Stop(){
@@ -170,11 +150,4 @@ void App::Stop(){
 	glm::vec2 currentTileCenter = m_BackgroundImage->GetCenterPositionOfTile(currentTile.first ,currentTile.second);	
 	
 	m_Pacman->SetPosition(currentTileCenter);
-/*
-	float deltaX = currentPosition.x - currentTileCenter.x;
-	float deltaY = currentPosition.y - currentTileCenter.y;
-
-	glm::vec2 pacmanNewPosition;
-	if(deltaX<0) pacmanNewPosition.x = 
-	*/
 }
