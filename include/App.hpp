@@ -53,6 +53,7 @@ public:
 	void PacmanMoveProcess();
 	std::string InputManager();
 	void ChangeDirectionIfPossible();
+	void Stop();
 
 private:
     void ValidTask();

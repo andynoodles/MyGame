@@ -78,7 +78,7 @@ void App::PacmanMoveProcess(){
 	ChangeDirectionIfPossible();
 	if(IfPacmanCollidesWall()){
 //		m_Pacman->MoveBack(m_Pacman->GetDirection() ,1);
-		m_Pacman->Stop();
+		Stop();
 	}
 	else 
 	m_Pacman->Move(m_Pacman->GetDirection() ,1);
@@ -164,4 +164,17 @@ bool App::IfPacmanCollidesWall(){
 	*/
 }
 
+void App::Stop(){
+	glm::vec2 currentPosition = m_Pacman->GetPosition();
+	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(currentPosition);
+	glm::vec2 currentTileCenter = m_BackgroundImage->GetCenterPositionOfTile(currentTile.first ,currentTile.second);	
+	
+	m_Pacman->SetPosition(currentTileCenter);
+/*
+	float deltaX = currentPosition.x - currentTileCenter.x;
+	float deltaY = currentPosition.y - currentTileCenter.y;
 
+	glm::vec2 pacmanNewPosition;
+	if(deltaX<0) pacmanNewPosition.x = 
+	*/
+}
