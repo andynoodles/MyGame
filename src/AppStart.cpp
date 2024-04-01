@@ -100,11 +100,11 @@ void App::Start() {
 
     m_Text = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,
-    "",
+    "1",
     Util::Color(255, 255, 255));
     m_TextScore = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,
-    "",
+    "1",
     Util::Color(255, 255, 255));
     m_TextScore->SetVisible(false);
 
