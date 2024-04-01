@@ -16,7 +16,9 @@ set(INCLUDE_FILES
     Ghost.hpp
     ShowText.hpp
     Food.hpp
-	config.hpp
+	  config.hpp
+    Level.hpp
+    Score.hpp
 )
 
 set(TEST_FILES

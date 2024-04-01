@@ -64,17 +64,15 @@ private:
     Util::Time m_Time;
     unsigned long Marker = 0;
     bool onPill = false;
-    std::shared_ptr<ShowText> m_Text;
+    std::shared_ptr<ShowText> m_Text, m_TextScore;
 
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
-    std::shared_ptr<Ghost> m_Red;
-    std::shared_ptr<Ghost> m_Pink;
-    std::shared_ptr<Ghost> m_Cyan;
-    std::shared_ptr<Ghost> m_Orange;
+    std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
+
 };
 
 #endif
