@@ -47,7 +47,7 @@ void App::FoodCollision(){
     for (int i = 0; i < SMALL_FOOD_NUM; i++) {
         if(IfCollides(m_SmallFood[i]) && m_SmallFood[i]->GetVisibility()){ 
             m_SmallFood[i]->SetVisible(false); 
-            m_Score->AddVisibleScore(10);
+            m_Score->AddVisibleScore(SCORE_FOOD);
         }
     }
     for (int i = 0; i < LARGE_FOOD_NUM; i++) {
@@ -55,7 +55,7 @@ void App::FoodCollision(){
             m_LargeFood[i]->SetVisible(false); 
             SetTimeMarker();
             onPill = true;
-            m_Score->AddVisibleScore(10);
+            m_Score->AddVisibleScore(SCORE_FOOD);
         }
     }
 }

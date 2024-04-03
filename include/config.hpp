@@ -16,6 +16,9 @@
 #define LARGE_FOOD_NUM 4
 #define SMALL_FOOD_NUM 240
 
+//Score
+#define SCORE_FOOD 10
+
 //Other
 #define PILL_DURATION 10000
 #define FLASH_DURATION 3000
