@@ -7,10 +7,21 @@ void Score::AddFoodScore(unsigned int delta){
     FoodScore += delta;
 }
 
-void Score::SetVisiableScore(unsigned int score){
-    VisiableScore = score;
+void Score::SetVisibleScore(unsigned int score){
+    VisibleScore = score;
 }
 
-void Score::AddVisiableScore(unsigned int delta){
-    VisiableScore += delta;
+void Score::AddVisibleScore(unsigned int delta){
+    VisibleScore += delta;
+}
+unsigned int Score::GetFoodScore(){
+    return this->FoodScore;
+}
+
+unsigned int Score::GetVisibleScore(){
+    return this->VisibleScore;
+}
+
+void Score::ScoreUpdate(){
+    SetText(std::to_string(this->VisibleScore));
 }

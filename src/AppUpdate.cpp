@@ -2,6 +2,7 @@
 
 void App::Update() {
     TimeUpdate();
+    ScoreUpdate();
 	PacmanMoveProcess();
 
     FoodCollision();
@@ -12,3 +13,4 @@ void App::Update() {
         m_CurrentState = State::END;
     }
 }
+
