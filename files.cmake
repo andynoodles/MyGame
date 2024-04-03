@@ -7,6 +7,8 @@ set(SRC_FILES
     Ghost.cpp
     Food.cpp
     App.cpp
+    Score.cpp
+    Level.cpp
 )
 
 set(INCLUDE_FILES

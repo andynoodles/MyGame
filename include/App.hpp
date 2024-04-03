@@ -19,7 +19,7 @@
 #include "BackgroundImage.hpp"
 #include "ShowText.hpp"
 #include "Food.hpp"
-
+#include "Score.hpp"
 
 
 class App {
@@ -39,6 +39,7 @@ public:
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
     void TimeUpdate();
+    void ScoreUpdate();
     void SetTimeMarker();
     void FoodCollision();
     void FoodEffect();
@@ -64,8 +65,8 @@ private:
     Util::Time m_Time;
     unsigned long Marker = 0;
     bool onPill = false;
-    std::shared_ptr<ShowText> m_Text, m_TextScore;
-
+    std::shared_ptr<ShowText> m_Text;
+    std::shared_ptr<Score> m_Score;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     

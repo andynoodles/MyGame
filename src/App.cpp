@@ -45,15 +45,17 @@ bool App::IfCollides(const std::shared_ptr<Ghost>& other){
 
 void App::FoodCollision(){
     for (int i = 0; i < SMALL_FOOD_NUM; i++) {
-        if(IfCollides(m_SmallFood[i])){ 
+        if(IfCollides(m_SmallFood[i]) && m_SmallFood[i]->GetVisibility()){ 
             m_SmallFood[i]->SetVisible(false); 
+            m_Score->AddVisibleScore(10);
         }
     }
     for (int i = 0; i < LARGE_FOOD_NUM; i++) {
-        if(IfCollides(m_LargeFood[i])){
+        if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
             m_LargeFood[i]->SetVisible(false); 
             SetTimeMarker();
             onPill = true;
+            m_Score->AddVisibleScore(10);
         }
     }
 }
@@ -120,7 +122,8 @@ std::string App::InputManager(){
     else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
         s =  "East";
     }
-	else s = m_Pacman->GetDirection();
+	else 
+        s = m_Pacman->GetDirection();
 	return s;
 }
 
@@ -145,4 +148,8 @@ void App::Stop(){
 	glm::vec2 currentTileCenter = m_BackgroundImage->GetCenterPositionOfTile(currentTile.first ,currentTile.second);	
 	
 	m_Pacman->SetPosition(currentTileCenter);
+}
+
+void App::ScoreUpdate(){
+    m_Score->ScoreUpdate();
 }
