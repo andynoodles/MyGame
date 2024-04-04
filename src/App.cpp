@@ -81,8 +81,9 @@ void App::PacmanMoveProcess(){
 	if(IfPacmanCollidesWall()){
 		Stop();
 	}
-	else 
-	m_Pacman->Move(m_Pacman->GetDirection() ,1);
+	else{
+		m_Pacman->Move(m_Pacman->GetDirection() ,1);
+	}
 }
 
 void App::ChangeDirectionIfPossible(){
@@ -100,10 +101,48 @@ void App::ChangeDirectionIfPossible(){
 		else if(newDirection =="West") tileintented = leftTile;
 		else if(newDirection =="East") tileintented = rightTile;
 	}
+
 	if(m_BackgroundImage->GetLayout(tileintented.second ,tileintented.first) == 1){
 		return;
 	}
 	else{
+		glm::vec2 centerOfTileIntented = m_BackgroundImage->GetCenterPositionOfTile(tileintented.first ,tileintented.second);
+		if(tileintented == upTile || tileintented == downTile){
+			while(m_Pacman->GetPosition().x != centerOfTileIntented.x){
+				glm::vec2 currentPosition = m_Pacman->GetPosition();
+				if(tileintented == upTile){
+					if(currentPosition.x < centerOfTileIntented.x) 
+							m_Pacman->SetPosition({currentPosition.x+1 ,currentPosition.y+1});	
+					else if(currentPosition.x > centerOfTileIntented.x)
+							m_Pacman->SetPosition({currentPosition.x-1 ,currentPosition.y+1});	
+				}
+				else{	
+					if(currentPosition.x < centerOfTileIntented.x) 
+						m_Pacman->SetPosition({currentPosition.x+1 ,currentPosition.y-1});	
+					else if(currentPosition.x > centerOfTileIntented.x)
+						m_Pacman->SetPosition({currentPosition.x-1 ,currentPosition.y-1});
+
+				}
+			}
+		}
+		else if(tileintented == leftTile || tileintented == rightTile){
+			while(m_Pacman->GetPosition().y != centerOfTileIntented.y){
+				glm::vec2 currentPosition = m_Pacman->GetPosition();
+				if(tileintented == leftTile){	
+					if(currentPosition.y < centerOfTileIntented.y)
+						m_Pacman->SetPosition({currentPosition.x-1 ,currentPosition.y+1});	
+					else if(currentPosition.y > centerOfTileIntented.y)
+						m_Pacman->SetPosition({currentPosition.x-1 ,currentPosition.y-1});	
+				}
+				else{
+					if(currentPosition.y < centerOfTileIntented.y)
+						m_Pacman->SetPosition({currentPosition.x+1 ,currentPosition.y+1});	
+					else if(currentPosition.y > centerOfTileIntented.y)
+						m_Pacman->SetPosition({currentPosition.x+1 ,currentPosition.y-1});	
+				}
+			}
+
+		}
 		m_Pacman->SetDirection(newDirection);
 	}
 }
