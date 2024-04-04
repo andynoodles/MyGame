@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cmath> 
 #include "pch.hpp" // IWYU pragma: export
 
 #include "Util/Root.hpp"
@@ -55,6 +56,10 @@ public:
 	std::string InputManager();
 	void ChangeDirectionIfPossible();
 	void Stop();
+
+
+	std::pair<int ,int> GetTileIntented(std::string newDirection);
+
 
 private:
     void ValidTask();
