@@ -19,7 +19,7 @@ add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
-)
+ "src/Astar.cpp")
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)

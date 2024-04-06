@@ -103,7 +103,7 @@ void App::Start() {
     m_Red->SetVisible(showCharacter);
     m_Red->SetLooping(true);
     m_Red->SetPlaying(true);
-    m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(13, 11));
+    m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(6, 5));
 
     m_Text = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,

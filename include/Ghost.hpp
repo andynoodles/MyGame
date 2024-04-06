@@ -4,9 +4,12 @@
 #include <vector>
 #include <string>
 
+
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
 #include "config.hpp"
+#include "Astar.hpp"
+#include "BackgroundImage.hpp"
 
 class Ghost : public Util::GameObject {
 public:
@@ -45,6 +48,12 @@ public:
     void GhostMoveScared();
     void GhostMoveFlash();
     void GhostMoveEye();
+    
+    //Path finding and moving
+    std::pair<int, int> Ghost::GetTileOfPosition(glm::vec2 position);
+    glm::vec2 GetCenterPositionOfTile(int x, int y);
+    glm::vec2 GetTargetPixel(std::pair<int, int> EndPosition);
+    void MoveToTile(std::pair<int, int> EndPosition);
 
     void SetState(GhostState state) { State = state; }
     GhostState GetState() { return State; }
@@ -55,7 +64,7 @@ public:
     unsigned long GetDeadMarker() { return DeadMarker; }
 private:
     glm::vec2 Speed;
-    std::string Direction = "North";
+    std::string Direction = "West";
     float SpeedMultiplier = 1;
     unsigned long DeadMarker = 0;
     GhostState State = GhostState::NORMAL;

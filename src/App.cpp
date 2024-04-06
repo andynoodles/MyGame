@@ -160,9 +160,5 @@ void App::GhostStateProcess() {
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-
-	m_Cyan->GhostMove();
-	m_Red->GhostMove();
-	m_Pink->GhostMove();
-	m_Orange->GhostMove();
+	m_Red->MoveToTile({1,1});
 }

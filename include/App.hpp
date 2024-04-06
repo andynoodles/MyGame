@@ -20,7 +20,7 @@
 #include "ShowText.hpp"
 #include "Food.hpp"
 #include "Score.hpp"
-
+#include "Astar.hpp""
 
 class App {
 public:

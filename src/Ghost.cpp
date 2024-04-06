@@ -142,3 +142,78 @@ void Ghost::GhostMove(){
         break;
     }
 }
+
+std::pair<int, int> Ghost::GetTileOfPosition(glm::vec2 position) {
+    int newX = position.x + 224, newY = 248 - position.y;
+    return { newX / PIXELPERTILE ,newY / PIXELPERTILE };
+}
+
+glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
+    glm::vec2 center = { -216 + PIXELPERTILE * x , 240 - PIXELPERTILE * y };
+    return center;
+}
+
+glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
+    vector<vector<int>> grid = {
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
+        {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
+        {0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1},
+        {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+        {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+        {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
+        {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    };
+
+    std::pair<int, int> StartPosition = GetTileOfPosition(this->GetPosition());
+
+    std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
+    if(path.size() - 1 != 0)
+        return GetCenterPositionOfTile(path[path.size() - 2].first, path[path.size() - 2].second);
+    else
+        return GetCenterPositionOfTile(path[path.size() - 1].first, path[path.size() - 1].second);
+}
+
+void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
+    glm::vec2 Target = GetTargetPixel(EndPosition);
+    std::cout << "Current:" << GetPosition().x << " " << GetPosition().y << endl;
+    std::cout << "Target:" << Target.x << " " << Target.y << endl;
+    if (GetPosition().x < Target.x && GetPosition().y == Target.y) {
+        SetDirection("East");
+    }
+    else if (GetPosition().x > Target.x && GetPosition().y == Target.y) {
+        SetDirection("West");
+    }
+    else if (GetPosition().x == Target.x && GetPosition().y > Target.y) {
+        SetDirection("South");
+    }
+    else if (GetPosition().x == Target.x && GetPosition().y < Target.y) {
+        SetDirection("North");
+    }
+
+    std::cout << "Direction:" << this->Direction << endl;
+    GhostMove();
+}
