@@ -19,7 +19,7 @@ glm::vec2 Ghost::GetPosition(){
     return m_Transform.translation;
 }
 
-void Ghost::GhostMove(std::string Direction, float SpeedMultiplier){
+void Ghost::GhostMoveNormal(){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 0;
     if(Direction == "East") {
@@ -48,7 +48,7 @@ void Ghost::GhostMove(std::string Direction, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveScared(std::string Direction, float SpeedMultiplier){
+void Ghost::GhostMoveScared(){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
     if(Direction == "East") {
@@ -72,7 +72,7 @@ void Ghost::GhostMoveScared(std::string Direction, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveScaredFlash(std::string Direction, float SpeedMultiplier){
+void Ghost::GhostMoveFlash(){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
     if(Direction == "East") {
@@ -94,4 +94,51 @@ void Ghost::GhostMoveScaredFlash(std::string Direction, float SpeedMultiplier){
         temp->SetCurrentFrame(StartIndex);
     }
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
+}
+
+void Ghost::GhostMoveEye() {
+    auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+    size_t StartIndex = 0;
+    if (Direction == "East") {
+        Speed = { GHOST_SPEED, 0 };
+        StartIndex = 15;
+    }
+    else if (Direction == "West") {
+        Speed = { -GHOST_SPEED, 0 };
+        StartIndex = 14;
+    }
+    else if (Direction == "North") {
+        Speed = { 0, GHOST_SPEED };
+        StartIndex = 16;
+    }
+    else if (Direction == "South") {
+        Speed = { 0, -GHOST_SPEED };
+        StartIndex = 13;
+    }
+    if (temp->GetCurrentFrameIndex() < StartIndex || temp->GetCurrentFrameIndex() > StartIndex) {
+        temp->SetCurrentFrame(StartIndex);
+    }
+
+    m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier);
+}
+
+void Ghost::GhostMove(){
+    switch (State)
+    {
+    case Ghost::GhostState::NORMAL:
+        GhostMoveNormal();
+        break;
+    case Ghost::GhostState::SCARED:
+        GhostMoveScared();
+        break;
+    case Ghost::GhostState::FLASHING:
+        GhostMoveFlash();
+        break;
+    case Ghost::GhostState::DEAD:
+        GhostMoveEye();
+        break;
+    default:
+        GhostMoveNormal();
+        break;
+    }
 }

@@ -4,9 +4,9 @@ void App::Update() {
     TimeUpdate();
     ScoreUpdate();
 	PacmanMoveProcess();
-
+    GhostMoveProcess();
     FoodCollision();
-    FoodEffect();
+
 
     m_Root.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {

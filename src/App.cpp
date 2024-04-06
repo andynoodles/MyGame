@@ -12,14 +12,6 @@ unsigned long App::GetDeltaTime(){
     return m_Time.GetDeltaTime();
 }
 
-void App::SetTimeMarker(){
-    Marker = m_Time.GetElapsedTimeMs();
-}
-
-unsigned long App::GetMarker(){
-    return Marker;
-}
-
 bool App::IfCollides(const std::shared_ptr<Food>& other){
         glm::vec2 OtherPosition = other->GetPosition();
         glm::vec2 ThisPosition = m_Pacman->GetPosition();
@@ -46,26 +38,10 @@ void App::FoodCollision(){
     for (int i = 0; i < LARGE_FOOD_NUM; i++) {
         if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
             m_LargeFood[i]->SetVisible(false); 
-            SetTimeMarker();
+			FoodEffectMarker = m_Time.GetElapsedTimeMs();
             onPill = true;
             m_Score->AddVisibleScore(SCORE_FOOD);
         }
-    }
-}
-
-void App::FoodEffect(){
-    if(GetElapsedTime() - GetMarker() < PILL_DURATION && onPill){
-        if(!(GetElapsedTime() - GetMarker() < FLASH_DURATION))
-            m_Cyan->GhostMoveScaredFlash("East", 0);
-        else
-            m_Cyan->GhostMoveScared("East", 0);
-
-        m_Text->SetText("I'm high");
-    }
-    else{
-        onPill = false;
-        m_Cyan->GhostMove("East", 0);
-        m_Text->SetText("I'm trash");
     }
 }
 
@@ -158,3 +134,41 @@ void App::Stop(){
 void App::ScoreUpdate(){
     m_Score->ScoreUpdate();
 }
+
+void App::GhostStateProcess() {
+	std::vector<std::shared_ptr<Ghost>> Ghost;
+	Ghost.push_back(m_Cyan);
+	Ghost.push_back(m_Red);
+	Ghost.push_back(m_Pink);
+	Ghost.push_back(m_Orange);
+	//Set State
+	for (int i = 0; i < 4; i++) {
+		if (GetElapsedTime() - FoodEffectMarker < PILL_DURATION &&
+			onPill &&
+			(Ghost[i]->GetState() != Ghost::GhostState::DEAD)) {
+			if (!(GetElapsedTime() - FoodEffectMarker < DONT_FLASH_DURATION))
+				Ghost[i]->SetState(Ghost::GhostState::FLASHING);
+			else
+				Ghost[i]->SetState(Ghost::GhostState::SCARED);
+			if (IfCollides(Ghost[i])) {
+				Ghost[i]->SetDeadMarker(GetElapsedTime());
+				Ghost[i]->SetState(Ghost::GhostState::DEAD);
+			}
+		}
+		else if(Ghost[i]->GetState() != Ghost::GhostState::DEAD ||
+				GetElapsedTime() - Ghost[i]->GetDeadMarker() > GHOST_DEAD_DURATION) {
+				Ghost[i]->SetState(Ghost::GhostState::NORMAL);
+		}
+			
+	}
+}
+
+void App::GhostMoveProcess() {
+	GhostStateProcess();
+
+	m_Cyan->GhostMove();
+	m_Red->GhostMove();
+	m_Pink->GhostMove();
+	m_Orange->GhostMove();
+}
+

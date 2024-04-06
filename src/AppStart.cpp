@@ -10,10 +10,10 @@ void App::Start() {
 
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
-    cyanImage.reserve(GHOST_ASSETS_NUM);
-    orangeImage.reserve(GHOST_ASSETS_NUM);
-    pinkImage.reserve(GHOST_ASSETS_NUM);
-    redImage.reserve(GHOST_ASSETS_NUM);
+    cyanImage.reserve(GHOST_ASSETS_RESERVE);
+    orangeImage.reserve(GHOST_ASSETS_RESERVE);
+    pinkImage.reserve(GHOST_ASSETS_RESERVE);
+    redImage.reserve(GHOST_ASSETS_RESERVE);
     for (int i = 0; i < PACMAN_ASSETS_NUM; ++i) {
         pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
     }
@@ -30,6 +30,13 @@ void App::Start() {
         orangeImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
         pinkImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
         redImage.emplace_back(RESOURCE_DIR"/image/ScaredMonster/Sprite (" + std::to_string(i + 65) + ").png");
+    }
+
+    for (int i = 0; i < GHOST_EYE_ASSETS_NUM; i++) {
+        cyanImage.emplace_back(RESOURCE_DIR"/image/Eyes/Look (" + std::to_string(i + 1) + ").png");
+        orangeImage.emplace_back(RESOURCE_DIR"/image/Eyes/Look (" + std::to_string(i + 1) + ").png");
+        pinkImage.emplace_back(RESOURCE_DIR"/image/Eyes/Look (" + std::to_string(i + 1) + ").png");
+        redImage.emplace_back(RESOURCE_DIR"/image/Eyes/Look (" + std::to_string(i + 1) + ").png");
     }
 
     //SPAWN FOOD
@@ -75,28 +82,28 @@ void App::Start() {
     m_Cyan->SetVisible(showCharacter);
     m_Cyan->SetLooping(true);
     m_Cyan->SetPlaying(true);
-    m_Cyan->SetPosition({0, 0});
+    m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
 
     m_Orange = std::make_shared<Ghost>(orangeImage);
     m_Orange->SetZIndex(17);
     m_Orange->SetVisible(showCharacter);
     m_Orange->SetLooping(true);
     m_Orange->SetPlaying(true);
-    m_Orange->SetPosition({0, 30});
+    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(13, 14));
 
     m_Pink = std::make_shared<Ghost>(pinkImage);
     m_Pink->SetZIndex(16);
     m_Pink->SetVisible(showCharacter);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(true);
-    m_Pink->SetPosition({0, 60});
+    m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(15, 14));
 
     m_Red = std::make_shared<Ghost>(redImage);
     m_Red->SetZIndex(15);
     m_Red->SetVisible(showCharacter);
     m_Red->SetLooping(true);
     m_Red->SetPlaying(true);
-    m_Red->SetPosition({0, 90});
+    m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(13, 11));
 
     m_Text = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,

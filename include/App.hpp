@@ -39,19 +39,24 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
+    //Misc 
     void TimeUpdate();
     void ScoreUpdate();
-    void SetTimeMarker();
+
     void FoodCollision();
-    void FoodEffect();
+
+    //Ghost
+    void GhostStateProcess();
+    void GhostMoveProcess();
+
+    //Time Related
     unsigned long GetElapsedTime();
     unsigned long GetDeltaTime();
-    unsigned long GetMarker();
 
+    //Pacman Related
     bool IfCollides(const std::shared_ptr<Food>& other);
     bool IfCollides(const std::shared_ptr<Ghost>& other);
 	bool IfPacmanCollidesWall();
-
 	void PacmanMoveProcess();
 	std::string InputManager();
 	void ChangeDirectionIfPossible();
@@ -62,14 +67,11 @@ public:
 
 
 private:
-    void ValidTask();
-
-private:
     State m_CurrentState = State::START;
 	Util::Root m_Root;
     Util::Time m_Time;
-    unsigned long Marker = 0;
-    bool onPill = false;
+    unsigned long FoodEffectMarker = 0;
+    bool onPill = false; // needs to be init every game
     std::shared_ptr<ShowText> m_Text;
     std::shared_ptr<Score> m_Score;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
