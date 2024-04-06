@@ -13,24 +13,17 @@ unsigned long App::GetDeltaTime(){
 }
 
 bool App::IfCollides(const std::shared_ptr<Food>& other){
-        (void) other;
-        int size = PIXELPERTILE/2;
         glm::vec2 OtherPosition = other->GetPosition();
         glm::vec2 ThisPosition = m_Pacman->GetPosition();
-        if( ThisPosition.x > OtherPosition.x - size &&
-            ThisPosition.x < OtherPosition.x + size &&
-            ThisPosition.y > OtherPosition.y - size &&
-            ThisPosition.y < OtherPosition.y + size){ return true;}
+		if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
+			return true;
         return false;
 }
 
 bool App::IfCollides(const std::shared_ptr<Ghost>& other){
-        (void) other;
         glm::vec2 OtherPosition = other->GetPosition();
         glm::vec2 ThisPosition = m_Pacman->GetPosition();
-		int pacmanTileX = ThisPosition.x/PIXELPERTILE ,pacmanTileY = ThisPosition.y/PIXELPERTILE;
-		int ghostTileX = OtherPosition.x/PIXELPERTILE ,ghostTileY = OtherPosition.y/PIXELPERTILE;
-		if(pacmanTileX == ghostTileX && pacmanTileY == ghostTileY)
+		if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
 			return true;
 		return false;
 }
@@ -57,29 +50,49 @@ void App::PacmanMoveProcess(){
 	if(IfPacmanCollidesWall()){
 		Stop();
 	}
-	else 
-	m_Pacman->Move(m_Pacman->GetDirection() ,1);
+	else{
+		m_Pacman->Move(m_Pacman->GetDirection() ,1);
+	}
+}
+
+std::pair<int ,int> App::GetTileIntented(std::string newDirection){
+	std::pair<int ,int> tileintented;
+	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
+
+	if(newDirection =="North") tileintented = {currentTile.first ,currentTile.second-1};
+	else if(newDirection =="South") tileintented = {currentTile.first ,currentTile.second+1};
+	else if(newDirection =="West") tileintented = {currentTile.first-1 ,currentTile.second};
+	else if(newDirection =="East") tileintented = {currentTile.first+1 ,currentTile.second};
+	
+	return tileintented;
 }
 
 void App::ChangeDirectionIfPossible(){
 	std::string oldDirection = m_Pacman->GetDirection() ,newDirection  = InputManager();
-	
-	glm::vec2 currentPosition = m_Pacman->GetPosition();
-	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(currentPosition);
-	std::pair<int ,int> upTile = {currentTile.first ,currentTile.second-1} ,downTile = {currentTile.first ,currentTile.second+1} ,leftTile = {currentTile.first-1 ,currentTile.second} ,rightTile = {currentTile.first+1 ,currentTile.second};
-
-	std::pair<int ,int> tileintented;
 	if(newDirection == oldDirection) return;
-	else{
-		if(newDirection =="North") tileintented = upTile;
-		else if(newDirection =="South") tileintented = downTile;
-		else if(newDirection =="West") tileintented = leftTile;
-		else if(newDirection =="East") tileintented = rightTile;
-	}
+
+	std::pair<int ,int> tileintented = GetTileIntented(newDirection);
 	if(m_BackgroundImage->GetLayout(tileintented.second ,tileintented.first) == 1){
 		return;
 	}
 	else{
+		glm::vec2 centerOfTileIntented = m_BackgroundImage->GetCenterPositionOfTile(tileintented.first ,tileintented.second);
+		glm::vec2 currentPosition = m_Pacman->GetPosition();
+		float disToMidX = currentPosition.x - centerOfTileIntented.x ,disToMidY = currentPosition.y - centerOfTileIntented.y;
+
+		if(newDirection == "North"){
+			m_Pacman->SetPosition({currentPosition.x - disToMidX ,currentPosition.y + std::fabs(disToMidX)});
+		}
+		else if(newDirection == "South"){
+			m_Pacman->SetPosition({currentPosition.x - disToMidX ,currentPosition.y - std::fabs(disToMidX)});
+		}
+		else if(newDirection == "West"){
+			m_Pacman->SetPosition({currentPosition.x - std::fabs(disToMidY) ,currentPosition.y - disToMidY});
+		}
+		else if(newDirection == "East"){
+			m_Pacman->SetPosition({currentPosition.x + std::fabs(disToMidY) ,currentPosition.y - disToMidY});
+		}
+
 		m_Pacman->SetDirection(newDirection);
 	}
 }
@@ -104,15 +117,7 @@ std::string App::InputManager(){
 }
 
 bool App::IfPacmanCollidesWall(){
-	glm::vec2 currentPosition = m_Pacman->GetPosition();
-	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(currentPosition);
-	std::pair<int ,int> upTile = {currentTile.first ,currentTile.second-1} ,downTile = {currentTile.first ,currentTile.second+1} ,leftTile = {currentTile.first-1 ,currentTile.second} ,rightTile = {currentTile.first+1 ,currentTile.second};
-	std::pair<int ,int> tileintented;
-	std::string dirIntented = m_Pacman->GetDirection();	
-	if(dirIntented =="North") tileintented = upTile;
-	else if(dirIntented =="South") tileintented = downTile;
-	else if(dirIntented =="West") tileintented = leftTile;
-	else if(dirIntented =="East") tileintented = rightTile;
+	std::pair<int ,int> tileintented = GetTileIntented(m_Pacman->GetDirection());
 
 	if(m_BackgroundImage->GetLayout(tileintented.second,tileintented.first) ==1) return true;
 	return false;
@@ -162,3 +167,4 @@ void App::GhostMoveProcess() {
 	GhostStateProcess();
 	m_Red->MoveToTile({2,1});
 }
+
