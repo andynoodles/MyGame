@@ -60,22 +60,6 @@ void App::FoodCollision(){
     }
 }
 
-void App::FoodEffect(){
-    if(GetElapsedTime() - GetMarker() < PILL_DURATION && onPill){
-        if(!(GetElapsedTime() - GetMarker() < FLASH_DURATION))
-            m_Cyan->GhostMoveScaredFlash("East", 0);
-        else
-            m_Cyan->GhostMoveScared("East", 0);
-
-        m_Text->SetText("I'm high");
-    }
-    else{
-        onPill = false;
-        m_Cyan->GhostMove("East", 0);
-        m_Text->SetText("I'm trash");
-    }
-}
-
 void App::PacmanMoveProcess(){
 	ChangeDirectionIfPossible();
 	if(IfPacmanCollidesWall()){
@@ -152,4 +136,11 @@ void App::Stop(){
 
 void App::ScoreUpdate(){
     m_Score->ScoreUpdate();
+}
+
+void App::GhostProcess() {
+	m_Cyan->GhostMoveEye("North", 1);
+	m_Red->GhostMoveEye("West", 1);
+	m_Orange->GhostMoveEye("West", 1);
+	m_Pink->GhostMoveEye("West", 1);
 }

@@ -7,12 +7,15 @@
 #define PACMAN_SPEED 5
 
 //Ghost setting
-#define GHOST_SPEED 15
+#define GHOST_SPEED 0
 
 //Assets Settings
 #define PACMAN_ASSETS_NUM 3
+
+#define GHOST_ASSETS_RESERVE 17
 #define GHOST_ASSETS_NUM 8
 #define GHOST_SCARED_ASSETS_NUM 5
+#define GHOST_EYE_ASSETS_NUM 4
 #define LARGE_FOOD_NUM 4
 #define SMALL_FOOD_NUM 240
 

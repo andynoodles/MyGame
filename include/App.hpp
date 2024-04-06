@@ -43,6 +43,7 @@ public:
     void SetTimeMarker();
     void FoodCollision();
     void FoodEffect();
+    void GhostProcess();
     unsigned long GetElapsedTime();
     unsigned long GetDeltaTime();
     unsigned long GetMarker();

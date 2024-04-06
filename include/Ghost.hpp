@@ -9,7 +9,12 @@
 #include "config.hpp"
 
 class Ghost : public Util::GameObject {
-
+    enum class GhostState {
+        NORMAL,
+        SCARED,
+        FLASHING,
+        GOING_BACK
+    };
 public:
     explicit Ghost(const std::vector<std::string>& AnimationPaths);
 
@@ -36,10 +41,16 @@ public:
     glm::vec2 GetPosition();
     void GhostMove(std::string Direction, float SpeedMultiplier);
     void GhostMoveScared(std::string Direction, float SpeedMultiplier);
-    void GhostMoveScaredFlash(std::string Direction, float SpeedMultiplier);
+    void GhostMoveFlash(std::string Direction, float SpeedMultiplier);
+    void GhostMoveEye(std::string Direction, float SpeedMultiplier);
 
+    void SetNormal() { State = GhostState::NORMAL; }
+    void SetScared() { State = GhostState::SCARED; }
+    void SetFlashing() { State = GhostState::GOING_BACK; }
+    void SetGoingBack() { State = GhostState::GOING_BACK; }
 private:
     glm::vec2 Speed;
+    GhostState State = GhostState::NORMAL;
 };
 
 #endif //ANIMATED_CHARACTER_HPP
