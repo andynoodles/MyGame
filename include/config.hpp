@@ -8,7 +8,7 @@
 
 //Ghost setting
 #define GHOST_SPEED 0
-
+#define GHOST_DEAD_DURATION 3000
 //Assets Settings
 #define PACMAN_ASSETS_NUM 3
 
@@ -24,5 +24,5 @@
 
 //Other
 #define PILL_DURATION 10000
-#define FLASH_DURATION 3000
+#define DONT_FLASH_DURATION 7000
 #define PI 3.14159265358979323846

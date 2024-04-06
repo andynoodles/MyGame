@@ -4,7 +4,7 @@ void App::Update() {
     TimeUpdate();
     ScoreUpdate();
 	PacmanMoveProcess();
-    GhostProcess();
+    GhostMoveProcess();
     FoodCollision();
 
 

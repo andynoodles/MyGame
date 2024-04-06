@@ -19,7 +19,7 @@ glm::vec2 Ghost::GetPosition(){
     return m_Transform.translation;
 }
 
-void Ghost::GhostMove(std::string Direction, float SpeedMultiplier){
+void Ghost::GhostMoveNormal(){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 0;
     if(Direction == "East") {
@@ -48,7 +48,7 @@ void Ghost::GhostMove(std::string Direction, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveScared(std::string Direction, float SpeedMultiplier){
+void Ghost::GhostMoveScared(){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
     if(Direction == "East") {
@@ -72,7 +72,7 @@ void Ghost::GhostMoveScared(std::string Direction, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveFlash(std::string Direction, float SpeedMultiplier){
+void Ghost::GhostMoveFlash(){
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
     size_t StartIndex = 8;
     if(Direction == "East") {
@@ -96,9 +96,9 @@ void Ghost::GhostMoveFlash(std::string Direction, float SpeedMultiplier){
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
-void Ghost::GhostMoveEye(std::string Direction, float SpeedMultiplier) {
+void Ghost::GhostMoveEye() {
     auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-    size_t StartIndex = 8;
+    size_t StartIndex = 0;
     if (Direction == "East") {
         Speed = { GHOST_SPEED, 0 };
         StartIndex = 15;
@@ -120,4 +120,25 @@ void Ghost::GhostMoveEye(std::string Direction, float SpeedMultiplier) {
     }
 
     m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier);
+}
+
+void Ghost::GhostMove(){
+    switch (State)
+    {
+    case Ghost::GhostState::NORMAL:
+        GhostMoveNormal();
+        break;
+    case Ghost::GhostState::SCARED:
+        GhostMoveScared();
+        break;
+    case Ghost::GhostState::FLASHING:
+        GhostMoveFlash();
+        break;
+    case Ghost::GhostState::DEAD:
+        GhostMoveEye();
+        break;
+    default:
+        GhostMoveNormal();
+        break;
+    }
 }
