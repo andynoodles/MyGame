@@ -145,7 +145,7 @@ void Ghost::GhostMove(){
 
 std::pair<int, int> Ghost::GetTileOfPosition(glm::vec2 position) {
     int newX = position.x + 224, newY = 248 - position.y;
-    return { newX / PIXELPERTILE ,newY / PIXELPERTILE };
+    return { newY / PIXELPERTILE ,newX / PIXELPERTILE };
 }
 
 glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
@@ -192,9 +192,9 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
 
     std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
     if(path.size() - 1 != 0)
-        return GetCenterPositionOfTile(path[path.size() - 2].first, path[path.size() - 2].second);
+        return GetCenterPositionOfTile(path[path.size() - 2].second, path[path.size() - 2].first);
     else
-        return GetCenterPositionOfTile(path[path.size() - 1].first, path[path.size() - 1].second);
+        return GetCenterPositionOfTile(path[path.size() - 1].second, path[path.size() - 1].first);
 }
 
 void Ghost::MoveToTile(std::pair<int, int> EndPosition) {

@@ -160,5 +160,5 @@ void App::GhostStateProcess() {
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-	m_Red->MoveToTile({1,1});
+	m_Red->MoveToTile({2,1});
 }
