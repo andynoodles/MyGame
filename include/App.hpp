@@ -64,7 +64,7 @@ public:
 
 
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
-
+	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
 
 private:
     State m_CurrentState = State::START;
