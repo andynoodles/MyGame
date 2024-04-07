@@ -183,9 +183,6 @@ std::pair<int ,int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		if(ghostState == Ghost::GhostState::NORMAL){	
 			ghostTargetTile = pacmanTile;
 		}
-		else if(ghostState == Ghost::GhostState::SCARED){
-			ghostTargetTile = m_BackgroundImage->GetTileOfPosition(NUMBEROFTILESX-2);
-		}
 	}
 	else if(ghost == m_Pink){
 		if(pacmanDir == "North"){
