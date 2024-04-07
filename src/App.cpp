@@ -165,14 +165,15 @@ void App::GhostStateProcess() {
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-	m_Red->MoveToTile({2,1});
+	m_Red->MoveToTile(GetGhostTargetTile(m_Red));
 }
 
-std::pair<int ,int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
+std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	Ghost::GhostState ghostState = ghost->GetState();
 	std::pair<int ,int> ghostTargetTile;
 	glm::vec2 pacmanPosition = m_Pacman->GetPosition();
 	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(pacmanPosition);
+	pacmanTile = { pacmanTile.second, pacmanTile.first };
 	std::string pacmanDir = m_Pacman->GetDirection();
 
 	if(ghost == m_Red){
