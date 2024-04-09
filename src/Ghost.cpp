@@ -199,21 +199,25 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
 
 void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
     glm::vec2 Target = GetTargetPixel(EndPosition);
-    std::cout << "Current:" << GetPosition().x << " " << GetPosition().y << endl;
-    std::cout << "Target:" << Target.x << " " << Target.y << endl;
-    if (GetPosition().x < Target.x && GetPosition().y == Target.y) {
+    //std::cout << "Current:" << GetPosition().x << " " << GetPosition().y << endl;
+    //std::cout << "Target:" << Target.x << " " << Target.y << endl;
+    if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
         SetDirection("East");
+        SetPosition({GetPosition().x, Target.y});
     }
-    else if (GetPosition().x > Target.x && GetPosition().y == Target.y) {
+    else if (GetPosition().x > Target.x && fabs(GetPosition().y - Target.y) < 10) {
         SetDirection("West");
+        SetPosition({GetPosition().x, Target.y});
     }
-    else if (GetPosition().x == Target.x && GetPosition().y > Target.y) {
+    else if (fabs(GetPosition().x - Target.x) < 10 && GetPosition().y > Target.y) {
         SetDirection("South");
+        SetPosition({Target.x, GetPosition().y});
     }
-    else if (GetPosition().x == Target.x && GetPosition().y < Target.y) {
+    else if (fabs(GetPosition().x - Target.x) < 10 && GetPosition().y < Target.y) {
         SetDirection("North");
+        SetPosition({Target.x, GetPosition().y});
     }
 
-    std::cout << "Direction:" << this->Direction << endl;
+    //std::cout << "Direction:" << this->Direction << endl;
     GhostMove();
 }

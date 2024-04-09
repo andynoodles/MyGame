@@ -36,11 +36,11 @@ std::vector<std::pair<int, int>> aStarSearch(std::vector<std::vector<int>>& grid
                 currentNode = currentNode->parent;
             }
             // Output path in reverse order
-            std::cout << "Path: ";
-            for (int i = path.size() - 1; i >= 0; i--) {
-                std::cout << "(" << path[i].first << "," << path[i].second << ") ";
-            }
-            std::cout << std::endl;
+            // std::cout << "Path: ";
+            // for (int i = path.size() - 1; i >= 0; i--) {
+            //     std::cout << "(" << path[i].first << "," << path[i].second << ") ";
+            // }
+            // std::cout << std::endl;
 
             return path;
         }

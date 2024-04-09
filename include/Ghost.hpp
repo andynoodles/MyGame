@@ -9,7 +9,6 @@
 #include "Util/GameObject.hpp"
 #include "config.hpp"
 #include "Astar.hpp"
-#include "BackgroundImage.hpp"
 
 class Ghost : public Util::GameObject {
 public:
@@ -50,7 +49,7 @@ public:
     void GhostMoveEye();
     
     //Path finding and moving
-    std::pair<int, int> Ghost::GetTileOfPosition(glm::vec2 position);
+    std::pair<int, int> GetTileOfPosition(glm::vec2 position);
     glm::vec2 GetCenterPositionOfTile(int x, int y);
     glm::vec2 GetTargetPixel(std::pair<int, int> EndPosition);
     void MoveToTile(std::pair<int, int> EndPosition);
