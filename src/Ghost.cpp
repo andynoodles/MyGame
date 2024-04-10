@@ -154,7 +154,7 @@ glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
 }
 
 glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
-    vector<vector<int>> grid = {
+    std::vector<std::vector<int>> grid = {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},

@@ -6,8 +6,6 @@
 #include <queue>
 #include <cmath>
 
-using namespace std;
-
 // Define structure for a node
 struct Node {
     int x, y; // Coordinates
@@ -34,4 +32,4 @@ struct CompareNode {
 // A* search algorithm function declaration
 std::vector<std::pair<int, int>> aStarSearch(std::vector<std::vector<int>>& grid, std::pair<int, int> start, std::pair<int, int> goal);
 
-#endif ASTAR_HPP 
+#endif 
