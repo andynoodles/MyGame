@@ -165,12 +165,12 @@ void App::GhostStateProcess() {
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-	m_Red->MoveToTile(GetGhostTargetTile(m_Red));
+	m_Red->MoveToTile({1, 1});
 }
 
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	Ghost::GhostState ghostState = ghost->GetState();
-	std::pair<int ,int> ghostTargetTile;
+	std::pair<int ,int> ghostTargetTile = {1, 1}; //add init value to avoid game crash
 	glm::vec2 pacmanPosition = m_Pacman->GetPosition();
 	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(pacmanPosition);
 	pacmanTile = { pacmanTile.second, pacmanTile.first };

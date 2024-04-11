@@ -48,7 +48,7 @@ public:
     //Ghost
     void GhostStateProcess();
     void GhostMoveProcess();
-
+    
     //Time Related
     unsigned long GetElapsedTime();
     unsigned long GetDeltaTime();

@@ -68,3 +68,4 @@ std::vector<std::pair<int, int>> aStarSearch(std::vector<std::vector<int>>& grid
     std::vector<std::pair<int, int>> path;
     return path;
 }
+

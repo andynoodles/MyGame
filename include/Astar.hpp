@@ -5,7 +5,7 @@
 #include <vector>
 #include <queue>
 #include <cmath>
-
+#include "Util/Logger.hpp"
 // Define structure for a node
 struct Node {
     int x, y; // Coordinates

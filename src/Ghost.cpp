@@ -1,4 +1,5 @@
 #include "Ghost.hpp"
+#include "Util/Logger.hpp"
 
 Ghost::Ghost(const std::vector<std::string>& AnimationPaths) {
     m_Drawable = std::make_shared<Util::Animation>(AnimationPaths, false, 125, false, 0);
@@ -189,12 +190,13 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
     };
 
     std::pair<int, int> StartPosition = GetTileOfPosition(this->GetPosition());
-
-    std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
-    if(path.size() - 1 != 0)
-        return GetCenterPositionOfTile(path[path.size() - 2].second, path[path.size() - 2].first);
-    else
-        return GetCenterPositionOfTile(path[path.size() - 1].second, path[path.size() - 1].first);
+    std::pair<int, int > NextTile = FindNextTile(grid, StartPosition, EndPosition);
+    return GetCenterPositionOfTile(NextTile.second, NextTile.first); 
+    // std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
+    // if(path.size() - 1 != 0)
+    //     return GetCenterPositionOfTile(path[path.size() - 2].second, path[path.size() - 2].first);
+    // else
+    //     return GetCenterPositionOfTile(path[path.size() - 1].second, path[path.size() - 1].first);
 }
 
 void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
@@ -220,4 +222,69 @@ void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
 
     //std::cout << "Direction:" << this->Direction << endl;
     GhostMove();
+}
+
+double distance(const std::pair<int, int>& vec1, const std::pair<int, int>& vec2) {
+    double dx = vec1.first - vec2.first;
+    double dy = vec1.second - vec2.second;
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+// Function to find the vector from a given set of vectors that has the shortest distance to a given vector
+std::pair<int, int> findClosestVector(const std::vector<std::pair<int, int>>& vectors, const std::pair<int, int>& target) {
+    double minDistance = std::numeric_limits<double>::max();
+    std::pair<double, double> closestVector = vectors[0]; // Initialize with the first vector
+
+    for (const auto& vec : vectors) {
+        double dist = distance(vec, target);
+        if (dist < minDistance) {
+            minDistance = dist;
+            closestVector = vec;
+        }
+    }
+
+    return closestVector;
+}
+
+std::vector<std::pair<int, int >> Ghost::FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile){
+	std::vector<std::pair<int, int >> Roads;
+	if(grid[CurrentTile.second + 1][CurrentTile.first] == 0){
+		// Check North Tile
+		Roads.push_back({CurrentTile.second + 1, CurrentTile.first});
+	}
+	if(grid[CurrentTile.second - 1][CurrentTile.first] == 0){
+		// Check South Tile
+		Roads.push_back({CurrentTile.second - 1, CurrentTile.first});
+	}	
+	if(grid[CurrentTile.second][CurrentTile.first + 1] == 0){
+		// Check East Tile
+		Roads.push_back({CurrentTile.second, CurrentTile.first + 1});
+	}
+	if(grid[CurrentTile.second][CurrentTile.first - 1] == 0){
+		// Check West Tile
+		Roads.push_back({CurrentTile.second, CurrentTile.first - 1});
+	}
+	return Roads;
+}
+
+std::pair<int, int> Ghost::FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
+    std::vector<std::pair<int, int >> Roads;
+    if (Direction == "North"){
+        Roads = FindNextTileHelper(grid, CurrentTile);
+        Roads.erase(Roads.begin() + 0);
+    }
+    else if (Direction == "South") {
+        Roads = FindNextTileHelper(grid, CurrentTile);
+        Roads.erase(Roads.begin() + 1);
+    }
+    else if (Direction == "East") {
+        Roads = FindNextTileHelper(grid, CurrentTile);
+        Roads.erase(Roads.begin() + 2);
+    }
+    else if (Direction == "West") {
+        Roads = FindNextTileHelper(grid, CurrentTile);
+        Roads.erase(Roads.begin() + 3);
+    }
+    LOG_DEBUG(Roads.size());
+    return findClosestVector(Roads, TargetTile);
 }
