@@ -66,6 +66,7 @@ public:
 private:
     glm::vec2 Speed;
     std::string Direction = "West";
+    std::pair<int, int> CurrentTile;
     float SpeedMultiplier = 1;
     unsigned long DeadMarker = 0;
     GhostState State = GhostState::NORMAL;

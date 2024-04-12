@@ -191,7 +191,6 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
 
     std::pair<int, int> StartPosition = GetTileOfPosition(this->GetPosition());
     std::pair<int, int > NextTile = FindNextTile(grid, StartPosition, EndPosition);
-    LOG_DEBUG("{}, {}", NextTile.first, NextTile.second);
     return GetCenterPositionOfTile(NextTile.second, NextTile.first); 
     // std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
     // if(path.size() - 1 != 0)
@@ -202,8 +201,7 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
 
 void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
     glm::vec2 Target = GetTargetPixel(EndPosition);
-    //std::cout << "Current:" << GetPosition().x << " " << GetPosition().y << endl;
-    //std::cout << "Target:" << Target.x << " " << Target.y << endl;
+
     if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
         SetDirection("East");
         SetPosition({GetPosition().x, Target.y});
@@ -221,7 +219,6 @@ void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
         SetPosition({Target.x, GetPosition().y});
     }
 
-    //std::cout << "Direction:" << this->Direction << endl;
     GhostMove();
 }
 
@@ -247,8 +244,9 @@ std::pair<int, int> findClosestVector(const std::vector<std::pair<int, int>>& ve
     return closestVector;
 }
 
-void Ghost::FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::vector<std::pair<int, int >> &Roads){
-	if(grid[CurrentTile.second + 1][CurrentTile.first] == 0){
+std::pair<int, int> Ghost::FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
+    std::vector<std::pair<int, int >> Roads;
+    if(grid[CurrentTile.second + 1][CurrentTile.first] == 0){
 		// Check North Tile
 		Roads.push_back({CurrentTile.second + 1, CurrentTile.first});
 	}
@@ -264,25 +262,6 @@ void Ghost::FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<in
 		// Check West Tile
 		Roads.push_back({CurrentTile.second, CurrentTile.first - 1});
 	}
-}
-
-std::pair<int, int> Ghost::FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
-    std::vector<std::pair<int, int >> Roads;
-    if (Direction == "North"){
-        FindNextTileHelper(grid, CurrentTile, Roads);
-        Roads.erase(Roads.begin() + 0);
-    }
-    else if (Direction == "South") {
-        FindNextTileHelper(grid, CurrentTile, Roads);
-        Roads.erase(Roads.begin() + 1);
-    }
-    else if (Direction == "East") {
-        FindNextTileHelper(grid, CurrentTile, Roads);
-        Roads.erase(Roads.begin() + 2);
-    }
-    else if (Direction == "West") {
-        FindNextTileHelper(grid, CurrentTile, Roads);
-        Roads.erase(Roads.begin() + 3);
-    }
+    
     return findClosestVector(Roads, TargetTile);
 }

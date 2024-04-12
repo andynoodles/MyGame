@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include <utility>
 
 void App::TimeUpdate(){
 	m_Time.Update();
@@ -165,7 +166,9 @@ void App::GhostStateProcess() {
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-	m_Red->MoveToTile({1, 1});
+	std::pair<int, int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
+	t = {t.second ,t.first};
+	m_Red->MoveToTile(t);
 }
 
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
