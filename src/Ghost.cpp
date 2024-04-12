@@ -190,16 +190,13 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
     };
 
     std::pair<int, int> StartPosition = GetTileOfPosition(this->GetPosition());
+    LOG_DEBUG("x:{}, y:{}", StartPosition.first, StartPosition.second);
     std::pair<int, int > NextTile = FindNextTile(grid, StartPosition, EndPosition);
     return GetCenterPositionOfTile(NextTile.second, NextTile.first); 
-    // std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
-    // if(path.size() - 1 != 0)
-    //     return GetCenterPositionOfTile(path[path.size() - 2].second, path[path.size() - 2].first);
-    // else
-    //     return GetCenterPositionOfTile(path[path.size() - 1].second, path[path.size() - 1].first);
 }
 
 void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
+    EndPosition = {EndPosition.second, EndPosition.first};
     glm::vec2 Target = GetTargetPixel(EndPosition);
 
     if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
