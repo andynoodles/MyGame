@@ -146,7 +146,7 @@ void Ghost::GhostMove(){
 
 std::pair<int, int> Ghost::GetTileOfPosition(glm::vec2 position) {
     int newX = position.x + 224, newY = 248 - position.y;
-    return { newY / PIXELPERTILE ,newX / PIXELPERTILE };
+    return { newX / PIXELPERTILE ,newY / PIXELPERTILE };
 }
 
 glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
@@ -191,6 +191,7 @@ glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
 
     std::pair<int, int> StartPosition = GetTileOfPosition(this->GetPosition());
     std::pair<int, int > NextTile = FindNextTile(grid, StartPosition, EndPosition);
+    LOG_DEBUG("{}, {}", NextTile.first, NextTile.second);
     return GetCenterPositionOfTile(NextTile.second, NextTile.first); 
     // std::vector<std::pair<int, int>> path = aStarSearch(grid, StartPosition, EndPosition);
     // if(path.size() - 1 != 0)
@@ -246,8 +247,7 @@ std::pair<int, int> findClosestVector(const std::vector<std::pair<int, int>>& ve
     return closestVector;
 }
 
-std::vector<std::pair<int, int >> Ghost::FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile){
-	std::vector<std::pair<int, int >> Roads;
+void Ghost::FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::vector<std::pair<int, int >> &Roads){
 	if(grid[CurrentTile.second + 1][CurrentTile.first] == 0){
 		// Check North Tile
 		Roads.push_back({CurrentTile.second + 1, CurrentTile.first});
@@ -264,27 +264,25 @@ std::vector<std::pair<int, int >> Ghost::FindNextTileHelper(std::vector<std::vec
 		// Check West Tile
 		Roads.push_back({CurrentTile.second, CurrentTile.first - 1});
 	}
-	return Roads;
 }
 
 std::pair<int, int> Ghost::FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
     std::vector<std::pair<int, int >> Roads;
     if (Direction == "North"){
-        Roads = FindNextTileHelper(grid, CurrentTile);
+        FindNextTileHelper(grid, CurrentTile, Roads);
         Roads.erase(Roads.begin() + 0);
     }
     else if (Direction == "South") {
-        Roads = FindNextTileHelper(grid, CurrentTile);
+        FindNextTileHelper(grid, CurrentTile, Roads);
         Roads.erase(Roads.begin() + 1);
     }
     else if (Direction == "East") {
-        Roads = FindNextTileHelper(grid, CurrentTile);
+        FindNextTileHelper(grid, CurrentTile, Roads);
         Roads.erase(Roads.begin() + 2);
     }
     else if (Direction == "West") {
-        Roads = FindNextTileHelper(grid, CurrentTile);
+        FindNextTileHelper(grid, CurrentTile, Roads);
         Roads.erase(Roads.begin() + 3);
     }
-    LOG_DEBUG(Roads.size());
     return findClosestVector(Roads, TargetTile);
 }

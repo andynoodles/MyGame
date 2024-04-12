@@ -53,7 +53,7 @@ public:
     glm::vec2 GetCenterPositionOfTile(int x, int y);
     glm::vec2 GetTargetPixel(std::pair<int, int> EndPosition);
     void MoveToTile(std::pair<int, int> EndPosition);
-    std::vector<std::pair<int, int >> FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile);
+    void FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::vector<std::pair<int, int >> &Roads);
     std::pair<int, int> FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile);
 
     void SetState(GhostState state) { State = state; }
