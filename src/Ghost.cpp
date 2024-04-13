@@ -177,7 +177,8 @@ void Ghost::MoveToTile(std::pair<int, int> EndTile) {
         SetDirection("North");
         SetPosition({Target.x, GetPosition().y});
     }
-
+    HistoryTile.push(CurrentTile);
+    if(HistoryTile.size() > 5) HistoryTile.pop();
     GhostMove();
 }
 
@@ -201,6 +202,17 @@ std::pair<int, int> findClosestVector(const std::vector<std::pair<int, int>>& ve
     }
 
     return closestVector;
+}
+
+bool InQueue(std::queue<std::pair<int, int>> Queue, std::pair<int, int> Target){
+    std::queue<std::pair<int, int>> myQueueCopy = Queue;
+
+    // Iterate over the copy of the queue and print its elements
+    while (!myQueueCopy.empty()) {
+        if(myQueueCopy.front() == Target) return true;
+        myQueueCopy.pop(); // Remove the front element
+    }
+    return false;
 }
 
 std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile, 
@@ -260,6 +272,10 @@ std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile,
 		Roads[3] = {CurrentTile.first - 1, CurrentTile.second};
 	}
     
+    for (size_t i = 0; i < Roads.size(); i++) {
+        if(InQueue(HistoryTile, Roads[i])) Roads[i] = {100, 100};
+    }
+
     for (size_t i = 0; i < Roads.size(); i++) {
         LOG_DEBUG("{} {}", Roads[i].first, Roads[i].second);
     }

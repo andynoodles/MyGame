@@ -67,6 +67,7 @@ private:
     std::string Direction = "West";
     std::pair<int, int> CurrentTile;
     std::pair<int, int> TargetTile;
+    std::queue<std::pair<int, int>> HistoryTile;
     float SpeedMultiplier = 1;
     unsigned long DeadMarker = 0;
     GhostState State = GhostState::NORMAL;
