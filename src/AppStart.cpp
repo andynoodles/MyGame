@@ -1,7 +1,4 @@
 #include "App.hpp"
-#include "Util/Time.hpp"
-#include <iostream>
-#include <stddef.h>
 
 void App::Start() {
     bool showCharacter = true;

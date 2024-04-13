@@ -1,6 +1,4 @@
 #include "Ghost.hpp"
-#include "Util/Logger.hpp"
-#include <sys/_types/_size_t.h>
 
 Ghost::Ghost(const std::vector<std::string>& AnimationPaths) {
     m_Drawable = std::make_shared<Util::Animation>(AnimationPaths, false, 125, false, 0);

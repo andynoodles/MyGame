@@ -3,12 +3,12 @@
 
 #include <vector>
 #include <string>
-
+#include <queue>
 
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
+#include "Util/Logger.hpp"
 #include "config.hpp"
-#include "Astar.hpp"
 
 class Ghost : public Util::GameObject {
 public:
