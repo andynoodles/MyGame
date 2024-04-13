@@ -156,10 +156,9 @@ glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
 }
 
 void Ghost::MoveToTile(std::pair<int, int> EndTile) {
-    EndTile = {EndTile.second, EndTile.first};
     CurrentTile = GetTileOfPosition(GetPosition());
     TargetTile = FindNextTile(CurrentTile, EndTile);
-    LOG_DEBUG("\nCurrent:{}, {}\nTarget:{}, {}\n", CurrentTile.first, CurrentTile.second, TargetTile.first, TargetTile.second);
+    LOG_DEBUG("\nCurrent:{}, {}\nTarget: {}, {}", CurrentTile.first, CurrentTile.second, TargetTile.first, TargetTile.second);
     glm::vec2 Target = GetCenterPositionOfTile(TargetTile.first, TargetTile.second); ;
 
     if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
@@ -204,7 +203,8 @@ std::pair<int, int> findClosestVector(const std::vector<std::pair<int, int>>& ve
     return closestVector;
 }
 
-std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
+std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile, 
+                                        std::pair<int, int> TargetTile){
     std::vector<std::vector<int>> grid = {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
