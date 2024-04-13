@@ -51,10 +51,9 @@ public:
     //Path finding and moving
     std::pair<int, int> GetTileOfPosition(glm::vec2 position);
     glm::vec2 GetCenterPositionOfTile(int x, int y);
-    glm::vec2 GetTargetPixel(std::pair<int, int> EndPosition);
+    void UpdateTargetTile(std::pair<int, int> EndPosition);
     void MoveToTile(std::pair<int, int> EndPosition);
-    void FindNextTileHelper(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::vector<std::pair<int, int >> &Roads);
-    std::pair<int, int> FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile);
+    std::pair<int, int> FindNextTile(std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile);
 
     void SetState(GhostState state) { State = state; }
     GhostState GetState() { return State; }
@@ -67,6 +66,7 @@ private:
     glm::vec2 Speed;
     std::string Direction = "West";
     std::pair<int, int> CurrentTile;
+    std::pair<int, int> TargetTile;
     float SpeedMultiplier = 1;
     unsigned long DeadMarker = 0;
     GhostState State = GhostState::NORMAL;

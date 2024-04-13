@@ -7,7 +7,7 @@
 #define PACMAN_SPEED 5
 
 //Ghost setting
-#define GHOST_SPEED 3
+#define GHOST_SPEED 5
 #define GHOST_DEAD_DURATION 3000
 //Assets Settings
 #define PACMAN_ASSETS_NUM 3

@@ -167,7 +167,7 @@ void App::GhostStateProcess() {
 void App::GhostMoveProcess() {
 	GhostStateProcess();
 
-	m_Red->MoveToTile({1,2});
+	m_Red->MoveToTile({0, 0});
 }
 
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){

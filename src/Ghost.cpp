@@ -1,5 +1,6 @@
 #include "Ghost.hpp"
 #include "Util/Logger.hpp"
+#include <sys/_types/_size_t.h>
 
 Ghost::Ghost(const std::vector<std::string>& AnimationPaths) {
     m_Drawable = std::make_shared<Util::Animation>(AnimationPaths, false, 125, false, 0);
@@ -154,50 +155,12 @@ glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
     return center;
 }
 
-glm::vec2 Ghost::GetTargetPixel(std::pair<int, int> EndPosition) {
-    std::vector<std::vector<int>> grid = {
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
-        {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
-        {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,1,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
-        {0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
-        {1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
-        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-        {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1},
-        {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
-        {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
-        {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
-        {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
-        {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-    };
-
-    std::pair<int, int> StartPosition = GetTileOfPosition(this->GetPosition());
-    LOG_DEBUG("x:{}, y:{}", StartPosition.first, StartPosition.second);
-    std::pair<int, int > NextTile = FindNextTile(grid, StartPosition, EndPosition);
-    return GetCenterPositionOfTile(NextTile.second, NextTile.first); 
-}
-
-void Ghost::MoveToTile(std::pair<int, int> EndPosition) {
-    EndPosition = {EndPosition.second, EndPosition.first};
-    glm::vec2 Target = GetTargetPixel(EndPosition);
+void Ghost::MoveToTile(std::pair<int, int> EndTile) {
+    EndTile = {EndTile.second, EndTile.first};
+    CurrentTile = GetTileOfPosition(GetPosition());
+    TargetTile = FindNextTile(CurrentTile, EndTile);
+    LOG_DEBUG("\nCurrent:{}, {}\nTarget:{}, {}\n", CurrentTile.first, CurrentTile.second, TargetTile.first, TargetTile.second);
+    glm::vec2 Target = GetCenterPositionOfTile(TargetTile.first, TargetTile.second); ;
 
     if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
         SetDirection("East");
@@ -241,24 +204,64 @@ std::pair<int, int> findClosestVector(const std::vector<std::pair<int, int>>& ve
     return closestVector;
 }
 
-std::pair<int, int> Ghost::FindNextTile(std::vector<std::vector<int>>& grid, std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
+std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile){
+    std::vector<std::vector<int>> grid = {
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
+        {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
+        {0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
+        {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1},
+        {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+        {1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
+        {1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
+        {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
+        {1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    };
     std::vector<std::pair<int, int >> Roads;
+    Roads.push_back({100, 100});
+    Roads.push_back({100, 100});
+    Roads.push_back({100, 100});
+    Roads.push_back({100, 100});
     if(grid[CurrentTile.second + 1][CurrentTile.first] == 0){
 		// Check North Tile
-		Roads.push_back({CurrentTile.second + 1, CurrentTile.first});
+		Roads[0] = {CurrentTile.first, CurrentTile.second + 1};
 	}
-	if(grid[CurrentTile.second - 1][CurrentTile.first] == 0){
+    if(grid[CurrentTile.second - 1][CurrentTile.first] == 0){
 		// Check South Tile
-		Roads.push_back({CurrentTile.second - 1, CurrentTile.first});
-	}	
+		Roads[1] = {CurrentTile.first, CurrentTile.second - 1};
+	}
 	if(grid[CurrentTile.second][CurrentTile.first + 1] == 0){
 		// Check East Tile
-		Roads.push_back({CurrentTile.second, CurrentTile.first + 1});
+		Roads[2] = {CurrentTile.first + 1, CurrentTile.second};
 	}
 	if(grid[CurrentTile.second][CurrentTile.first - 1] == 0){
 		// Check West Tile
-		Roads.push_back({CurrentTile.second, CurrentTile.first - 1});
+		Roads[3] = {CurrentTile.first - 1, CurrentTile.second};
 	}
     
+    for (size_t i = 0; i < Roads.size(); i++) {
+        LOG_DEBUG("{} {}", Roads[i].first, Roads[i].second);
+    }
     return findClosestVector(Roads, TargetTile);
 }
