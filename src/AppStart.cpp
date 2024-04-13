@@ -89,14 +89,14 @@ void App::Start() {
     m_Orange->SetVisible(showCharacter);
     m_Orange->SetLooping(true);
     m_Orange->SetPlaying(true);
-    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(13, 14));
+    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
 
     m_Pink = std::make_shared<Ghost>(pinkImage);
     m_Pink->SetZIndex(16);
     m_Pink->SetVisible(showCharacter);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(true);
-    m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(15, 14));
+    m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
 
     m_Red = std::make_shared<Ghost>(redImage);
     m_Red->SetZIndex(15);

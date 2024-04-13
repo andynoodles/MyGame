@@ -166,8 +166,11 @@ void App::GhostStateProcess() {
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-	std::pair<int ,int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
-	m_Red->MoveToTile(t);
+	//std::pair<int ,int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
+	m_Red->MoveToTile({28 ,0});
+	m_Cyan->MoveToTile({0 ,0});
+	m_Pink->MoveToTile({28, 31});
+	m_Orange->MoveToTile({0 , 31});
 }
 
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
