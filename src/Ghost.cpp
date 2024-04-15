@@ -157,7 +157,7 @@ void Ghost::MoveToTile(std::pair<int, int> EndTile) {
     CurrentTile = GetTileOfPosition(GetPosition());
     TargetTile = FindNextTile(CurrentTile, EndTile);
     LOG_DEBUG("\nCurrent:{}, {}\nTarget: {}, {}", CurrentTile.first, CurrentTile.second, TargetTile.first, TargetTile.second);
-    glm::vec2 Target = GetCenterPositionOfTile(TargetTile.first, TargetTile.second); ;
+    glm::vec2 Target = GetCenterPositionOfTile(TargetTile.first, TargetTile.second); 
 
     if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
         SetDirection("East");

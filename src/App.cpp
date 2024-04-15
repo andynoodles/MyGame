@@ -166,10 +166,14 @@ void App::GhostStateProcess() {
 void App::GhostMoveProcess() {
 	GhostStateProcess();
 	//std::pair<int ,int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
-	m_Red->MoveToTile({28 ,0});
-	m_Cyan->MoveToTile({0 ,0});
-	m_Pink->MoveToTile({28, 31});
-	m_Orange->MoveToTile({0 , 31});
+	m_Red->MoveToTile(GetGhostTargetTile(m_Red));
+	m_Orange->MoveToTile(GetGhostTargetTile(m_Orange));
+	m_Cyan->MoveToTile(GetGhostTargetTile(m_Cyan));
+	m_Pink->MoveToTile(GetGhostTargetTile(m_Pink));
+//	m_Red->MoveToTile({28 ,0});
+//	m_Cyan->MoveToTile({0 ,0});
+//	m_Pink->MoveToTile({28, 31});
+//	m_Orange->MoveToTile({0 , 31});
 }
 
 
@@ -177,12 +181,10 @@ void App::GhostMoveProcess() {
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	Ghost::GhostState ghostState = ghost->GetState();
 	if(ghostState == Ghost::GhostState::DEAD){
-		return {12 ,14}; //Target is located directly above the left side of the “door” to the ghost house.
+		return {14 ,11}; //Target is located directly above the left side of the “door” to the ghost house.
 	}
 	std::pair<int ,int> ghostTargetTile;
-	glm::vec2 pacmanPosition = m_Pacman->GetPosition();
-	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(pacmanPosition);
-	pacmanTile = { pacmanTile.second, pacmanTile.first };
+	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
 	std::string pacmanDir = m_Pacman->GetDirection();
 
 	if(ghost == m_Red){
@@ -190,7 +192,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){	
-			ghostTargetTile = {1 ,NUMBEROFTILESX-2}; //upper right at map
+			ghostTargetTile = {NUMBEROFTILESX-2 ,1}; //upper right at map
 		}
 	}
 	else if(ghost == m_Pink){
@@ -199,16 +201,13 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 				ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second-4};//It's not bug,it's feature.
 			}
 			else if(pacmanDir == "West"){
-				//ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second};
-				ghostTargetTile = {pacmanTile.first ,pacmanTile.second-4};
+				ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second};
 			}
 			else if(pacmanDir == "East"){
-				//ghostTargetTile = {pacmanTile.first+4 ,pacmanTile.second};
-				ghostTargetTile = {pacmanTile.first ,pacmanTile.second+4};
+				ghostTargetTile = {pacmanTile.first+4 ,pacmanTile.second};
 			}
 			else if(pacmanDir == "South"){
-				//ghostTargetTile = {pacmanTile.first ,pacmanTile.second+4};
-				ghostTargetTile = {pacmanTile.first+4 ,pacmanTile.second};
+				ghostTargetTile = {pacmanTile.first ,pacmanTile.second+4};
 			}
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){	
@@ -239,7 +238,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 			ghostTargetTile = m_BackgroundImage->GetTileOfPosition({offsetTileCenter.x+(offsetTileCenter.x-redGhostTileCenter.x) ,offsetTileCenter.y+(offsetTileCenter.y-redGhostTileCenter.y)});
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){
-			ghostTargetTile = {NUMBEROFTILESY-2 ,NUMBEROFTILESX-2}; //lower right at map
+			ghostTargetTile = {NUMBEROFTILESX-2 ,NUMBEROFTILESY-2}; //lower right at map
 		}
 	}
 	else if(ghost == m_Orange){
@@ -250,14 +249,13 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || distance < 8 ||ghostState == Ghost::GhostState::FLASHING){
-			ghostTargetTile = {NUMBEROFTILESY-2 ,1}; //lower left at map
+			ghostTargetTile = {1,NUMBEROFTILESY-2}; //lower left at map
 		}
 	}
 
 	if(ghostTargetTile.first < 1) ghostTargetTile.first = 1;
-	else if(ghostTargetTile.first > NUMBEROFTILESY-2) ghostTargetTile.first = NUMBEROFTILESY-2;
+	else if(ghostTargetTile.first > NUMBEROFTILESX-2) ghostTargetTile.first = NUMBEROFTILESX-2;
 	if(ghostTargetTile.second < 1) ghostTargetTile.second = 1;
-	else if(ghostTargetTile.second > NUMBEROFTILESX-2) ghostTargetTile.second = NUMBEROFTILESX-2;
-	ghostTargetTile = {ghostTargetTile.second ,ghostTargetTile.first};
+	else if(ghostTargetTile.second > NUMBEROFTILESY-2) ghostTargetTile.second = NUMBEROFTILESY-2;
 	return ghostTargetTile;
 }
