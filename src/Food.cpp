@@ -1,6 +1,4 @@
 #include "Food.hpp"
-#include "Util/Image.hpp"
-
 
 Food::Food(const std::string& ImagePath) {
     SetImage(ImagePath);

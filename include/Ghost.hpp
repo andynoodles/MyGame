@@ -3,9 +3,11 @@
 
 #include <vector>
 #include <string>
+#include <queue>
 
 #include "Util/Animation.hpp"
 #include "Util/GameObject.hpp"
+#include "Util/Logger.hpp"
 #include "config.hpp"
 
 class Ghost : public Util::GameObject {
@@ -45,6 +47,13 @@ public:
     void GhostMoveScared();
     void GhostMoveFlash();
     void GhostMoveEye();
+    
+    //Path finding and moving
+    std::pair<int, int> GetTileOfPosition(glm::vec2 position);
+    glm::vec2 GetCenterPositionOfTile(int x, int y);
+    void UpdateTargetTile(std::pair<int, int> EndPosition);
+    void MoveToTile(std::pair<int, int> EndPosition);
+    std::pair<int, int> FindNextTile(std::pair<int, int> CurrentTile, std::pair<int, int> TargetTile);
 
     void SetState(GhostState state) { State = state; }
     GhostState GetState() { return State; }
@@ -55,7 +64,10 @@ public:
     unsigned long GetDeadMarker() { return DeadMarker; }
 private:
     glm::vec2 Speed;
-    std::string Direction = "North";
+    std::string Direction = "West";
+    std::pair<int, int> CurrentTile;
+    std::pair<int, int> TargetTile;
+    std::queue<std::pair<int, int>> HistoryTile;
     float SpeedMultiplier = 1;
     unsigned long DeadMarker = 0;
     GhostState State = GhostState::NORMAL;

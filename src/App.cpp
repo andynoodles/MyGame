@@ -1,48 +1,48 @@
 #include "App.hpp"
 
 void App::TimeUpdate(){
-    m_Time.Update();
+	m_Time.Update();
 }
 
 unsigned long App::GetElapsedTime(){
-    return m_Time.GetElapsedTimeMs();
+	return m_Time.GetElapsedTimeMs();
 }
 
 unsigned long App::GetDeltaTime(){
-    return m_Time.GetDeltaTime();
+	return m_Time.GetDeltaTime();
 }
 
 bool App::IfCollides(const std::shared_ptr<Food>& other){
-        glm::vec2 OtherPosition = other->GetPosition();
-        glm::vec2 ThisPosition = m_Pacman->GetPosition();
-		if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
-			return true;
-        return false;
+	glm::vec2 OtherPosition = other->GetPosition();
+	glm::vec2 ThisPosition = m_Pacman->GetPosition();
+	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
+		return true;
+	return false;
 }
 
 bool App::IfCollides(const std::shared_ptr<Ghost>& other){
-        glm::vec2 OtherPosition = other->GetPosition();
-        glm::vec2 ThisPosition = m_Pacman->GetPosition();
-		if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
-			return true;
-		return false;
+	glm::vec2 OtherPosition = other->GetPosition();
+	glm::vec2 ThisPosition = m_Pacman->GetPosition();
+	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
+		return true;
+	return false;
 }
 
 void App::FoodCollision(){
-    for (int i = 0; i < SMALL_FOOD_NUM; i++) {
-        if(IfCollides(m_SmallFood[i]) && m_SmallFood[i]->GetVisibility()){ 
-            m_SmallFood[i]->SetVisible(false); 
-            m_Score->AddVisibleScore(SCORE_FOOD);
-        }
-    }
-    for (int i = 0; i < LARGE_FOOD_NUM; i++) {
-        if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
-            m_LargeFood[i]->SetVisible(false); 
+	for (int i = 0; i < SMALL_FOOD_NUM; i++) {
+		if(IfCollides(m_SmallFood[i]) && m_SmallFood[i]->GetVisibility()){ 
+			m_SmallFood[i]->SetVisible(false); 
+			m_Score->AddVisibleScore(SCORE_FOOD);
+		}
+	}
+	for (int i = 0; i < LARGE_FOOD_NUM; i++) {
+		if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
+			m_LargeFood[i]->SetVisible(false); 
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
-            onPill = true;
-            m_Score->AddVisibleScore(SCORE_FOOD);
-        }
-    }
+			onPill = true;
+			m_Score->AddVisibleScore(SCORE_FOOD);
+		}
+	}
 }
 
 void App::PacmanMoveProcess(){
@@ -63,7 +63,7 @@ std::pair<int ,int> App::GetTileIntented(std::string newDirection){
 	else if(newDirection =="South") tileintented = {currentTile.first ,currentTile.second+1};
 	else if(newDirection =="West") tileintented = {currentTile.first-1 ,currentTile.second};
 	else if(newDirection =="East") tileintented = {currentTile.first+1 ,currentTile.second};
-	
+
 	return tileintented;
 }
 
@@ -99,20 +99,20 @@ void App::ChangeDirectionIfPossible(){
 
 std::string App::InputManager(){
 	std::string s;
-    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        s =  "North";
-    } 
-    else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-       s =  "West";
-    } 
-    else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-        s =  "South";
-    } 
-    else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-        s =  "East";
-    }
+	if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+		s =  "North";
+	} 
+	else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+		s =  "West";
+	} 
+	else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+		s =  "South";
+	} 
+	else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+		s =  "East";
+	}
 	else 
-        s = m_Pacman->GetDirection();
+		s = m_Pacman->GetDirection();
 	return s;
 }
 
@@ -127,12 +127,12 @@ void App::Stop(){
 	glm::vec2 currentPosition = m_Pacman->GetPosition();
 	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(currentPosition);
 	glm::vec2 currentTileCenter = m_BackgroundImage->GetCenterPositionOfTile(currentTile.first ,currentTile.second);	
-	
+
 	m_Pacman->SetPosition(currentTileCenter);
 }
 
 void App::ScoreUpdate(){
-    m_Score->ScoreUpdate();
+	m_Score->ScoreUpdate();
 }
 
 void App::GhostStateProcess() {
@@ -144,8 +144,8 @@ void App::GhostStateProcess() {
 	//Set State
 	for (int i = 0; i < 4; i++) {
 		if (GetElapsedTime() - FoodEffectMarker < PILL_DURATION &&
-			onPill &&
-			(Ghost[i]->GetState() != Ghost::GhostState::DEAD)) {
+				onPill &&
+				(Ghost[i]->GetState() != Ghost::GhostState::DEAD)) {
 			if (!(GetElapsedTime() - FoodEffectMarker < DONT_FLASH_DURATION))
 				Ghost[i]->SetState(Ghost::GhostState::FLASHING);
 			else
@@ -157,18 +157,80 @@ void App::GhostStateProcess() {
 		}
 		else if(Ghost[i]->GetState() != Ghost::GhostState::DEAD ||
 				GetElapsedTime() - Ghost[i]->GetDeadMarker() > GHOST_DEAD_DURATION) {
-				Ghost[i]->SetState(Ghost::GhostState::NORMAL);
+			Ghost[i]->SetState(Ghost::GhostState::NORMAL);
 		}
-			
+
 	}
 }
 
 void App::GhostMoveProcess() {
 	GhostStateProcess();
-
-	m_Cyan->GhostMove();
-	m_Red->GhostMove();
-	m_Pink->GhostMove();
-	m_Orange->GhostMove();
+	//std::pair<int ,int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
+	m_Red->MoveToTile({28 ,0});
+	m_Cyan->MoveToTile({0 ,0});
+	m_Pink->MoveToTile({28, 31});
+	m_Orange->MoveToTile({0 , 31});
 }
+
+std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
+	Ghost::GhostState ghostState = ghost->GetState();
+	std::pair<int ,int> ghostTargetTile = {1, 1}; //add init value to avoid game crash
+	glm::vec2 pacmanPosition = m_Pacman->GetPosition();
+	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(pacmanPosition);
+	pacmanTile = { pacmanTile.second, pacmanTile.first };
+	std::string pacmanDir = m_Pacman->GetDirection();
+
+	if(ghost == m_Red){
+		if(ghostState == Ghost::GhostState::NORMAL){	
+			ghostTargetTile = pacmanTile;
+		}
+	}
+	else if(ghost == m_Pink){
+		if(pacmanDir == "North"){
+			ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second-4};//It's not bug,it's feature.
+		}
+		else if(pacmanDir == "West"){
+			ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second};
+		}
+		else if(pacmanDir == "East"){
+			ghostTargetTile = {pacmanTile.first+4 ,pacmanTile.second};
+		}
+		else if(pacmanDir == "South"){
+			ghostTargetTile = {pacmanTile.first ,pacmanTile.second+4};
+		}
+
+	}
+	else if(ghost == m_Cyan){
+		std::pair<int ,int> offsetTile;
+		if(pacmanDir == "North"){
+			offsetTile = {pacmanTile.first-2 ,pacmanTile.second-2};//It's not bug,it's feature.
+		}
+		else if(pacmanDir == "West"){
+			offsetTile = {pacmanTile.first-2 ,pacmanTile.second};
+		}
+		else if(pacmanDir == "East"){
+			offsetTile = {pacmanTile.first+2 ,pacmanTile.second};
+		}
+		else if(pacmanDir == "South"){
+			offsetTile = {pacmanTile.first ,pacmanTile.second+2};
+		}
+
+		std::pair<int ,int> redGhostTile = m_BackgroundImage->GetTileOfPosition(m_Red->GetPosition());
+		glm::vec2 redGhostTileCenter = m_BackgroundImage->GetCenterPositionOfTile(redGhostTile.first ,redGhostTile.second);
+		glm::vec2 offsetTileCenter = m_BackgroundImage->GetCenterPositionOfTile(offsetTile.first ,offsetTile.second);
+
+		ghostTargetTile = m_BackgroundImage->GetTileOfPosition({offsetTileCenter.x+(offsetTileCenter.x-redGhostTileCenter.x) ,offsetTileCenter.y+(offsetTileCenter.y-redGhostTileCenter.y)});
+	}
+	else if(ghost == m_Orange){
+		std::pair<int ,int> orangeGhostTile = m_BackgroundImage->GetTileOfPosition(m_Orange->GetPosition());
+		//Get Euclidean distance between orange's tile and Pacman's tile.
+		float distance = std::sqrt(std::pow(orangeGhostTile.first-pacmanTile.first ,2) + std::pow(orangeGhostTile.second-pacmanTile.second ,2));					
+		if(distance >= 8){
+			ghostTargetTile = pacmanTile;
+		}
+	}
+
+	return ghostTargetTile;
+}
+
 

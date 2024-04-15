@@ -22,7 +22,6 @@
 #include "Food.hpp"
 #include "Score.hpp"
 
-
 class App {
 public:
     enum class State {
@@ -48,7 +47,7 @@ public:
     //Ghost
     void GhostStateProcess();
     void GhostMoveProcess();
-
+    
     //Time Related
     unsigned long GetElapsedTime();
     unsigned long GetDeltaTime();
@@ -64,7 +63,7 @@ public:
 
 
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
-
+	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
 
 private:
     State m_CurrentState = State::START;

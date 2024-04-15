@@ -1,7 +1,4 @@
 #include "App.hpp"
-#include "Util/Time.hpp"
-#include <iostream>
-#include <stddef.h>
 
 void App::Start() {
     bool showCharacter = true;
@@ -89,21 +86,21 @@ void App::Start() {
     m_Orange->SetVisible(showCharacter);
     m_Orange->SetLooping(true);
     m_Orange->SetPlaying(true);
-    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(13, 14));
+    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
 
     m_Pink = std::make_shared<Ghost>(pinkImage);
     m_Pink->SetZIndex(16);
     m_Pink->SetVisible(showCharacter);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(true);
-    m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(15, 14));
+    m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
 
     m_Red = std::make_shared<Ghost>(redImage);
     m_Red->SetZIndex(15);
     m_Red->SetVisible(showCharacter);
     m_Red->SetLooping(true);
     m_Red->SetPlaying(true);
-    m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(13, 11));
+    m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(6, 5));
 
     m_Text = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,
