@@ -4,8 +4,8 @@ void App::Start() {
     bool showCharacter = true;
     LOG_TRACE("Start");
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
-
-    std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
+	m_SFX = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/munch.wav");
+	m_BGM = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/ghost-normal-move.mp3");
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
     cyanImage.reserve(GHOST_ASSETS_RESERVE);
     orangeImage.reserve(GHOST_ASSETS_RESERVE);

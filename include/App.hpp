@@ -13,6 +13,8 @@
 #include "Util/Logger.hpp"
 #include "Util/Animation.hpp"
 #include "Util/Time.hpp"
+#include "Util/SFX.hpp"
+#include "Util/BGM.hpp"
 
 #include "config.hpp"
 #include "Pacman.hpp"
@@ -80,6 +82,8 @@ private:
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
+    std::shared_ptr<Util::SFX> m_SFX;
+    std::shared_ptr<Util::BGM> m_BGM;
 
 };
 

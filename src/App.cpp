@@ -33,6 +33,7 @@ void App::FoodCollision(){
 		if(IfCollides(m_SmallFood[i]) && m_SmallFood[i]->GetVisibility()){ 
 			m_SmallFood[i]->SetVisible(false); 
 			m_Score->AddVisibleScore(SCORE_FOOD);
+			m_SFX->Play();
 		}
 	}
 	for (int i = 0; i < LARGE_FOOD_NUM; i++) {
