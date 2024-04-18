@@ -6,6 +6,7 @@ void App::Update() {
 	PacmanMoveProcess();
     GhostMoveProcess();
     FoodCollision();
+	GhostCollision();
 
 
     m_Root.Update();

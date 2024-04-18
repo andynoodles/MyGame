@@ -5,9 +5,11 @@
 
 //Pacman Settings
 #define PACMAN_SPEED 5
+#define PACMAN_STARTTILE_X 13
+#define PACMAN_STARTTILE_Y 23
 
 //Ghost setting
-#define GHOST_SPEED 5
+#define GHOST_SPEED 3
 #define GHOST_DEAD_DURATION 3000
 //Assets Settings
 #define PACMAN_ASSETS_NUM 3

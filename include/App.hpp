@@ -41,8 +41,8 @@ public:
     //Misc 
     void TimeUpdate();
     void ScoreUpdate();
-
-    void FoodCollision();
+	void GhostCollision();
+    void FoodCollision(); //Pacman collided with ghost.
 
     //Ghost
     void GhostStateProcess();

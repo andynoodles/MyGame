@@ -15,7 +15,7 @@ unsigned long App::GetDeltaTime(){
 bool App::IfCollides(const std::shared_ptr<Food>& other){
 	glm::vec2 OtherPosition = other->GetPosition();
 	glm::vec2 ThisPosition = m_Pacman->GetPosition();
-	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
+	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition)) //Pacman and Ghost is on same tile.
 		return true;
 	return false;
 }
@@ -42,6 +42,17 @@ void App::FoodCollision(){
 			onPill = true;
 			m_Score->AddVisibleScore(SCORE_FOOD);
 		}
+	}
+}
+
+void App::GhostCollision(){
+	if(IfCollides(m_Red) || IfCollides(m_Pink) || IfCollides(m_Cyan) || IfCollides(m_Orange)){	
+		m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
+		m_Pacman->HpMinusOne();	
+	}
+	if(m_Pacman->GetHp() == 0){
+		LOG_DEBUG("Game Over!");
+        m_CurrentState = State::END;
 	}
 }
 

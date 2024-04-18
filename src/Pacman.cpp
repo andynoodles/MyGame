@@ -31,10 +31,6 @@ void Pacman::SetDirection(std::string Direction){
     MoveDirection = Direction;
 }
 
-std::string Pacman::GetDirection(){
-    return MoveDirection;
-}
-
 void Pacman::Move(const std::string Direction, float SpeedMultiplier = 1){ 
     if(Direction == "East") {
         FaceEast();
@@ -73,10 +69,6 @@ void Pacman::MoveBack(const std::string Direction, float SpeedMultiplier = 1){
         Speed = {0, PACMAN_SPEED};
     }
 	SetPosition(m_Transform.translation + (Speed * SpeedMultiplier)); 
-
-}
-glm::vec2 Pacman::GetPosition(){
-    return m_Transform.translation;
 }
 
 void Pacman::Stop(){
