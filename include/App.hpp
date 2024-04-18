@@ -41,12 +41,14 @@ public:
     //Misc 
     void TimeUpdate();
     void ScoreUpdate();
-	void GhostCollision();
-    void FoodCollision(); //Pacman collided with ghost.
+    void FoodCollision(); 	
+	void GhostCollision();//Pacman collided with ghost.
+	bool IsFoodAllEaten();
 
     //Ghost
     void GhostStateProcess();
     void GhostMoveProcess();
+	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
     
     //Time Related
     unsigned long GetElapsedTime();
@@ -63,7 +65,6 @@ public:
 
 
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
-	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
 
 private:
     State m_CurrentState = State::START;

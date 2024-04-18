@@ -47,6 +47,7 @@ public:
 	void Move(const std::string Direction, float SpeedMultiplier);
    	void MoveBack(const std::string Direction, float SpeedMultiplier);
 	void Stop();
+	bool IsDead(){return (GetHp() == 0)? true:false;} // Check if pacman is dead.
 
 private:
     std::string MoveDirection = "East";

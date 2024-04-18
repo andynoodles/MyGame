@@ -72,6 +72,6 @@ void Pacman::MoveBack(const std::string Direction, float SpeedMultiplier = 1){
 }
 
 void Pacman::Stop(){
-		
 	SetPosition(GetPosition()); 
 }
+

@@ -46,14 +46,21 @@ void App::FoodCollision(){
 }
 
 void App::GhostCollision(){
-	if(IfCollides(m_Red) || IfCollides(m_Pink) || IfCollides(m_Cyan) || IfCollides(m_Orange)){	
-		m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
-		m_Pacman->HpMinusOne();	
+	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
+	for(auto g : vec){
+		if(IfCollides(g) && g->GetState() != Ghost::GhostState::DEAD){
+			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
+			m_Pacman->HpMinusOne();	
+		}
 	}
-	if(m_Pacman->GetHp() == 0){
-		LOG_DEBUG("Game Over!");
-        m_CurrentState = State::END;
-	}
+}
+
+bool App::IsFoodAllEaten(){
+	for(auto f : m_SmallFood)
+		if(f->GetVisibility()) return false;
+	for(auto f : m_LargeFood)
+		if(f->GetVisibility()) return false;
+	return true;
 }
 
 void App::PacmanMoveProcess(){
