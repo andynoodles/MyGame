@@ -48,7 +48,7 @@ void App::FoodCollision(){
 void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
-		if(IfCollides(g) && g->GetState() != Ghost::GhostState::DEAD){
+		if(IfCollides(g) && g->GetState() != Ghost::GhostState::DEAD && g->GetState() != Ghost::GhostState::SCARED){
 			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
 		}
