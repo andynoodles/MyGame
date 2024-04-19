@@ -125,7 +125,7 @@ void Ghost::GhostMoveEye() {
 void Ghost::GhostMove(){
     switch (State)
     {
-    case Ghost::GhostState::NORMAL:
+    case Ghost::GhostState::CHASE:
         GhostMoveNormal();
         break;
     case Ghost::GhostState::SCARED:

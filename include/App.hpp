@@ -52,10 +52,6 @@ public:
     void GhostStateProcess();
     void GhostMoveProcess();
 	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
-    
-    //Time Related
-    unsigned long GetElapsedTime();
-    unsigned long GetDeltaTime();
 
     //Pacman Related
     bool IfCollides(const std::shared_ptr<Food>& other);

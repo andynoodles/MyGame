@@ -13,8 +13,9 @@
 class Ghost : public Util::GameObject {
 public:
     enum class GhostState {
-        NORMAL,
+        CHASE,
         SCARED,
+        SCATTER,
         FLASHING,
         DEAD
     };
@@ -60,8 +61,8 @@ public:
 
     void SetDirection(std::string direction) { Direction = direction; }
     void SetSpeedMultiplier(float mul) { SpeedMultiplier = mul; }
-    void SetDeadMarker(unsigned long time) { DeadMarker = time; }
-    unsigned long GetDeadMarker() { return DeadMarker; }
+    void SetMarker(unsigned long time) { marker = time; }
+    unsigned long GetMarker() { return marker; }
 private:
     glm::vec2 Speed;
     std::string Direction = "West";
@@ -69,8 +70,8 @@ private:
     std::pair<int, int> TargetTile;
     std::queue<std::pair<int, int>> HistoryTile;
     float SpeedMultiplier = 1;
-    unsigned long DeadMarker = 0;
-    GhostState State = GhostState::NORMAL;
+    unsigned long marker = 0;
+    GhostState State = GhostState::SCATTER;
 };
 
 #endif //ANIMATED_CHARACTER_HPP
