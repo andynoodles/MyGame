@@ -176,7 +176,7 @@ void Ghost::MoveToTile(std::pair<int, int> EndTile) {
         SetPosition({Target.x, GetPosition().y});
     }
     HistoryTile.push(CurrentTile);
-    if(HistoryTile.size() > 4) HistoryTile.pop();
+    if(HistoryTile.size() > 10) HistoryTile.pop();
     GhostMove();
 }
 
