@@ -34,7 +34,7 @@ void App::FoodCollision(){
 			m_SmallFood[i]->SetVisible(false); 
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
-			m_SFX->Play();
+			m_SFX.PlayMunch();
 		}
 	}
 	for (int i = 0; i < LARGE_FOOD_NUM; i++) {
@@ -44,6 +44,7 @@ void App::FoodCollision(){
 			onPill = true;
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
+			m_SFX.PlayMunch();
 		}
 	}
 }
