@@ -23,6 +23,7 @@
 #include "ShowText.hpp"
 #include "Food.hpp"
 #include "Score.hpp"
+#include "Level.hpp"
 
 class App {
 public:
@@ -72,8 +73,7 @@ private:
     State m_CurrentState = State::START;
 	Util::Root m_Root;
     Util::Time m_Time;
-    unsigned long FoodEffectMarker = 0;
-    bool onPill = false; // needs to be init every game
+    
     std::shared_ptr<ShowText> m_Text;
     std::shared_ptr<Score> m_Score;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
@@ -84,6 +84,10 @@ private:
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
     std::shared_ptr<Util::SFX> m_SFX;
     std::shared_ptr<Util::BGM> m_BGM;
+
+    //custom classes
+    unsigned long FoodEffectMarker = 0;
+    Level currentLevel;
 };
 
 #endif

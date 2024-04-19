@@ -41,7 +41,6 @@ void App::FoodCollision(){
 		if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
 			m_LargeFood[i]->SetVisible(false); 
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
-			onPill = true;
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
 		}
@@ -167,7 +166,6 @@ void App::GhostStateProcess() {
 	//Set State
 	for (int i = 0; i < 4; i++) {
 		if (GetElapsedTime() - FoodEffectMarker < PILL_DURATION &&
-				onPill &&
 				(Ghost[i]->GetState() != Ghost::GhostState::DEAD)) {
 			if (!(GetElapsedTime() - FoodEffectMarker < DONT_FLASH_DURATION))
 				Ghost[i]->SetState(Ghost::GhostState::FLASHING);
