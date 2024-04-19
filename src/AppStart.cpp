@@ -6,6 +6,7 @@ void App::Start() {
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 	m_SFX = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/munch.wav");
 	m_BGM = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/ghost-normal-move.mp3");
+	m_BGM->Play();
 
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
