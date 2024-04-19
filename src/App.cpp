@@ -32,7 +32,8 @@ void App::FoodCollision(){
 	for (int i = 0; i < SMALL_FOOD_NUM; i++) {
 		if(IfCollides(m_SmallFood[i]) && m_SmallFood[i]->GetVisibility()){ 
 			m_SmallFood[i]->SetVisible(false); 
-			m_Score->AddVisibleScore(SCORE_FOOD);
+			m_Score->AddVisibleScore(FOOD_SCORE);
+			m_Score->AddFoodScore(FOOD_SCORE);
 			m_SFX->Play();
 		}
 	}
@@ -41,7 +42,8 @@ void App::FoodCollision(){
 			m_LargeFood[i]->SetVisible(false); 
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
 			onPill = true;
-			m_Score->AddVisibleScore(SCORE_FOOD);
+			m_Score->AddVisibleScore(FOOD_SCORE);
+			m_Score->AddFoodScore(FOOD_SCORE);
 		}
 	}
 }
@@ -56,6 +58,7 @@ void App::GhostCollision(){
 	}
 }
 
+/*
 bool App::IsFoodAllEaten(){
 	for(auto f : m_SmallFood)
 		if(f->GetVisibility()) return false;
@@ -63,6 +66,7 @@ bool App::IsFoodAllEaten(){
 		if(f->GetVisibility()) return false;
 	return true;
 }
+*/
 
 void App::PacmanMoveProcess(){
 	ChangeDirectionIfPossible();

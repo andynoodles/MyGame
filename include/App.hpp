@@ -45,7 +45,7 @@ public:
     void ScoreUpdate();
     void FoodCollision(); 	
 	void GhostCollision();//Pacman collided with ghost.
-	bool IsFoodAllEaten();
+//	bool IsFoodAllEaten();
 
     //Ghost
     void GhostStateProcess();
@@ -84,7 +84,6 @@ private:
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
     std::shared_ptr<Util::SFX> m_SFX;
     std::shared_ptr<Util::BGM> m_BGM;
-
 };
 
 #endif
