@@ -170,16 +170,20 @@ void App::GhostStateProcess() {
 			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
 		}
 		// onPill and flashing
-		if(m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION){
+		if(Ghost->GetState() == Ghost::GhostState::SCARED &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION){
 			Ghost->SetState(Ghost::GhostState::FLASHING);
 		}
 		// onPill and not flashing
-		if(m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
+		if((Ghost->GetState() == Ghost::GhostState::SCATTER ||
+		    Ghost->GetState() == Ghost::GhostState::CHASE) &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
 		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < DONT_FLASH_DURATION){
 			Ghost->SetState(Ghost::GhostState::SCARED);
 		}
 		// after pill
-		if(m_Time.GetElapsedTimeMs() - FoodEffectMarker > PILL_DURATION){
+		if(Ghost->GetState() == Ghost::GhostState::FLASHING &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker > PILL_DURATION){
 			Ghost->SetState(Ghost::GhostState::SCATTER);
 			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
 		}
@@ -190,7 +194,7 @@ void App::GhostStateProcess() {
 		}	
 		//if DEAD and back home
 		if( Ghost->GetState() == Ghost::GhostState::DEAD &&
-			Ghost->GetPosition() == m_BackgroundImage->GetCenterPositionOfTile(14, 11)){
+			m_BackgroundImage->GetTileOfPosition(Ghost->GetPosition()) == std::pair{14, 11}){
 			Ghost->SetState(Ghost::GhostState::SCATTER);
 			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
 		}
@@ -218,7 +222,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	std::pair<int ,int> ghostTargetTile;
 	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
 	std::string pacmanDir = m_Pacman->GetDirection();
-	
+
 	if(ghostState == Ghost::GhostState::DEAD){
 		return {14 ,11}; //Target is located directly above the left side of the “door” to the ghost house.
 	}
