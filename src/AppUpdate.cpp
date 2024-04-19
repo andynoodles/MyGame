@@ -6,10 +6,11 @@ void App::Update() {
 	PacmanMoveProcess();
     GhostMoveProcess();
     FoodCollision();
+	GhostCollision();
 
 
     m_Root.Update();
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit() || m_Pacman->IsDead() || m_Score->IsFoodAllEaten() ) {
         m_CurrentState = State::END;
     }
 }

@@ -25,3 +25,6 @@ unsigned int Score::GetVisibleScore(){
 void Score::ScoreUpdate(){
     SetText(std::to_string(this->VisibleScore));
 }
+bool Score::IsFoodAllEaten(){
+	return (FoodScore == FULL_FOOD_SCORE) ? true :false;
+}

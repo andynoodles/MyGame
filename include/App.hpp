@@ -13,6 +13,8 @@
 #include "Util/Logger.hpp"
 #include "Util/Animation.hpp"
 #include "Util/Time.hpp"
+#include "Util/SFX.hpp"
+#include "Util/BGM.hpp"
 
 #include "config.hpp"
 #include "Pacman.hpp"
@@ -41,12 +43,14 @@ public:
     //Misc 
     void TimeUpdate();
     void ScoreUpdate();
-
-    void FoodCollision();
+    void FoodCollision(); 	
+	void GhostCollision();//Pacman collided with ghost.
+//	bool IsFoodAllEaten();
 
     //Ghost
     void GhostStateProcess();
     void GhostMoveProcess();
+	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
     
     //Time Related
     unsigned long GetElapsedTime();
@@ -63,7 +67,6 @@ public:
 
 
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
-	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
 
 private:
     State m_CurrentState = State::START;
@@ -79,7 +82,8 @@ private:
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
-
+    std::shared_ptr<Util::SFX> m_SFX;
+    std::shared_ptr<Util::BGM> m_BGM;
 };
 
 #endif

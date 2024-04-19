@@ -1,5 +1,6 @@
 #include "ShowText.hpp"
 #include <string>
+#include "config.hpp"
 
 class Score : public ShowText {
 public:
@@ -16,10 +17,10 @@ public:
     void SetVisibleScore(unsigned int score);
     void AddVisibleScore(unsigned int delta);
     unsigned int GetVisibleScore();
-
     void ScoreUpdate();
+	bool IsFoodAllEaten();
 private:
     unsigned int VisibleScore = 0;
-    unsigned int FoodScore = 0;
+    unsigned int FoodScore = 0; //This is invisible.
 
 };
