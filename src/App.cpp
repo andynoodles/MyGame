@@ -171,7 +171,8 @@ void App::GhostStateProcess() {
 		}
 		// onPill and flashing
 		if(Ghost->GetState() == Ghost::GhostState::SCARED &&
-		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION){
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker > DONT_FLASH_DURATION){
 			Ghost->SetState(Ghost::GhostState::FLASHING);
 		}
 		// onPill and not flashing
