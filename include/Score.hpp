@@ -19,8 +19,18 @@ public:
     unsigned int GetVisibleScore();
     void ScoreUpdate();
 	bool IsFoodAllEaten();
+    
+    unsigned int GetScoreMultiplier(){ return ScoreMultiplier; };
+    void IncreaseScoreMultiplier(int i){ ScoreMultiplier += i; };
+    void ResetScoreMultiplier(){ ScoreMultiplier = 1; };
+
+    void SetMarker(unsigned long time){ Marker = time; };
+    unsigned long GetMarker(){ return Marker; };
 private:
     unsigned int VisibleScore = 0;
     unsigned int FoodScore = 0; //This is invisible.
+    unsigned int ScoreMultiplier = 1;
+
+    unsigned long Marker = 0;
 
 };

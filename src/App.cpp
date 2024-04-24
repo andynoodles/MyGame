@@ -1,15 +1,9 @@
 #include "App.hpp"
+#include "Ghost.hpp"
+#include <string>
 
 void App::TimeUpdate(){
 	m_Time.Update();
-}
-
-unsigned long App::GetElapsedTime(){
-	return m_Time.GetElapsedTimeMs();
-}
-
-unsigned long App::GetDeltaTime(){
-	return m_Time.GetDeltaTime();
 }
 
 bool App::IfCollides(const std::shared_ptr<Food>& other){
@@ -41,10 +35,11 @@ void App::FoodCollision(){
 		if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
 			m_LargeFood[i]->SetVisible(false); 
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
-			onPill = true;
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
-			m_SFX.PlayMunch();
+=======
+			m_FlashText->ResetScoreMultiplier();
+>>>>>>> andy
 		}
 	}
 }
@@ -52,10 +47,26 @@ void App::FoodCollision(){
 void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
-		if(IfCollides(g) && g->GetState() != Ghost::GhostState::DEAD && g->GetState() != Ghost::GhostState::SCARED){
+		bool collided = IfCollides(g);
+		if( collided && g->GetState() != Ghost::GhostState::DEAD && 
+						g->GetState() != Ghost::GhostState::SCARED &&
+						g->GetState() != Ghost::GhostState::FLASHING){
 			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
 		}
+		else if (collided){
+			//show socre on screen
+			m_Score->AddVisibleScore(400 * m_FlashText->GetScoreMultiplier());
+			m_FlashText->SetText(std::to_string(400 * m_FlashText->GetScoreMultiplier()));
+			m_FlashText->SetPosition(m_Pacman->GetPosition());
+			m_FlashText->SetVisible(true);
+			m_FlashText->SetMarker(m_Time.GetElapsedTimeMs());
+			m_FlashText->IncreaseScoreMultiplier(1);
+		}
+	}
+
+	if(m_Time.GetElapsedTimeMs() - m_FlashText->GetMarker() > 2000){
+		m_FlashText->SetVisible(false);
 	}
 }
 
@@ -160,30 +171,56 @@ void App::ScoreUpdate(){
 }
 
 void App::GhostStateProcess() {
-	std::vector<std::shared_ptr<Ghost>> Ghost;
-	Ghost.push_back(m_Cyan);
-	Ghost.push_back(m_Red);
-	Ghost.push_back(m_Pink);
-	Ghost.push_back(m_Orange);
+	std::vector<std::shared_ptr<Ghost>> Ghosts;
+	Ghosts.push_back(m_Cyan);
+	Ghosts.push_back(m_Red);
+	Ghosts.push_back(m_Pink);
+	Ghosts.push_back(m_Orange);\
+	//Time 
+	unsigned long scatter = 5000, chase = 20000;
 	//Set State
-	for (int i = 0; i < 4; i++) {
-		if (GetElapsedTime() - FoodEffectMarker < PILL_DURATION &&
-				onPill &&
-				(Ghost[i]->GetState() != Ghost::GhostState::DEAD)) {
-			if (!(GetElapsedTime() - FoodEffectMarker < DONT_FLASH_DURATION))
-				Ghost[i]->SetState(Ghost::GhostState::FLASHING);
-			else
-				Ghost[i]->SetState(Ghost::GhostState::SCARED);
-			if (IfCollides(Ghost[i])) {
-				Ghost[i]->SetDeadMarker(GetElapsedTime());
-				Ghost[i]->SetState(Ghost::GhostState::DEAD);
-			}
+	for (auto Ghost : Ghosts) {
+		if(Ghost->GetState() == Ghost::GhostState::SCATTER && 
+		   m_Time.GetElapsedTimeMs() - Ghost->GetMarker() > scatter){
+			Ghost->SetState(Ghost::GhostState::CHASE);
+			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
 		}
-		else if(Ghost[i]->GetState() != Ghost::GhostState::DEAD ||
-				GetElapsedTime() - Ghost[i]->GetDeadMarker() > GHOST_DEAD_DURATION) {
-			Ghost[i]->SetState(Ghost::GhostState::NORMAL);
+		if(Ghost->GetState() == Ghost::GhostState::CHASE && 
+		   m_Time.GetElapsedTimeMs() - Ghost->GetMarker() > chase){
+			Ghost->SetState(Ghost::GhostState::SCATTER);
+			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
 		}
-
+		// onPill and flashing
+		if(Ghost->GetState() == Ghost::GhostState::SCARED &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker > DONT_FLASH_DURATION){
+			Ghost->SetState(Ghost::GhostState::FLASHING);
+		}
+		// onPill and not flashing
+		if((Ghost->GetState() == Ghost::GhostState::SCATTER ||
+		    Ghost->GetState() == Ghost::GhostState::CHASE) &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < DONT_FLASH_DURATION){
+			Ghost->SetState(Ghost::GhostState::SCARED);
+		}
+		// after pill
+		if(Ghost->GetState() == Ghost::GhostState::FLASHING &&
+		   m_Time.GetElapsedTimeMs() - FoodEffectMarker > PILL_DURATION){
+			Ghost->SetState(Ghost::GhostState::SCATTER);
+			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
+		}
+		if( (Ghost->GetState() == Ghost::GhostState::SCARED || 
+			Ghost->GetState() == Ghost::GhostState::FLASHING) &&
+			IfCollides(Ghost)) {
+			Ghost->SetState(Ghost::GhostState::DEAD);
+		}	
+		//if DEAD and back home
+		if( Ghost->GetState() == Ghost::GhostState::DEAD &&
+			m_BackgroundImage->GetTileOfPosition(Ghost->GetPosition()) == std::pair{14, 11}){
+			Ghost->SetState(Ghost::GhostState::SCATTER);
+			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
+		}
+		
 	}
 }
 
@@ -204,15 +241,15 @@ void App::GhostMoveProcess() {
 
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	Ghost::GhostState ghostState = ghost->GetState();
-	if(ghostState == Ghost::GhostState::DEAD){
-		return {14 ,11}; //Target is located directly above the left side of the “door” to the ghost house.
-	}
 	std::pair<int ,int> ghostTargetTile;
 	std::pair<int ,int> pacmanTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
 	std::string pacmanDir = m_Pacman->GetDirection();
 
+	if(ghostState == Ghost::GhostState::DEAD){
+		return {14 ,11}; //Target is located directly above the left side of the “door” to the ghost house.
+	}
 	if(ghost == m_Red){
-		if(ghostState == Ghost::GhostState::NORMAL){	
+		if(ghostState == Ghost::GhostState::CHASE){	
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){	
@@ -220,7 +257,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		}
 	}
 	else if(ghost == m_Pink){
-		if(ghostState == Ghost::GhostState::NORMAL){
+		if(ghostState == Ghost::GhostState::CHASE){
 			if(pacmanDir == "North"){
 				ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second-4};//It's not bug,it's feature.
 			}
@@ -240,7 +277,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 
 	}
 	else if(ghost == m_Cyan){
-		if(ghostState == Ghost::GhostState::NORMAL){	
+		if(ghostState == Ghost::GhostState::CHASE){	
 			std::pair<int ,int> offsetTile;
 			if(pacmanDir == "North"){
 				offsetTile = {pacmanTile.first-2 ,pacmanTile.second-2};//It's not bug,it's feature.
@@ -269,7 +306,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		std::pair<int ,int> orangeGhostTile = m_BackgroundImage->GetTileOfPosition(m_Orange->GetPosition());
 		//Get Euclidean distance between orange's tile and Pacman's tile.
 		float distance = std::sqrt(std::pow(orangeGhostTile.first-pacmanTile.first ,2) + std::pow(orangeGhostTile.second-pacmanTile.second ,2));					
-		if(ghostState == Ghost::GhostState::NORMAL && distance >= 8){
+		if(ghostState == Ghost::GhostState::CHASE && distance >= 8){
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || distance < 8 ||ghostState == Ghost::GhostState::FLASHING){

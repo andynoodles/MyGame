@@ -21,8 +21,7 @@
 #include "ShowText.hpp"
 #include "Food.hpp"
 #include "Score.hpp"
-#include "SFX.hpp"
-#include "BGM.hpp"
+#include "Level.hpp"
 
 class App {
 public:
@@ -51,10 +50,6 @@ public:
     void GhostStateProcess();
     void GhostMoveProcess();
 	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
-    
-    //Time Related
-    unsigned long GetElapsedTime();
-    unsigned long GetDeltaTime();
 
     //Pacman Related
     bool IfCollides(const std::shared_ptr<Food>& other);
@@ -72,18 +67,21 @@ private:
     State m_CurrentState = State::START;
 	Util::Root m_Root;
     Util::Time m_Time;
-    unsigned long FoodEffectMarker = 0;
-    bool onPill = false; // needs to be init every game
-    std::shared_ptr<ShowText> m_Text;
-    std::shared_ptr<Score> m_Score;
+    
+    std::shared_ptr<Score> m_FlashText, m_Score;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
-    SFX m_SFX;
-	BGM m_BGM;
+    std::shared_ptr<Util::SFX> m_SFX;
+    std::shared_ptr<Util::BGM> m_BGM;
+
+    //custom classes
+    unsigned long FoodEffectMarker = 0;
+    Level currentLevel;
+>>>>>>> andy
 };
 
 #endif

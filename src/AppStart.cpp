@@ -4,7 +4,12 @@ void App::Start() {
     bool showCharacter = true;
     LOG_TRACE("Start");
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
-	m_BGM.PlayNormal();
+<<<<<<< HEAD
+=======
+	m_SFX = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/munch.wav");
+	m_BGM = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/ghost-normal-move.mp3");
+	
+>>>>>>> andy
 
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
@@ -108,19 +113,22 @@ void App::Start() {
     //m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(6, 5));
     m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1 ,1));
 
-    m_Text = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
-    20,
-    "1",
-    Util::Color(255, 255, 255));
+    m_FlashText = std::make_shared<Score>(RESOURCE_DIR"/Font/emulogic.ttf",
+    8,
+    "FlashScore",
+    Util::Color(0, 255, 250));
+    m_FlashText->SetVisible(false);
+    m_FlashText->SetZIndex(100);
+
     m_Score = std::make_shared<Score>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,
-    "What",
+    "MainScore",
     Util::Color(255, 255, 255));
     m_Score->SetPosition({400, 228});
     m_Score->SetVisible(true);
     
     m_Root.AddChild(m_Score);
-    m_Root.AddChild(m_Text);
+    m_Root.AddChild(m_FlashText);
     m_Root.AddChild(m_Cyan);
     m_Root.AddChild(m_Orange);
     m_Root.AddChild(m_Pink);
@@ -128,6 +136,10 @@ void App::Start() {
     m_Root.AddChild(m_Pacman);  
 	m_Root.AddChild(m_BackgroundImage);
 	m_Root.Update();
+
+    m_BGM->Play();
+
+    currentLevel.SetLevel(1);
 
     m_CurrentState = State::UPDATE;
 }
