@@ -70,8 +70,7 @@ private:
 	Util::Root m_Root;
     Util::Time m_Time;
     
-    std::shared_ptr<ShowText> m_Text;
-    std::shared_ptr<Score> m_Score;
+    std::shared_ptr<Score> m_FlashText, m_Score;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     

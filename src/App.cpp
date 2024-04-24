@@ -1,4 +1,6 @@
 #include "App.hpp"
+#include "Ghost.hpp"
+#include <string>
 
 void App::TimeUpdate(){
 	m_Time.Update();
@@ -35,6 +37,7 @@ void App::FoodCollision(){
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
+			m_FlashText->ResetScoreMultiplier();
 		}
 	}
 }
@@ -42,10 +45,26 @@ void App::FoodCollision(){
 void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
-		if(IfCollides(g) && g->GetState() != Ghost::GhostState::DEAD && g->GetState() != Ghost::GhostState::SCARED){
+		bool collided = IfCollides(g);
+		if( collided && g->GetState() != Ghost::GhostState::DEAD && 
+						g->GetState() != Ghost::GhostState::SCARED &&
+						g->GetState() != Ghost::GhostState::FLASHING){
 			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
 		}
+		else if (collided){
+			//show socre on screen
+			m_Score->AddVisibleScore(400 * m_FlashText->GetScoreMultiplier());
+			m_FlashText->SetText(std::to_string(400 * m_FlashText->GetScoreMultiplier()));
+			m_FlashText->SetPosition(m_Pacman->GetPosition());
+			m_FlashText->SetVisible(true);
+			m_FlashText->SetMarker(m_Time.GetElapsedTimeMs());
+			m_FlashText->IncreaseScoreMultiplier(1);
+		}
+	}
+
+	if(m_Time.GetElapsedTimeMs() - m_FlashText->GetMarker() > 2000){
+		m_FlashText->SetVisible(false);
 	}
 }
 
