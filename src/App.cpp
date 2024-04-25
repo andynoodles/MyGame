@@ -47,6 +47,7 @@ void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
 		bool collided = IfCollides(g);
+
 		if( collided && g->GetState() != Ghost::GhostState::DEAD && 
 						g->GetState() != Ghost::GhostState::SCARED &&
 						g->GetState() != Ghost::GhostState::FLASHING){
@@ -61,6 +62,7 @@ void App::GhostCollision(){
 			m_FlashText->SetVisible(true);
 			m_FlashText->SetMarker(m_Time.GetElapsedTimeMs());
 			m_FlashText->IncreaseScoreMultiplier(1);
+			m_SFX.PlayEatGhost();
 		}
 	}
 
@@ -327,6 +329,7 @@ void App::BGMCtrl(){
 	   m_Pink->GetState() == Ghost::GhostState::DEAD){
 		m_BGM.PlayRetreat();
 	}
+	
 	else{
 		m_BGM.PlayNormal();
 	}
