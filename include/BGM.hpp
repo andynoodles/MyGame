@@ -7,8 +7,9 @@
 class BGM{
 public:
 	enum class BGMState{
-		NORMAL,
-		RETREAT,
+		NORMAL, //Ghost is chasing Pacman.
+		RETREAT, //Ghost is going home.
+		POWER, //Pacman is chasing ghost.
 		OTHER
 	};
 
@@ -16,6 +17,7 @@ public:
 
 	void PlayNormal();
 	void PlayRetreat();
+	void PlayPower();
 
 	BGMState GetCurBGM(){return curBGM;} 
 private:

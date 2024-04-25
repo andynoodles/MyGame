@@ -24,3 +24,12 @@ void BGM::PlayRetreat(){
 	}
 }
 
+void BGM::PlayPower(){
+	curBGM = BGMState::POWER;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/power_pellet.wav");
+		bgm->Play();
+		lastBGM = curBGM;
+	}
+
+} 

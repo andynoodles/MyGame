@@ -323,14 +323,18 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 }
 
 void App::BGMCtrl(){
-	if(m_Red->GetState() == Ghost::GhostState::DEAD ||
-	   m_Cyan->GetState() == Ghost::GhostState::DEAD ||
-	   m_Orange->GetState() == Ghost::GhostState::DEAD ||
-	   m_Pink->GetState() == Ghost::GhostState::DEAD){
-		m_BGM.PlayRetreat();
+	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Cyan ,m_Pink ,m_Orange};
+	for(auto g : vec){
+		if(g->GetState() == Ghost::GhostState::DEAD){
+			m_BGM.PlayRetreat(); //Ghost is going home.
+			return;	
+		}
 	}
-	
-	else{
-		m_BGM.PlayNormal();
+	for(auto g:vec){
+		if(g->GetState() == Ghost::GhostState::SCARED || g->GetState() == Ghost::GhostState::FLASHING){
+			m_BGM.PlayPower();	//Pacman chase ghost.
+			return;
+		}
 	}
+	m_BGM.PlayNormal();
 }
