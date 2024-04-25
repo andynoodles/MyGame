@@ -22,6 +22,8 @@
 #include "Food.hpp"
 #include "Score.hpp"
 #include "Level.hpp"
+#include "BGM.hpp"
+#include "SFX.hpp"
 
 class App {
 public:
@@ -45,6 +47,7 @@ public:
     void FoodCollision(); 	
 	void GhostCollision();//Pacman collided with ghost.
 //	bool IsFoodAllEaten();
+	void BGMCtrl(); //BGM control.
 
     //Ghost
     void GhostStateProcess();
@@ -75,13 +78,12 @@ private:
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
-    std::shared_ptr<Util::SFX> m_SFX;
-    std::shared_ptr<Util::BGM> m_BGM;
+    SFX m_SFX;
+    BGM m_BGM;
 
     //custom classes
     unsigned long FoodEffectMarker = 0;
     Level currentLevel;
->>>>>>> andy
 };
 
 #endif

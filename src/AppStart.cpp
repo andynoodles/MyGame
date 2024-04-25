@@ -4,12 +4,6 @@ void App::Start() {
     bool showCharacter = true;
     LOG_TRACE("Start");
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
-<<<<<<< HEAD
-=======
-	m_SFX = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/munch.wav");
-	m_BGM = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/ghost-normal-move.mp3");
-	
->>>>>>> andy
 
     std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
@@ -137,7 +131,6 @@ void App::Start() {
 	m_Root.AddChild(m_BackgroundImage);
 	m_Root.Update();
 
-    m_BGM->Play();
 
     currentLevel.SetLevel(1);
 

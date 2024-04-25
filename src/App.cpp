@@ -37,9 +37,8 @@ void App::FoodCollision(){
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
-=======
+			m_SFX.PlayMunch();
 			m_FlashText->ResetScoreMultiplier();
->>>>>>> andy
 		}
 	}
 }
@@ -319,4 +318,16 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	if(ghostTargetTile.second < 1) ghostTargetTile.second = 1;
 	else if(ghostTargetTile.second > NUMBEROFTILESY-2) ghostTargetTile.second = NUMBEROFTILESY-2;
 	return ghostTargetTile;
+}
+
+void App::BGMCtrl(){
+	if(m_Red->GetState() == Ghost::GhostState::DEAD ||
+	   m_Cyan->GetState() == Ghost::GhostState::DEAD ||
+	   m_Orange->GetState() == Ghost::GhostState::DEAD ||
+	   m_Pink->GetState() == Ghost::GhostState::DEAD){
+		m_BGM.PlayRetreat();
+	}
+	else{
+		m_BGM.PlayNormal();
+	}
 }

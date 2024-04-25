@@ -7,6 +7,7 @@ void App::Update() {
     GhostMoveProcess();
     FoodCollision();
 	GhostCollision();
+	BGMCtrl();
 
 
     m_Root.Update();

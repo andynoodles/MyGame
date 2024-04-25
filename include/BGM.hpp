@@ -6,11 +6,21 @@
 
 class BGM{
 public:
+	enum class BGMState{
+		NORMAL,
+		RETREAT,
+		OTHER
+	};
+
 	BGM();
 
 	void PlayNormal();
+	void PlayRetreat();
+
+	BGMState GetCurBGM(){return curBGM;} 
 private:
-    std::shared_ptr<Util::BGM> normal;
+	std::shared_ptr<Util::BGM> bgm; //Current BGM.
+	BGMState curBGM ,lastBGM;
 };
 
 #endif
