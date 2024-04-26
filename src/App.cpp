@@ -48,13 +48,12 @@ void App::GhostCollision(){
 	for(auto g : vec){
 		bool collided = IfCollides(g);
 
-		if( collided && g->GetState() != Ghost::GhostState::DEAD && 
-						g->GetState() != Ghost::GhostState::SCARED &&
-						g->GetState() != Ghost::GhostState::FLASHING){
+		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
+						g->GetState() == Ghost::GhostState::CHASE)){
 			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
 		}
-		else if (collided){
+		else if (collided && g->GetState() != Ghost::GhostState::DEAD){
 			//show socre on screen
 			m_Score->AddVisibleScore(400 * m_FlashText->GetScoreMultiplier());
 			m_FlashText->SetText(std::to_string(400 * m_FlashText->GetScoreMultiplier()));
