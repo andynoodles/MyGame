@@ -4,7 +4,7 @@
 #define PIXELPERTILE 16
 
 //Pacman Settings
-#define PACMAN_SPEED 15
+#define PACMAN_SPEED 8
 #define PACMAN_STARTTILE_X 13
 #define PACMAN_STARTTILE_Y 23
 

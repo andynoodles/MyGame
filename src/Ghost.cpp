@@ -156,7 +156,7 @@ glm::vec2 Ghost::GetCenterPositionOfTile(int x, int y) {
 void Ghost::MoveToTile(std::pair<int, int> EndTile) {
     CurrentTile = GetTileOfPosition(GetPosition());
     TargetTile = FindNextTile(CurrentTile, EndTile);
-    LOG_DEBUG("\nCurrent:{}, {}\nTarget: {}, {}", CurrentTile.first, CurrentTile.second, TargetTile.first, TargetTile.second);
+    // LOG_DEBUG("\nCurrent:{}, {}\nTarget: {}, {}", CurrentTile.first, CurrentTile.second, TargetTile.first, TargetTile.second);
     glm::vec2 Target = GetCenterPositionOfTile(TargetTile.first, TargetTile.second); 
 
     if (GetPosition().x < Target.x && fabs(GetPosition().y - Target.y) < 10) {
@@ -274,8 +274,8 @@ std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile,
         if(InQueue(HistoryTile, Roads[i])) Roads[i] = {100, 100};
     }
 
-    for (size_t i = 0; i < Roads.size(); i++) {
-        LOG_DEBUG("{} {}", Roads[i].first, Roads[i].second);
-    }
+    // for (size_t i = 0; i < Roads.size(); i++) {
+    //     LOG_DEBUG("{} {}", Roads[i].first, Roads[i].second);
+    // }
     return findClosestVector(Roads, TargetTile);
 }
