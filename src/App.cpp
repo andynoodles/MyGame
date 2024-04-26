@@ -53,7 +53,8 @@ void App::GhostCollision(){
 			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
 		}
-		else if (collided && g->GetState() != Ghost::GhostState::DEAD){
+		else if (collided && (g->GetState() == Ghost::GhostState::FLASHING ||
+								g->GetState() == Ghost::GhostState::SCARED)){
 			//show socre on screen
 			m_Score->AddVisibleScore(400 * m_FlashText->GetScoreMultiplier());
 			m_FlashText->SetText(std::to_string(400 * m_FlashText->GetScoreMultiplier()));
