@@ -3,10 +3,11 @@
 void App::Update() {
     TimeUpdate();
     ScoreUpdate();
-	PacmanMoveProcess();
+    PacmanMoveProcess();
     GhostMoveProcess();
     FoodCollision();
 	GhostCollision();
+    GhostStateProcess();
 	BGMCtrl();
 
 

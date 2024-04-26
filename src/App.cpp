@@ -1,5 +1,6 @@
 #include "App.hpp"
 #include "Ghost.hpp"
+#include "Util/Logger.hpp"
 #include <string>
 
 void App::TimeUpdate(){
@@ -47,15 +48,16 @@ void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
 		bool collided = IfCollides(g);
-
 		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
 						g->GetState() == Ghost::GhostState::CHASE)){
+			LOG_DEBUG("PACMAN EATEN");
 			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
 		}
 		else if (collided && (g->GetState() == Ghost::GhostState::FLASHING ||
 								g->GetState() == Ghost::GhostState::SCARED)){
 			//show socre on screen
+			LOG_DEBUG("GHOST EATEN");
 			m_Score->AddVisibleScore(400 * m_FlashText->GetScoreMultiplier());
 			m_FlashText->SetText(std::to_string(400 * m_FlashText->GetScoreMultiplier()));
 			m_FlashText->SetPosition(m_Pacman->GetPosition());
@@ -223,10 +225,10 @@ void App::GhostStateProcess() {
 		}
 		
 	}
+	
 }
 
 void App::GhostMoveProcess() {
-	GhostStateProcess();
 	//std::pair<int ,int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
 	m_Red->MoveToTile(GetGhostTargetTile(m_Red));
 	m_Orange->MoveToTile(GetGhostTargetTile(m_Orange));
