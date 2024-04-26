@@ -9,6 +9,8 @@ set(SRC_FILES
     App.cpp
     Score.cpp
     Level.cpp
+	SFX.cpp
+	BGM.cpp
 )
 
 set(INCLUDE_FILES
@@ -18,9 +20,11 @@ set(INCLUDE_FILES
     Ghost.hpp
     ShowText.hpp
     Food.hpp
-	  config.hpp
+	config.hpp
     Level.hpp
     Score.hpp
+	SFX.hpp
+	BGM.hpp
 )
 
 set(TEST_FILES

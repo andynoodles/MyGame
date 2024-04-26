@@ -28,7 +28,7 @@ void App::FoodCollision(){
 			m_SmallFood[i]->SetVisible(false); 
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
-			m_SFX->Play();
+			m_SFX.PlayMunch();
 		}
 	}
 	for (int i = 0; i < LARGE_FOOD_NUM; i++) {
@@ -37,6 +37,7 @@ void App::FoodCollision(){
 			FoodEffectMarker = m_Time.GetElapsedTimeMs();
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
+			m_SFX.PlayMunch();
 			m_FlashText->ResetScoreMultiplier();
 		}
 	}
@@ -46,6 +47,7 @@ void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
 		bool collided = IfCollides(g);
+
 		if( collided && g->GetState() != Ghost::GhostState::DEAD && 
 						g->GetState() != Ghost::GhostState::SCARED &&
 						g->GetState() != Ghost::GhostState::FLASHING){
@@ -60,6 +62,7 @@ void App::GhostCollision(){
 			m_FlashText->SetVisible(true);
 			m_FlashText->SetMarker(m_Time.GetElapsedTimeMs());
 			m_FlashText->IncreaseScoreMultiplier(1);
+			m_SFX.PlayEatGhost();
 		}
 	}
 
@@ -317,4 +320,21 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	if(ghostTargetTile.second < 1) ghostTargetTile.second = 1;
 	else if(ghostTargetTile.second > NUMBEROFTILESY-2) ghostTargetTile.second = NUMBEROFTILESY-2;
 	return ghostTargetTile;
+}
+
+void App::BGMCtrl(){
+	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Cyan ,m_Pink ,m_Orange};
+	for(auto g : vec){
+		if(g->GetState() == Ghost::GhostState::DEAD){
+			m_BGM.PlayRetreat(); //Ghost is going home.
+			return;	
+		}
+	}
+	for(auto g:vec){
+		if(g->GetState() == Ghost::GhostState::SCARED || g->GetState() == Ghost::GhostState::FLASHING){
+			m_BGM.PlayPower();	//Pacman chase ghost.
+			return;
+		}
+	}
+	m_BGM.PlayNormal();
 }
