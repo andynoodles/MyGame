@@ -26,6 +26,7 @@ set(INCLUDE_FILES
     Score.hpp
 	SFX.hpp
 	BGM.hpp
+	Empty.hpp
 )
 
 set(TEST_FILES

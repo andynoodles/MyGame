@@ -124,11 +124,18 @@ void App::Init() {
     m_ReadyText = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
     16,
     "READY!",
-    Util::Color(255, 255, 0));
+    Util::Color(255, 255, 0)); //yellow
     m_ReadyText->SetPosition({READY_TEXT_X, READY_TEXT_Y});
     m_ReadyText->SetVisible(true);
     
-   
+	m_Empty1=std::make_shared<Empty>(RESOURCE_DIR"/image/empty.bmp");
+	m_Empty1->SetVisible(true);
+	m_Empty1-> SetPosition({TP_X1 , m_BackgroundImage->GetUpperLeftY() - (PIXELPERTILE*TP_TILE_Y)});
+
+   	m_Empty2=std::make_shared<Empty>(RESOURCE_DIR"/image/empty.bmp");
+	m_Empty2->SetVisible(true);
+	m_Empty2-> SetPosition({TP_X2 , m_BackgroundImage->GetUpperLeftY() - (PIXELPERTILE*TP_TILE_Y)});
+
     m_Root.AddChild(m_Score);
     m_Root.AddChild(m_ReadyText);
     m_Root.AddChild(m_FlashText);
@@ -138,7 +145,8 @@ void App::Init() {
     m_Root.AddChild(m_Red);
     m_Root.AddChild(m_Pacman);  
 	m_Root.AddChild(m_BackgroundImage);
-//	m_Root.Update();
+	m_Root.AddChild(m_Empty1);
+	m_Root.AddChild(m_Empty2);
 
 
     currentLevel.SetLevel(1);

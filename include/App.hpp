@@ -25,6 +25,7 @@
 #include "Level.hpp"
 #include "BGM.hpp"
 #include "SFX.hpp"
+#include "Empty.hpp"
 
 class App {
 public:
@@ -83,6 +84,7 @@ private:
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
+	std::shared_ptr<Empty> m_Empty1 ,m_Empty2; //16x16 black img.
     SFX m_SFX;
     BGM m_BGM;
 

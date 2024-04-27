@@ -73,16 +73,6 @@ void App::GhostCollision(){
 	}
 }
 
-/*
-bool App::IsFoodAllEaten(){
-	for(auto f : m_SmallFood)
-		if(f->GetVisibility()) return false;
-	for(auto f : m_LargeFood)
-		if(f->GetVisibility()) return false;
-	return true;
-}
-*/
-
 void App::PacmanMoveProcess(){
 	ChangeDirectionIfPossible();
 	if(IfPacmanCollidesWall()){
@@ -156,8 +146,7 @@ std::string App::InputManager(){
 
 bool App::IfPacmanCollidesWall(){
 	std::pair<int ,int> tileintented = GetTileIntented(m_Pacman->GetDirection());
-
-	if(m_BackgroundImage->GetLayout(tileintented.second,tileintented.first) ==1) return true;
+	if((tileintented.first >=0 && tileintented.first <= NUMBEROFTILESX -1) && m_BackgroundImage->GetLayout(tileintented.second,tileintented.first) ==1) return true;
 	return false;
 }
 
@@ -229,18 +218,11 @@ void App::GhostStateProcess() {
 }
 
 void App::GhostMoveProcess() {
-	//std::pair<int ,int> t = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
 	m_Red->MoveToTile(GetGhostTargetTile(m_Red));
 	m_Orange->MoveToTile(GetGhostTargetTile(m_Orange));
 	m_Cyan->MoveToTile(GetGhostTargetTile(m_Cyan));
 	m_Pink->MoveToTile(GetGhostTargetTile(m_Pink));
-//	m_Red->MoveToTile({28 ,0});
-//	m_Cyan->MoveToTile({0 ,0});
-//	m_Pink->MoveToTile({28, 31});
-//	m_Orange->MoveToTile({0 , 31});
 }
-
-
 
 std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	Ghost::GhostState ghostState = ghost->GetState();
