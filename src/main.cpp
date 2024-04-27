@@ -7,6 +7,10 @@ int main(int, char**) {
 
     while (!context->GetExit()) {
         switch (app.GetCurrentState()) {
+			case App::State::INIT:
+				app.Init();
+				break;
+
             case App::State::START:
                 app.Start();
                 break;

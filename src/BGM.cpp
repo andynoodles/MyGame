@@ -6,6 +6,17 @@ BGM::BGM(){
 	lastBGM = BGMState::OTHER;
 }
 
+void BGM::PlayStart(){
+	curBGM = BGMState::NORMAL;
+	int loop = 1;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/game_start.wav");
+		bgm->Play(loop);
+		lastBGM = curBGM;
+	}
+
+}
+
 void BGM::PlayNormal(){
 	curBGM = BGMState::NORMAL;
 	if(curBGM != lastBGM){

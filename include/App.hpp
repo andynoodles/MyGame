@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath> 
 #include "pch.hpp" // IWYU pragma: export
+#include "SDL.h"
 
 #include "Util/Root.hpp"
 #include "Util/Image.hpp"
@@ -28,12 +29,15 @@
 class App {
 public:
     enum class State {
+		INIT,
         START,
         UPDATE,
         END,
     };
 
     State GetCurrentState() const { return m_CurrentState; }
+
+	void Init();
 
     void Start();
 
@@ -67,11 +71,12 @@ public:
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
 
 private:
-    State m_CurrentState = State::START;
+    State m_CurrentState = State::INIT;
 	Util::Root m_Root;
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;
+	std::shared_ptr<ShowText> m_ReadyText;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     
