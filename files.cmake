@@ -1,6 +1,7 @@
 set(SRC_FILES
-    AppUpdate.cpp
+	AppInit.cpp
     AppStart.cpp
+    AppUpdate.cpp
     AppEnd.cpp
   	BackgroundImage.cpp
     Pacman.cpp
@@ -25,6 +26,7 @@ set(INCLUDE_FILES
     Score.hpp
 	SFX.hpp
 	BGM.hpp
+	Empty.hpp
 )
 
 set(TEST_FILES

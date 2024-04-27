@@ -7,6 +7,7 @@
 class BGM{
 public:
 	enum class BGMState{
+		START, //Game start.
 		NORMAL, //Ghost is chasing Pacman.
 		RETREAT, //Ghost is going home.
 		POWER, //Pacman is chasing ghost.
@@ -15,6 +16,7 @@ public:
 
 	BGM();
 
+	void PlayStart();
 	void PlayNormal();
 	void PlayRetreat();
 	void PlayPower();

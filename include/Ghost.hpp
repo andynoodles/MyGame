@@ -63,6 +63,7 @@ public:
     void SetSpeedMultiplier(float mul) { SpeedMultiplier = mul; }
     void SetMarker(unsigned long time) { marker = time; }
     unsigned long GetMarker() { return marker; }
+	
 private:
     glm::vec2 Speed;
     std::string Direction = "West";
