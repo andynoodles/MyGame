@@ -176,8 +176,9 @@ void Ghost::MoveToTile(std::pair<int, int> EndTile) {
         SetPosition({Target.x, GetPosition().y});
     }
     HistoryTile.push(CurrentTile);
-    if(HistoryTile.size() > 10) HistoryTile.pop();
+    if(HistoryTile.size() > 20) HistoryTile.pop();
     GhostMove();
+    CheckTp();
 }
 
 double distance(const std::pair<int, int>& vec1, const std::pair<int, int>& vec2) {
@@ -278,4 +279,9 @@ std::pair<int, int> Ghost::FindNextTile(std::pair<int, int> CurrentTile,
     //     LOG_DEBUG("{} {}", Roads[i].first, Roads[i].second);
     // }
     return findClosestVector(Roads, TargetTile);
+}
+
+void Ghost::CheckTp(){
+	if(fabs(GetPosition().x - TP_X1) < 5)	SetPosition({TP_X2 + 6, 16});
+	else if(fabs(GetPosition().x - TP_X2) < 5) SetPosition({TP_X1 - 6, 16});
 }
