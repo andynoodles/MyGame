@@ -64,6 +64,7 @@ public:
     void SetMarker(unsigned long time) { marker = time; }
     unsigned long GetMarker() { return marker; }
 	
+    void CheckTp();
 private:
     glm::vec2 Speed;
     std::string Direction = "West";

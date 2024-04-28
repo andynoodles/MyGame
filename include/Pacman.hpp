@@ -52,7 +52,7 @@ public:
 private:
     std::string MoveDirection = "East";
     glm::vec2 Speed;
-	int hp = 3;
+	int hp = 300;
 };
 
 #endif //ANIMATED_CHARACTER_HPP

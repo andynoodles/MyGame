@@ -7,7 +7,7 @@ void App::Update() {
     GhostMoveProcess();
     FoodCollision();
 	GhostCollision();
-    GhostStateProcess();
+    GhostStateProcess(); //must be execute after ghost collsion
 	BGMCtrl();
 
 
