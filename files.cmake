@@ -2,6 +2,7 @@ set(SRC_FILES
 	AppInit.cpp
     AppStart.cpp
     AppUpdate.cpp
+    AppDead.cpp
     AppEnd.cpp
   	BackgroundImage.cpp
     Pacman.cpp
