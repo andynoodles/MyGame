@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-unsigned long App::Init() {
+void App::Init() {
     bool showCharacter = true;
     LOG_TRACE("Start");
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
@@ -70,8 +70,8 @@ unsigned long App::Init() {
     m_Pacman->SetZIndex(19);
     m_Pacman->SetVisible(showCharacter);
     m_Pacman->SetLooping(true);
-    m_Pacman->SetPlaying(true);
-//    m_Pacman->SetPosition({upperLeftX + PIXELPERTILE, upperLeftY - PIXELPERTILE});
+    m_Pacman->SetPlaying(false);
+    // m_Pacman->SetPosition({upperLeftX + PIXELPERTILE, upperLeftY - PIXELPERTILE});
 	m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
     m_Pacman->FaceEast();
 
@@ -79,33 +79,41 @@ unsigned long App::Init() {
     m_Cyan->SetZIndex(18);
     m_Cyan->SetVisible(showCharacter);
     m_Cyan->SetLooping(true);
-    m_Cyan->SetPlaying(true);
-//    m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
+    m_Cyan->SetPlaying(false);
+    // m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
     m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1 ,NUMBEROFTILESY-2));
+    m_Cyan->SetState(Ghost::GhostState::SCATTER);
+    m_Cyan->SetVisible(false);
 
     m_Orange = std::make_shared<Ghost>(orangeImage);
     m_Orange->SetZIndex(17);
     m_Orange->SetVisible(showCharacter);
     m_Orange->SetLooping(true);
-    m_Orange->SetPlaying(true);
-//    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
+    m_Orange->SetPlaying(false);
+    // m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
     m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX-2 ,NUMBEROFTILESY-2));
+    m_Orange->SetState(Ghost::GhostState::SCATTER);
+    m_Orange->SetVisible(false);
 
     m_Pink = std::make_shared<Ghost>(pinkImage);
     m_Pink->SetZIndex(16);
     m_Pink->SetVisible(showCharacter);
     m_Pink->SetLooping(true);
-    m_Pink->SetPlaying(true);
-    //m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
+    m_Pink->SetPlaying(false);
+    // m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
     m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX-2 ,1));
+    m_Pink->SetState(Ghost::GhostState::SCATTER);
+    m_Pink->SetVisible(false);
 
     m_Red = std::make_shared<Ghost>(redImage);
     m_Red->SetZIndex(15);
     m_Red->SetVisible(showCharacter);
     m_Red->SetLooping(true);
-    m_Red->SetPlaying(true);
-    //m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(6, 5));
+    m_Red->SetPlaying(false);
+    // m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(6, 5));
     m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1 ,1));
+    m_Red->SetState(Ghost::GhostState::SCATTER);
+    m_Red->SetVisible(false);
 
     m_FlashText = std::make_shared<Score>(RESOURCE_DIR"/Font/emulogic.ttf",
     8,
@@ -152,5 +160,4 @@ unsigned long App::Init() {
     currentLevel.SetLevel(1);
 
     m_CurrentState = State::START;
-    return m_Time.GetElapsedTimeMs();
 }
