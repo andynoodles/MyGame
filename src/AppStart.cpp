@@ -2,16 +2,13 @@
 
 unsigned long App::Start(unsigned long InitTime) {
 	m_BGM.PlayStart();
-	m_BackgroundImage->Draw();
-	m_ReadyText->Draw();
+
 	if(m_Time.GetElapsedTimeMs()- InitTime > GAME_OPENING_TIME_DURATION/2.5){
 		m_Red->SetVisible(true);
 		m_Pink->SetVisible(true);
 		m_Orange->SetVisible(true);
 		m_Cyan->SetVisible(true);
 		m_Pacman->SetVisible(true);
-
-		
 	}
 	if(m_Time.GetElapsedTimeMs()- InitTime > GAME_OPENING_TIME_DURATION){
 		m_ReadyText->SetVisible(false);
@@ -24,6 +21,8 @@ unsigned long App::Start(unsigned long InitTime) {
 		m_CurrentState = State::UPDATE;
 	}
 
+	m_Root.Update();
+	
 	return m_Time.GetElapsedTimeMs();
 }
 

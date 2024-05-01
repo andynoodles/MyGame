@@ -67,7 +67,7 @@ unsigned long App::Init() {
     }
 
     m_Pacman = std::make_shared<Pacman>(pacmanImage);
-    m_Pacman->SetZIndex(19);
+    m_Pacman->SetZIndex(100);
     m_Pacman->SetVisible(showCharacter);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(false);
@@ -117,14 +117,14 @@ unsigned long App::Init() {
 
     m_FlashText = std::make_shared<Score>(RESOURCE_DIR"/Font/emulogic.ttf",
     8,
-    "FlashScore",
+    "0",
     Util::Color(0, 255, 250));
     m_FlashText->SetVisible(false);
     m_FlashText->SetZIndex(100);
 
     m_Score = std::make_shared<Score>(RESOURCE_DIR"/Font/emulogic.ttf",
     20,
-    "MainScore",
+    "0",
     Util::Color(255, 255, 255));
     m_Score->SetPosition({400, 228});
     m_Score->SetVisible(true);
