@@ -285,3 +285,9 @@ void Ghost::CheckTp(){
 	if(fabs(GetPosition().x - TP_X1) < 5)	SetPosition({TP_X2 + 6, 16});
 	else if(fabs(GetPosition().x - TP_X2) < 5) SetPosition({TP_X1 - 6, 16});
 }
+
+bool Ghost::isBeenChasing(){
+	GhostState st = GetState();
+	if(st == Ghost::GhostState::SCARED || st == Ghost::GhostState::FLASHING)  return true;
+	return false;
+}	

@@ -65,6 +65,7 @@ public:
 	bool IfPacmanCollidesWall();
 	void PacmanMoveProcess();
 	std::string InputManager();
+	void SetPacmanSpeedMul();
 	void ChangeDirectionIfPossible();
 	void Stop();
 

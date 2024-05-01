@@ -79,10 +79,23 @@ void App::PacmanMoveProcess(){
 		Stop();
 	}
 	else{
-		m_Pacman->Move(m_Pacman->GetDirection() ,currentLevel.GetPacmanSpeedMul());
+		SetPacmanSpeedMul();
+		m_Pacman->Move(m_Pacman->GetDirection());
 	}
 }
 
+void App::SetPacmanSpeedMul(){
+	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
+	for(int i=0 ; i<vec.size() ;i++){
+		if(vec[i]->isBeenChasing()){
+			m_Pacman->SetSpeedMul(currentLevel.GetPacmanFrightSpeedMul());
+			break;
+		}
+		else if(i == vec.size()-1){
+			m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
+		}
+	}
+}
 std::pair<int ,int> App::GetTileIntented(std::string newDirection){
 	std::pair<int ,int> tileintented;
 	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
