@@ -40,9 +40,9 @@ public:
 
     State GetCurrentState() const { return m_CurrentState; }
 
-	void Init();
+	unsigned long Init();
 
-    void Start();
+    void Start(unsigned long InitTime);
 
     void Update();
 

@@ -8,18 +8,21 @@ int main(int, char**) {
     while (!context->GetExit()) {
         switch (app.GetCurrentState()) {
 			case App::State::INIT:
-				app.Init();
+				timeMarker = app.Init();
 				break;
 
             case App::State::START:
-                app.Start();
+                app.Start(timeMarker);
                 break;
+
             case App::State::DEAD:
                 timeMarker = app.Dead();
                 break;
+
             case App::State::REVIVE:
                 app.Revive(timeMarker);
                 break;
+
             case App::State::UPDATE:
                 app.Update();
                 break;
