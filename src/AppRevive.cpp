@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-void App::Revive(unsigned long ReviveTime) { 
+unsigned long App::Revive(unsigned long ReviveTime) { 
 	m_BGM.PlayStart();
 	m_ReadyText->SetVisible(true);
 	if(m_Time.GetElapsedTimeMs() - ReviveTime > 3000){
@@ -26,4 +26,5 @@ void App::Revive(unsigned long ReviveTime) {
 	}
 
     m_Root.Update();
+    return m_Time.GetElapsedTimeMs();
 }

@@ -42,13 +42,13 @@ public:
 
 	unsigned long Init();
 
-    void Start(unsigned long InitTime);
+    unsigned long Start(unsigned long InitTime);
 
-    void Update();
+    unsigned long Update();
 
     unsigned long Dead();
 
-    void Revive(unsigned long ReviveTime);
+    unsigned long Revive(unsigned long ReviveTime);
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 

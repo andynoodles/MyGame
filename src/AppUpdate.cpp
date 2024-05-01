@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-void App::Update() {
+unsigned long App::Update() {
     TimeUpdate();
     ScoreUpdate();
     PacmanMoveProcess();
@@ -15,5 +15,7 @@ void App::Update() {
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
+
+    return m_Time.GetElapsedTimeMs();
 }
 

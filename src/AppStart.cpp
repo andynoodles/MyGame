@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-void App::Start(unsigned long InitTime) {
+unsigned long App::Start(unsigned long InitTime) {
 	m_BGM.PlayStart();
 	m_BackgroundImage->Draw();
 	m_ReadyText->Draw();
@@ -23,5 +23,7 @@ void App::Start(unsigned long InitTime) {
 		
 		m_CurrentState = State::UPDATE;
 	}
+
+	return m_Time.GetElapsedTimeMs();
 }
 

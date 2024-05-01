@@ -4,7 +4,7 @@
 int main(int, char**) {
     auto context = Core::Context::GetInstance();
     App app;
-    unsigned long timeMarker = 100000; 
+    unsigned long timeMarker = 0; 
     while (!context->GetExit()) {
         switch (app.GetCurrentState()) {
 			case App::State::INIT:
