@@ -4,11 +4,11 @@
 int main(int, char**) {
     auto context = Core::Context::GetInstance();
     App app;
-    unsigned long timeMarker = 0;
+    unsigned long timeMarker = 100000; 
     while (!context->GetExit()) {
         switch (app.GetCurrentState()) {
 			case App::State::INIT:
-				app.Init();
+				timeMarker = app.Init();
 				break;
 
             case App::State::START:

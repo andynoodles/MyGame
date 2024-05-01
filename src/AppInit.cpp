@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-void App::Init() {
+unsigned long App::Init() {
     bool showCharacter = true;
     LOG_TRACE("Start");
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
@@ -160,4 +160,6 @@ void App::Init() {
     currentLevel.SetLevel(1);
 
     m_CurrentState = State::START;
+
+    return m_Time.GetElapsedTimeMs();
 }

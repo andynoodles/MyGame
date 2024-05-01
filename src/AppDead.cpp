@@ -8,7 +8,7 @@ unsigned long App::Dead() { // NOLINT(this method will mutate members in the fut
         // Reset life, level, score
         
         // Restart Game
-        m_CurrentState = State::UPDATE;
+        m_CurrentState = State::START;
     }
     // Half Dead
     else{
