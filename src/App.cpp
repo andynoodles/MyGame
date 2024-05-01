@@ -51,8 +51,8 @@ void App::GhostCollision(){
 		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
 						g->GetState() == Ghost::GhostState::CHASE)){
 			LOG_DEBUG("PACMAN EATEN");
-			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
 			m_Pacman->HpMinusOne();	
+			m_CurrentState = State::DEAD;
 		}
 		else if (collided && (g->GetState() == Ghost::GhostState::FLASHING ||
 								g->GetState() == Ghost::GhostState::SCARED)){

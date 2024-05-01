@@ -12,7 +12,7 @@ void App::Update() {
 
 
     m_Root.Update();
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit() || m_Pacman->IsDead() || m_Score->IsFoodAllEaten() ) {
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
 }
