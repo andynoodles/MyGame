@@ -4,7 +4,7 @@
 int main(int, char**) {
     auto context = Core::Context::GetInstance();
     App app;
-
+    unsigned long timeMarker = 0;
     while (!context->GetExit()) {
         switch (app.GetCurrentState()) {
 			case App::State::INIT:
@@ -15,10 +15,10 @@ int main(int, char**) {
                 app.Start();
                 break;
             case App::State::DEAD:
-                app.Dead();
+                timeMarker = app.Dead();
                 break;
             case App::State::REVIVE:
-                app.Revive();
+                app.Revive(timeMarker);
                 break;
             case App::State::UPDATE:
                 app.Update();

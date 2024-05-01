@@ -46,9 +46,9 @@ public:
 
     void Update();
 
-    void Dead();
+    unsigned long Dead();
 
-    void Revive();
+    void Revive(unsigned long ReviveTime);
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
