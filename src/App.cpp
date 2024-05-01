@@ -79,7 +79,7 @@ void App::PacmanMoveProcess(){
 		Stop();
 	}
 	else{
-		m_Pacman->Move(m_Pacman->GetDirection() ,1);
+		m_Pacman->Move(m_Pacman->GetDirection() ,currentLevel.GetPacmanSpeedMul());
 	}
 }
 
