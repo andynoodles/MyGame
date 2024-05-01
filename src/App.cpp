@@ -87,7 +87,7 @@ void App::PacmanMoveProcess(){
 void App::SetPacmanSpeedMul(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(int i=0 ; i<vec.size() ;i++){
-		if(vec[i]->isBeenChasing()){
+		if(vec[i]->IsBeenChasing()){
 			m_Pacman->SetSpeedMul(currentLevel.GetPacmanFrightSpeedMul());
 			break;
 		}
@@ -317,6 +317,15 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	if(ghostTargetTile.second < 1) ghostTargetTile.second = 1;
 	else if(ghostTargetTile.second > NUMBEROFTILESY-2) ghostTargetTile.second = NUMBEROFTILESY-2;
 	return ghostTargetTile;
+}
+
+void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
+	if(g->IsBeenChasing()){
+		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
+	}
+	else{
+		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
+	}
 }
 
 void App::BGMCtrl(){
