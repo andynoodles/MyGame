@@ -17,6 +17,9 @@ int main(int, char**) {
             case App::State::DEAD:
                 app.Dead();
                 break;
+            case App::State::REVIVE:
+                app.Revive();
+                break;
             case App::State::UPDATE:
                 app.Update();
                 break;

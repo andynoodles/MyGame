@@ -34,6 +34,7 @@ public:
         START,
         UPDATE,
         DEAD,
+        REVIVE,
         END,
     };
 
@@ -46,6 +47,8 @@ public:
     void Update();
 
     void Dead();
+
+    void Revive();
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
