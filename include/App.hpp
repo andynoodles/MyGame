@@ -80,7 +80,7 @@ private:
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;
-	std::shared_ptr<ShowText> m_ReadyText;
+	std::shared_ptr<ShowText> m_ReadyText, m_GameOverText;
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     

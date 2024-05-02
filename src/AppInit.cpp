@@ -146,6 +146,13 @@ unsigned long App::Init() {
     Util::Color(255, 255, 0)); //yellow
     m_ReadyText->SetPosition({READY_TEXT_X, READY_TEXT_Y});
     m_ReadyText->SetVisible(true);
+
+    m_GameOverText = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
+        16,
+        "GAME OVER",
+        Util::Color(255, 0, 0)); //red
+    m_GameOverText->SetPosition({ READY_TEXT_X, READY_TEXT_Y });
+    m_GameOverText->SetVisible(false);
     
 	m_Empty1=std::make_shared<Empty>(RESOURCE_DIR"/image/empty.bmp");
 	m_Empty1->SetVisible(true);
@@ -157,6 +164,7 @@ unsigned long App::Init() {
 
     m_Root.AddChild(m_Score);
     m_Root.AddChild(m_ReadyText);
+    m_Root.AddChild(m_GameOverText);
     m_Root.AddChild(m_FlashText);
     m_Root.AddChild(m_Cyan);
     m_Root.AddChild(m_Orange);
