@@ -50,9 +50,8 @@ void App::GhostCollision(){
 		bool collided = IfCollides(g);
 		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
 						g->GetState() == Ghost::GhostState::CHASE)){
-			LOG_DEBUG("PACMAN EATEN");
-			m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
-			m_Pacman->HpMinusOne();	
+			PacmanDead();
+			break;
 		}
 		else if (collided && (g->GetState() == Ghost::GhostState::FLASHING ||
 								g->GetState() == Ghost::GhostState::SCARED)){
@@ -343,4 +342,28 @@ void App::BGMCtrl(){
 		}
 	}
 	m_BGM.PlayNormal();
+}
+
+void App::PacmanDead() {
+	LOG_DEBUG("PACMAN EATEN");
+	m_Pacman->HpMinusOne();
+	// Undisplay some objs
+	m_Pacman->SetVisible(false);
+	m_Cyan->SetVisible(false);
+	m_Red->SetVisible(false);
+	m_Orange->SetVisible(false);
+	m_Pink->SetVisible(false);
+	for (auto& Food : m_SmallFood) {
+		Food->SetVisible(false);
+	}
+	for (auto& Food : m_LargeFood) {
+		Food->SetVisible(false);
+	}
+	// Start dead animation
+	m_PacmanDead->SetPosition(m_Pacman->GetPosition());
+	m_PacmanDead->SetVisible(true);
+	m_PacmanDead->SetLooping(true);
+	m_PacmanDead->SetPlaying(true);
+	m_PacmanDead->SetFrame(0);
+	m_CurrentState = State::DEAD;
 }
