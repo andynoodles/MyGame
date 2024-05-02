@@ -29,6 +29,10 @@ public:
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         if(play) temp->Play();
     }
+    void SetFrame(unsigned int i) {
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        temp->SetCurrentFrame(i);
+    }
 	void SetPosition(const glm::vec2& Position);
     void SetDirection(std::string Direction);
 	void HpMinusOne(){hp--;}
@@ -52,7 +56,7 @@ public:
 private:
     std::string MoveDirection = "East";
     glm::vec2 Speed;
-	int hp = 300;
+	int hp = 2;
 };
 
 #endif //ANIMATED_CHARACTER_HPP
