@@ -16,7 +16,7 @@ int main(int, char**) {
                 break;
 
             case App::State::DEAD:
-                timeMarker = app.Dead();
+                app.Dead(timeMarker);
                 break;
 
             case App::State::REVIVE:
@@ -24,7 +24,7 @@ int main(int, char**) {
                 break;
 
             case App::State::UPDATE:
-                app.Update();
+                timeMarker = app.Update();
                 break;
 
             case App::State::END:

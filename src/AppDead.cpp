@@ -1,33 +1,19 @@
 #include "App.hpp"
 
-unsigned long App::Dead() { // NOLINT(this method will mutate members in the future)
-    // Full Dead
-    if(m_Pacman->IsDead()){
-        // Play end animation
-
-        // Reset life, level, score
-        
-        // Restart Game
-        m_CurrentState = State::START;
+unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mutate members in the future)
+    if (m_PacmanDead->IfAnimationEnds()) {
+        m_PacmanDead->SetLooping(false);
     }
-    // Half Dead
-    else{
-        // Set Display false on some obj
-        m_Cyan->SetVisible(false);
-        m_Red->SetVisible(false);
-        m_Orange->SetVisible(false);
-        m_Pink->SetVisible(false);
-        for (auto& Food : m_SmallFood) {
-			Food->SetVisible(false); 
-		}
-        for (auto& Food : m_LargeFood) {
-            Food->SetVisible(false); 
-        }
-        // Play Pacman dead animation
-
-
-        // Go back AppUpdate
-        m_CurrentState = State::REVIVE;    
+    
+    if (m_Time.GetElapsedTimeMs() - InitTime > 2500){
+        // Exit Dead state
+        if(m_Pacman->IsDead())
+            m_CurrentState = State::START;
+        else
+            m_CurrentState = State::REVIVE;
     }
+    
+    m_Root.Update();
+
     return m_Time.GetElapsedTimeMs();
 }

@@ -41,13 +41,9 @@ public:
     State GetCurrentState() const { return m_CurrentState; }
 
 	unsigned long Init();
-
     unsigned long Start(unsigned long InitTime);
-
     unsigned long Update();
-
-    unsigned long Dead();
-
+    unsigned long Dead(unsigned long InitTime);
     unsigned long Revive(unsigned long ReviveTime);
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
@@ -73,6 +69,7 @@ public:
 	std::string InputManager();
 	void ChangeDirectionIfPossible();
 	void Stop();
+    void PacmanDead();
 
 
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
@@ -88,7 +85,7 @@ private:
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
-    std::shared_ptr<Pacman> m_Pacman;
+    std::shared_ptr<Pacman> m_Pacman, m_PacmanDead;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
 	std::shared_ptr<Empty> m_Empty1 ,m_Empty2; //16x16 black img.
     SFX m_SFX;

@@ -38,6 +38,12 @@ public:
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         if(play) temp->Play();
     }
+
+    void SetFrame(unsigned int i) {
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        temp->SetCurrentFrame(i);
+    }
+
     [[nodiscard]] bool IfAnimationEnds() const;
     
     void SetPosition(const glm::vec2& Position);

@@ -5,7 +5,7 @@ unsigned long App::Init() {
     LOG_TRACE("Start");
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 
-    std::vector<std::string> pacmanImage, cyanImage, orangeImage, pinkImage, redImage;
+    std::vector<std::string> pacmanImage, pacmanDead, cyanImage, orangeImage, pinkImage, redImage;
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
     cyanImage.reserve(GHOST_ASSETS_RESERVE);
     orangeImage.reserve(GHOST_ASSETS_RESERVE);
@@ -13,6 +13,10 @@ unsigned long App::Init() {
     redImage.reserve(GHOST_ASSETS_RESERVE);
     for (int i = 0; i < PACMAN_ASSETS_NUM; ++i) {
         pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
+    }
+
+    for (int i = 0; i < 15; ++i) {
+        pacmanDead.emplace_back(RESOURCE_DIR"/image/PacmanDead/Sprite (" + std::to_string(i + 3) + ").png");
     }
 
     for (int i = 0; i < GHOST_ASSETS_NUM; i++) {
@@ -67,13 +71,20 @@ unsigned long App::Init() {
     }
 
     m_Pacman = std::make_shared<Pacman>(pacmanImage);
-    m_Pacman->SetZIndex(100);
+    m_Pacman->SetZIndex(50);
     m_Pacman->SetVisible(showCharacter);
     m_Pacman->SetLooping(true);
     m_Pacman->SetPlaying(false);
     // m_Pacman->SetPosition({upperLeftX + PIXELPERTILE, upperLeftY - PIXELPERTILE});
 	m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
     m_Pacman->FaceEast();
+
+    m_PacmanDead = std::make_shared<Pacman>(pacmanDead);
+    m_PacmanDead->SetZIndex(50);
+    m_PacmanDead->SetVisible(false);
+    m_PacmanDead->SetLooping(false);
+    m_PacmanDead->SetPlaying(false);
+    m_PacmanDead->FaceEast();
 
     m_Cyan = std::make_shared<Ghost>(cyanImage);
     m_Cyan->SetZIndex(18);
@@ -155,7 +166,7 @@ unsigned long App::Init() {
 	m_Root.AddChild(m_BackgroundImage);
 	m_Root.AddChild(m_Empty1);
 	m_Root.AddChild(m_Empty2);
-
+    m_Root.AddChild(m_PacmanDead);
 
     currentLevel.SetLevel(1);
 
