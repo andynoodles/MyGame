@@ -5,7 +5,7 @@ unsigned long App::Revive(unsigned long ReviveTime) {
     m_PacmanDead->SetVisible(false);
 
     // Ready Time + Dead animation time
-	if(m_Time.GetElapsedTimeMs() - ReviveTime > 3000 + 2500){
+	if(MyElapsedTime() - ReviveTime > 3000 + 2500){
         // Stop Display state on some obj
         m_ReadyText->SetVisible(false);
 
@@ -50,5 +50,5 @@ unsigned long App::Revive(unsigned long ReviveTime) {
 	}
 
     m_Renderer.Update();
-    return m_Time.GetElapsedTimeMs();
+    return MyElapsedTime();
 }

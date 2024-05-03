@@ -25,7 +25,7 @@ unsigned long App::Start(unsigned long InitTime) {
     m_Pacman->SetLooping(false);
 
 
-	if(m_Time.GetElapsedTimeMs() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
+	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
         m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
 		m_Red->SetVisible(true);
 
@@ -41,7 +41,7 @@ unsigned long App::Start(unsigned long InitTime) {
         m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
         m_Pacman->SetVisible(true);
 	}
-	if(m_Time.GetElapsedTimeMs() - InitTime > GAME_OPENING_TIME_DURATION){
+	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION){
         m_ReadyText->SetVisible(false);
         
         m_Red->SetPlaying(true);        
@@ -72,6 +72,6 @@ unsigned long App::Start(unsigned long InitTime) {
 
 	m_Renderer.Update();
 	
-	return m_Time.GetElapsedTimeMs();
+	return MyElapsedTime();
 }
 

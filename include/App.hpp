@@ -49,7 +49,7 @@ public:
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
     //Misc 
-    void TimeUpdate();
+    unsigned long MyElapsedTime();
     void ScoreUpdate();
     void FoodCollision(); 	
 	void GhostCollision();//Pacman collided with ghost.

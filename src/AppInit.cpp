@@ -180,5 +180,5 @@ unsigned long App::Init() {
 
     m_CurrentState = State::START;
 
-    return m_Time.GetElapsedTimeMs();
+    return MyElapsedTime();
 }
