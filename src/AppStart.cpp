@@ -65,7 +65,7 @@ unsigned long App::Start(unsigned long InitTime) {
 		m_CurrentState = State::UPDATE;
 	}
 
-	m_Root.Update();
+	m_Renderer.Update();
 	
 	return m_Time.GetElapsedTimeMs();
 }

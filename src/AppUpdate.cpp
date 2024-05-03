@@ -11,7 +11,7 @@ unsigned long App::Update() {
 	BGMCtrl();
 
 
-    m_Root.Update();
+    m_Renderer.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }

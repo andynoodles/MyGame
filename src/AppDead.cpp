@@ -22,7 +22,7 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
             m_CurrentState = State::REVIVE;
     }
     
-    m_Root.Update();
+    m_Renderer.Update();
 
     return m_Time.GetElapsedTimeMs();
 }

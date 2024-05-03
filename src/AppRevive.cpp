@@ -49,6 +49,6 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         m_CurrentState = State::UPDATE;
 	}
 
-    m_Root.Update();
+    m_Renderer.Update();
     return m_Time.GetElapsedTimeMs();
 }

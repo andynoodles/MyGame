@@ -7,7 +7,7 @@
 #include "pch.hpp" // IWYU pragma: export
 #include "SDL.h"
 
-#include "Util/Root.hpp"
+#include "Util/Renderer.hpp"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -77,7 +77,7 @@ public:
 
 private:
     State m_CurrentState = State::INIT;
-	Util::Root m_Root;
+	Util::Renderer m_Renderer;
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;

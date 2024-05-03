@@ -46,13 +46,13 @@ unsigned long App::Init() {
         m_LargeFood[i] = std::make_shared<Food>(RESOURCE_DIR"/image/Food/LargeFood.png"); 
         m_LargeFood[i]->SetZIndex(10);
         m_LargeFood[i]->SetVisible(true);
-        m_Root.AddChild(m_LargeFood[i]);
+        m_Renderer.AddChild(m_LargeFood[i]);
     }
     for (int i = 0; i < SMALL_FOOD_NUM; i++) {
         m_SmallFood[i] = std::make_shared<Food>(RESOURCE_DIR"/image/Food/SmallFood.png"); 
         m_SmallFood[i]->SetZIndex(10);
         m_SmallFood[i]->SetVisible(true);
-        m_Root.AddChild(m_SmallFood[i]);
+        m_Renderer.AddChild(m_SmallFood[i]);
     }
 
 	float upperLeftX = m_BackgroundImage->GetUpperLeftX() ,upperLeftY = m_BackgroundImage->GetUpperLeftY();
@@ -162,19 +162,19 @@ unsigned long App::Init() {
 	m_Empty2->SetVisible(true);
 	m_Empty2-> SetPosition({TP_X2 , m_BackgroundImage->GetUpperLeftY() - (PIXELPERTILE*TP_TILE_Y)});
 
-    m_Root.AddChild(m_Score);
-    m_Root.AddChild(m_ReadyText);
-    m_Root.AddChild(m_GameOverText);
-    m_Root.AddChild(m_FlashText);
-    m_Root.AddChild(m_Cyan);
-    m_Root.AddChild(m_Orange);
-    m_Root.AddChild(m_Pink);
-    m_Root.AddChild(m_Red);
-    m_Root.AddChild(m_Pacman);  
-	m_Root.AddChild(m_BackgroundImage);
-	m_Root.AddChild(m_Empty1);
-	m_Root.AddChild(m_Empty2);
-    m_Root.AddChild(m_PacmanDead);
+    m_Renderer.AddChild(m_Score);
+    m_Renderer.AddChild(m_ReadyText);
+    m_Renderer.AddChild(m_GameOverText);
+    m_Renderer.AddChild(m_FlashText);
+    m_Renderer.AddChild(m_Cyan);
+    m_Renderer.AddChild(m_Orange);
+    m_Renderer.AddChild(m_Pink);
+    m_Renderer.AddChild(m_Red);
+    m_Renderer.AddChild(m_Pacman);  
+	m_Renderer.AddChild(m_BackgroundImage);
+	m_Renderer.AddChild(m_Empty1);
+	m_Renderer.AddChild(m_Empty2);
+    m_Renderer.AddChild(m_PacmanDead);
 
     currentLevel.SetLevel(1);
 
