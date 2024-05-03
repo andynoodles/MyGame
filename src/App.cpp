@@ -82,12 +82,12 @@ void App::PacmanMoveProcess(){
 
 void App::SetPacmanSpeedMul(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
-	for(int i=0 ; i < vec.size() ;i++){
-		if(vec[i]->IsBeenChasing()){
+	for(auto& ghost : vec){
+		if(ghost->IsBeenChasing()){
 			m_Pacman->SetSpeedMul(currentLevel.GetPacmanFrightSpeedMul());
 			break;
 		}
-		else if(i == vec.size()-1){
+		else if(ghost == m_Orange){
 			m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
 		}
 	}
