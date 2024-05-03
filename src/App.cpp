@@ -346,6 +346,7 @@ void App::BGMCtrl(){
 
 void App::PacmanDead() {
 	m_SFX.PlayPacmanDeath();
+	LOG_DEBUG("start time:{}", m_Time.GetElapsedTimeMs());
 	LOG_DEBUG("PACMAN EATEN");
 	m_Pacman->HpMinusOne();
 	// Undisplay some objs
