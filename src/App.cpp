@@ -1,7 +1,4 @@
 #include "App.hpp"
-#include "Ghost.hpp"
-#include "Util/Logger.hpp"
-#include <string>
 
 void App::TimeUpdate(){
 	m_Time.Update();
