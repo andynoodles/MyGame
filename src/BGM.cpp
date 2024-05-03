@@ -43,4 +43,14 @@ void BGM::PlayPower(){
 		lastBGM = curBGM;
 	}
 
-} 
+}
+
+void BGM::PlayDeath(){
+	curBGM = BGMState::DEATH;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/death.wav");
+		bgm->Play();
+		lastBGM = curBGM;
+	}
+
+}
