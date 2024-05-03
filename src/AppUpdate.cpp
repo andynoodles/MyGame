@@ -1,7 +1,6 @@
 #include "App.hpp"
 
 unsigned long App::Update() {
-    TimeUpdate();
     ScoreUpdate();
     PacmanMoveProcess();
     GhostMoveProcess();
