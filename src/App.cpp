@@ -1,7 +1,4 @@
 #include "App.hpp"
-#include "Ghost.hpp"
-#include "Util/Logger.hpp"
-#include <string>
 
 void App::TimeUpdate(){
 	m_Time.Update();
@@ -78,10 +75,23 @@ void App::PacmanMoveProcess(){
 		Stop();
 	}
 	else{
-		m_Pacman->Move(m_Pacman->GetDirection() ,currentLevel.GetPacmanSpeedMul());
+		SetPacmanSpeedMul();
+		m_Pacman->Move(m_Pacman->GetDirection());
 	}
 }
 
+void App::SetPacmanSpeedMul(){
+	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
+	for(int i=0 ; i < vec.size() ;i++){
+		if(vec[i]->IsBeenChasing()){
+			m_Pacman->SetSpeedMul(currentLevel.GetPacmanFrightSpeedMul());
+			break;
+		}
+		else if(i == vec.size()-1){
+			m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
+		}
+	}
+}
 std::pair<int ,int> App::GetTileIntented(std::string newDirection){
 	std::pair<int ,int> tileintented;
 	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
@@ -305,6 +315,15 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 	return ghostTargetTile;
 }
 
+void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
+	if(g->IsBeenChasing()){
+		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
+	}
+	else{
+		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
+	}
+}
+
 void App::BGMCtrl(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Cyan ,m_Pink ,m_Orange};
 	for(auto g : vec){
@@ -323,6 +342,8 @@ void App::BGMCtrl(){
 }
 
 void App::PacmanDead() {
+	m_SFX.PlayPacmanDeath();
+	LOG_DEBUG("start time:{}", m_Time.GetElapsedTimeMs());
 	LOG_DEBUG("PACMAN EATEN");
 	m_Pacman->HpMinusOne();
 	// Undisplay some objs

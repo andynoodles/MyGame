@@ -9,7 +9,6 @@ bool Ghost::IfAnimationEnds() const {
     auto animation = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         return animation->GetCurrentFrameIndex() == animation->GetFrameCount() -1;
 }
-
 void Ghost::SetPosition(const glm::vec2& Position){ 
     m_Transform.translation = Position; 
 }
@@ -285,3 +284,9 @@ void Ghost::CheckTp(){
 	if(fabs(GetPosition().x - TP_X1) < 5)	SetPosition({TP_X2 + 6, 16});
 	else if(fabs(GetPosition().x - TP_X2) < 5) SetPosition({TP_X1 - 6, 16});
 }
+
+bool Ghost::IsBeenChasing(){
+	GhostState st = GetState();
+	if(st == Ghost::GhostState::SCARED || st == Ghost::GhostState::FLASHING)  return true;
+	return false;
+}	

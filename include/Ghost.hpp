@@ -64,9 +64,10 @@ public:
 
     void SetState(GhostState state) { State = state; }
     GhostState GetState() { return State; }
+	bool IsBeenChasing();
 
     void SetDirection(std::string direction) { Direction = direction; }
-    void SetSpeedMultiplier(float mul) { SpeedMultiplier = mul; }
+    void SetSpeedMul(float mul) { SpeedMultiplier = mul; }
     void SetMarker(unsigned long time) { marker = time; }
     unsigned long GetMarker() { return marker; }
 	

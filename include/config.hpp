@@ -7,7 +7,7 @@
 #define TP_TILE_Y 14
 
 //Pacman Settings
-#define PACMAN_SPEED 2
+#define PACMAN_SPEED 5
 #define PACMAN_STARTTILE_X 13
 #define PACMAN_STARTTILE_Y 23
 

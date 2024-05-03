@@ -11,6 +11,7 @@ public:
 		NORMAL, //Ghost is chasing Pacman.
 		RETREAT, //Ghost is going home.
 		POWER, //Pacman is chasing ghost.
+		DEATH, //Pacman is dieing.
 		OTHER
 	};
 
@@ -20,6 +21,7 @@ public:
 	void PlayNormal();
 	void PlayRetreat();
 	void PlayPower();
+	void PlayDeath();
 
 	BGMState GetCurBGM(){return curBGM;} 
 private:

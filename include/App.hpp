@@ -53,13 +53,13 @@ public:
     void ScoreUpdate();
     void FoodCollision(); 	
 	void GhostCollision();//Pacman collided with ghost.
-//	bool IsFoodAllEaten();
 	void BGMCtrl(); //BGM control.
 
     //Ghost
     void GhostStateProcess();
     void GhostMoveProcess();
 	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
+	void SetGhostSpeedMul(std::shared_ptr<Ghost> g);
 
     //Pacman Related
     bool IfCollides(const std::shared_ptr<Food>& other);
@@ -67,6 +67,7 @@ public:
 	bool IfPacmanCollidesWall();
 	void PacmanMoveProcess();
 	std::string InputManager();
+	void SetPacmanSpeedMul();
 	void ChangeDirectionIfPossible();
 	void Stop();
     void PacmanDead();

@@ -1,7 +1,6 @@
 #include "App.hpp"
 
 unsigned long App::Revive(unsigned long ReviveTime) { 
-	m_BGM.PlayStart();
 	m_ReadyText->SetVisible(true);
     m_PacmanDead->SetVisible(false);
 
@@ -15,6 +14,13 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         m_Red->SetVisible(true);
         m_Orange->SetVisible(true);
         m_Pink->SetVisible(true);
+
+        // Start Playing on Ghosts
+        m_Cyan->SetLooping(true);
+        m_Red->SetLooping(true);
+        m_Orange->SetLooping(true);
+        m_Pink->SetLooping(true);
+
         for (auto& Food : m_SmallFood) {
             Food->SetVisible(true); 
         }
@@ -37,6 +43,8 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
         m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
         m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
+
+
 
         m_CurrentState = State::UPDATE;
 	}
