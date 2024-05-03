@@ -223,6 +223,10 @@ void App::GhostStateProcess() {
 }
 
 void App::GhostMoveProcess() {
+	SetGhostSpeedMul(m_Red);
+	SetGhostSpeedMul(m_Pink);
+	SetGhostSpeedMul(m_Cyan);
+	SetGhostSpeedMul(m_Orange);
 	m_Red->MoveToTile(GetGhostTargetTile(m_Red));
 	m_Orange->MoveToTile(GetGhostTargetTile(m_Orange));
 	m_Cyan->MoveToTile(GetGhostTargetTile(m_Cyan));
