@@ -1,9 +1,5 @@
 #include "App.hpp"
 
-void App::TimeUpdate(){
-	m_Time.Update();
-}
-
 bool App::IfCollides(const std::shared_ptr<Food>& other){
 	glm::vec2 OtherPosition = other->GetPosition();
 	glm::vec2 ThisPosition = m_Pacman->GetPosition();
@@ -343,7 +339,6 @@ void App::BGMCtrl(){
 
 void App::PacmanDead() {
 	m_SFX.PlayPacmanDeath();
-	LOG_DEBUG("start time:{}", m_Time.GetElapsedTimeMs());
 	LOG_DEBUG("PACMAN EATEN");
 	m_Pacman->HpMinusOne();
 	// Undisplay some objs

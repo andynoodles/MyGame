@@ -49,6 +49,11 @@ unsigned long App::Start(unsigned long InitTime) {
         m_Orange->SetPlaying(true);    
 		m_Cyan->SetPlaying(true);
 
+        m_Red->SetLooping(true);        
+        m_Pink->SetLooping(true);	   
+        m_Orange->SetLooping(true);    
+		m_Cyan->SetLooping(true);
+
         m_Pacman->SetPlaying(true);
         m_Pacman->SetLooping(true);
         for (auto& Food : m_SmallFood) {
@@ -65,7 +70,7 @@ unsigned long App::Start(unsigned long InitTime) {
 		m_CurrentState = State::UPDATE;
 	}
 
-	m_Root.Update();
+	m_Renderer.Update();
 	
 	return m_Time.GetElapsedTimeMs();
 }

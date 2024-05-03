@@ -4,7 +4,6 @@
 unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mutate members in the future)
 //	m_BGM.PlayDeath();
     if (m_PacmanDead->IfAnimationEnds()) {
-        LOG_DEBUG("end time:{}", m_Time.GetElapsedTimeMs());
         m_PacmanDead->SetLooping(false);
     }
     
@@ -22,7 +21,7 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
             m_CurrentState = State::REVIVE;
     }
     
-    m_Root.Update();
+    m_Renderer.Update();
 
     return m_Time.GetElapsedTimeMs();
 }
