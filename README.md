@@ -8,6 +8,11 @@ git clone https://github.com/andynoodles/MyGame --recursive
 ```
 
 ## Build Game
+Using Linux/MacOS
 ```
 cmake -DCMAKE_BUILD_TYPE=Debug -B build && cmake --build build  && ./build/pacman
+```
+Using Windows
+```
+cmake -DCMAKE_BUILD_TYPE=Debug -B build ^ cmake --build build  ^ ./build/pacman
 ```
