@@ -356,10 +356,10 @@ void App::PacmanDead() {
 	m_Orange->SetVisible(false);
 	m_Pink->SetVisible(false);
 	for (auto& Food : m_SmallFood) {
-		Food->SetVisible(false);
+		Food->SetZIndex(-2);
 	}
 	for (auto& Food : m_LargeFood) {
-		Food->SetVisible(false);
+		Food->SetZIndex(-2);
 	}
 	// Start dead animation
 	m_PacmanDead->SetPosition(m_Pacman->GetPosition());
@@ -368,4 +368,5 @@ void App::PacmanDead() {
 	m_PacmanDead->SetPlaying(true);
 	m_PacmanDead->SetFrame(0);
 	m_CurrentState = State::DEAD;
+	m_Renderer.Update();
 }

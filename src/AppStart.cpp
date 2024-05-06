@@ -58,9 +58,11 @@ unsigned long App::Start(unsigned long InitTime) {
         m_Pacman->SetLooping(true);
         for (auto& Food : m_SmallFood) {
             Food->SetVisible(true);
+            Food->SetZIndex(10);
         }
         for (auto& Food : m_LargeFood) {
             Food->SetVisible(true);
+            Food->SetZIndex(10);
         }
 
         // Reset scores

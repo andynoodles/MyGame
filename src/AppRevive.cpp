@@ -22,10 +22,10 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         m_Pink->SetLooping(true);
 
         for (auto& Food : m_SmallFood) {
-            Food->SetVisible(true); 
+            Food->SetZIndex(10);
         }
         for (auto& Food : m_LargeFood) {
-            Food->SetVisible(true); 
+            Food->SetZIndex(10);
         }
 
         // Reset FoodScore to 0
