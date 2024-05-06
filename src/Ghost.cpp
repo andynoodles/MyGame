@@ -175,7 +175,7 @@ void Ghost::MoveToTile(std::pair<int, int> EndTile) {
         SetPosition({Target.x, GetPosition().y});
     }
     HistoryTile.push(CurrentTile);
-    if(HistoryTile.size() > 10) HistoryTile.pop();
+    if(HistoryTile.size() > 20) HistoryTile.pop();
     GhostMove();
     CheckTp();
 }
@@ -285,7 +285,7 @@ void Ghost::CheckTp(){
 	else if(fabs(GetPosition().x - TP_X2) < 5) SetPosition({TP_X1 - 6, 16});
 }
 
-bool Ghost::IsBeenChasing(){
+bool Ghost::IsBeingChase(){
 	GhostState st = GetState();
 	if(st == Ghost::GhostState::SCARED || st == Ghost::GhostState::FLASHING)  return true;
 	return false;

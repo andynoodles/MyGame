@@ -83,15 +83,14 @@ void App::PacmanMoveProcess(){
 void App::SetPacmanSpeedMul(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto& ghost : vec){
-		if(ghost->IsBeenChasing()){
+		if(ghost->IsBeingChase()){
 			m_Pacman->SetSpeedMul(currentLevel.GetPacmanFrightSpeedMul());
-			break;
-		}
-		else if(ghost == m_Orange){
-			m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
+			return;
 		}
 	}
+	m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
 }
+
 std::pair<int ,int> App::GetTileIntented(std::string newDirection){
 	std::pair<int ,int> tileintented;
 	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
@@ -320,7 +319,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 }
 
 void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
-	if(g->IsBeenChasing()){
+	if(g->IsBeingChase()){
 		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
 	}
 	else{

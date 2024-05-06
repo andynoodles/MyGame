@@ -64,7 +64,7 @@ public:
 
     void SetState(GhostState state) { State = state; }
     GhostState GetState() { return State; }
-	bool IsBeenChasing();
+	bool IsBeingChase();
 
     void SetDirection(std::string direction) { Direction = direction; }
     void SetSpeedMul(float mul) { SpeedMultiplier = mul; }
