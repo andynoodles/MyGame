@@ -1,5 +1,4 @@
 #include "App.hpp"
-#include "Util/Logger.hpp"
 
 unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mutate members in the future)
 //	m_BGM.PlayDeath();
@@ -11,7 +10,7 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
         m_GameOverText->SetVisible(true);
     }
 
-    if (m_Time.GetElapsedTimeMs() - InitTime > 2500){
+    if (MyElapsedTime() - InitTime > 2500){
         // Exit Dead state
         if (m_Pacman->IsDead()) {
             m_GameOverText->SetVisible(false);
@@ -22,6 +21,9 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
     }
     
     m_Renderer.Update();
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
 
-    return m_Time.GetElapsedTimeMs();
+    return MyElapsedTime();
 }

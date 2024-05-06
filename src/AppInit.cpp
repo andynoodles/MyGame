@@ -77,14 +77,12 @@ unsigned long App::Init() {
     m_Pacman->SetPlaying(false);
     // m_Pacman->SetPosition({upperLeftX + PIXELPERTILE, upperLeftY - PIXELPERTILE});
 	m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
-    m_Pacman->FaceEast();
 
     m_PacmanDead = std::make_shared<Pacman>(pacmanDead);
     m_PacmanDead->SetZIndex(50);
     m_PacmanDead->SetVisible(false);
     m_PacmanDead->SetLooping(false);
     m_PacmanDead->SetPlaying(false);
-    m_PacmanDead->FaceEast();
 
     m_Cyan = std::make_shared<Ghost>(cyanImage);
     m_Cyan->SetZIndex(18);
@@ -180,5 +178,5 @@ unsigned long App::Init() {
 
     m_CurrentState = State::START;
 
-    return m_Time.GetElapsedTimeMs();
+    return MyElapsedTime();
 }

@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include "Level.hpp"
 
 unsigned long App::Start(unsigned long InitTime) {
     // init setting
@@ -25,7 +26,7 @@ unsigned long App::Start(unsigned long InitTime) {
     m_Pacman->SetLooping(false);
 
 
-	if(m_Time.GetElapsedTimeMs() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
+	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
         m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
 		m_Red->SetVisible(true);
 
@@ -41,7 +42,7 @@ unsigned long App::Start(unsigned long InitTime) {
         m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
         m_Pacman->SetVisible(true);
 	}
-	if(m_Time.GetElapsedTimeMs() - InitTime > GAME_OPENING_TIME_DURATION){
+	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION){
         m_ReadyText->SetVisible(false);
         
         m_Red->SetPlaying(true);        
@@ -58,20 +59,27 @@ unsigned long App::Start(unsigned long InitTime) {
         m_Pacman->SetLooping(true);
         for (auto& Food : m_SmallFood) {
             Food->SetVisible(true);
+            Food->SetZIndex(10);
         }
         for (auto& Food : m_LargeFood) {
             Food->SetVisible(true);
+            Food->SetZIndex(10);
         }
 
-        // Reset scores
+        // Reset Values
         m_Score->SetFoodScore(0);
         m_Score->SetVisibleScore(0);
+        m_Pacman->SetHp(3);
+        currentLevel.SetLevel(1);
         
 		m_CurrentState = State::UPDATE;
 	}
 
 	m_Renderer.Update();
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
 	
-	return m_Time.GetElapsedTimeMs();
+	return MyElapsedTime();
 }
 

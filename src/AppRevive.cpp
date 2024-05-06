@@ -5,7 +5,7 @@ unsigned long App::Revive(unsigned long ReviveTime) {
     m_PacmanDead->SetVisible(false);
 
     // Ready Time + Dead animation time
-	if(m_Time.GetElapsedTimeMs() - ReviveTime > 3000 + 2500){
+	if(MyElapsedTime() - ReviveTime > 3000 + 2500){
         // Stop Display state on some obj
         m_ReadyText->SetVisible(false);
 
@@ -22,10 +22,10 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         m_Pink->SetLooping(true);
 
         for (auto& Food : m_SmallFood) {
-            Food->SetVisible(true); 
+            Food->SetZIndex(10);
         }
         for (auto& Food : m_LargeFood) {
-            Food->SetVisible(true); 
+            Food->SetZIndex(10);
         }
 
         // Reset FoodScore to 0
@@ -50,5 +50,9 @@ unsigned long App::Revive(unsigned long ReviveTime) {
 	}
 
     m_Renderer.Update();
-    return m_Time.GetElapsedTimeMs();
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
+
+    return MyElapsedTime();
 }

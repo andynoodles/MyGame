@@ -1,5 +1,9 @@
 #include "App.hpp"
 
+unsigned long App::MyElapsedTime(){
+	return m_Time.GetElapsedTimeMs() + 100000;
+}
+
 bool App::IfCollides(const std::shared_ptr<Food>& other){
 	glm::vec2 OtherPosition = other->GetPosition();
 	glm::vec2 ThisPosition = m_Pacman->GetPosition();
@@ -28,7 +32,7 @@ void App::FoodCollision(){
 	for (int i = 0; i < LARGE_FOOD_NUM; i++) {
 		if(IfCollides(m_LargeFood[i]) && m_LargeFood[i]->GetVisibility()){
 			m_LargeFood[i]->SetVisible(false); 
-			FoodEffectMarker = m_Time.GetElapsedTimeMs();
+			FoodEffectMarker = MyElapsedTime();
 			m_Score->AddVisibleScore(FOOD_SCORE);
 			m_Score->AddFoodScore(FOOD_SCORE);
 			m_SFX.PlayMunch();
@@ -54,13 +58,13 @@ void App::GhostCollision(){
 			m_FlashText->SetText(std::to_string(400 * m_FlashText->GetScoreMultiplier()));
 			m_FlashText->SetPosition(m_Pacman->GetPosition());
 			m_FlashText->SetVisible(true);
-			m_FlashText->SetMarker(m_Time.GetElapsedTimeMs());
+			m_FlashText->SetMarker(MyElapsedTime());
 			m_FlashText->IncreaseScoreMultiplier(1);
 			m_SFX.PlayEatGhost();
 		}
 	}
 
-	if(m_Time.GetElapsedTimeMs() - m_FlashText->GetMarker() > 2000){
+	if(MyElapsedTime() - m_FlashText->GetMarker() > 2000){
 		m_FlashText->SetVisible(false);
 	}
 }
@@ -78,16 +82,15 @@ void App::PacmanMoveProcess(){
 
 void App::SetPacmanSpeedMul(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
-	for(int i=0 ; i < vec.size() ;i++){
-		if(vec[i]->IsBeenChasing()){
+	for(auto& ghost : vec){
+		if(ghost->IsBeingChase()){
 			m_Pacman->SetSpeedMul(currentLevel.GetPacmanFrightSpeedMul());
-			break;
-		}
-		else if(i == vec.size()-1){
-			m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
+			return;
 		}
 	}
+	m_Pacman->SetSpeedMul(currentLevel.GetPacmanSpeedMul());
 }
+
 std::pair<int ,int> App::GetTileIntented(std::string newDirection){
 	std::pair<int ,int> tileintented;
 	std::pair<int ,int> currentTile = m_BackgroundImage->GetTileOfPosition(m_Pacman->GetPosition());
@@ -178,33 +181,33 @@ void App::GhostStateProcess() {
 	//Set State
 	for (auto Ghost : Ghosts) {
 		if(Ghost->GetState() == Ghost::GhostState::SCATTER && 
-		   m_Time.GetElapsedTimeMs() - Ghost->GetMarker() > scatter){
+		    MyElapsedTime() - Ghost->GetMarker() > scatter){
 			Ghost->SetState(Ghost::GhostState::CHASE);
-			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
+			Ghost->SetMarker(MyElapsedTime());
 		}
 		if(Ghost->GetState() == Ghost::GhostState::CHASE && 
-		   m_Time.GetElapsedTimeMs() - Ghost->GetMarker() > chase){
+		    MyElapsedTime() - Ghost->GetMarker() > chase){
 			Ghost->SetState(Ghost::GhostState::SCATTER);
-			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
+			Ghost->SetMarker(MyElapsedTime());
 		}
 		// onPill and flashing
 		if(Ghost->GetState() == Ghost::GhostState::SCARED &&
-		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
-		   m_Time.GetElapsedTimeMs() - FoodEffectMarker > DONT_FLASH_DURATION){
+		    MyElapsedTime() - FoodEffectMarker < PILL_DURATION &&
+		    MyElapsedTime() - FoodEffectMarker > DONT_FLASH_DURATION){
 			Ghost->SetState(Ghost::GhostState::FLASHING);
 		}
 		// onPill and not flashing
 		if((Ghost->GetState() == Ghost::GhostState::SCATTER ||
 		    Ghost->GetState() == Ghost::GhostState::CHASE) &&
-		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < PILL_DURATION &&
-		   m_Time.GetElapsedTimeMs() - FoodEffectMarker < DONT_FLASH_DURATION){
+		    MyElapsedTime() - FoodEffectMarker < PILL_DURATION &&
+		    MyElapsedTime() - FoodEffectMarker < DONT_FLASH_DURATION){
 			Ghost->SetState(Ghost::GhostState::SCARED);
 		}
 		// after pill
 		if(Ghost->GetState() == Ghost::GhostState::FLASHING &&
-		   m_Time.GetElapsedTimeMs() - FoodEffectMarker > PILL_DURATION){
+		   	MyElapsedTime() - FoodEffectMarker > PILL_DURATION){
 			Ghost->SetState(Ghost::GhostState::SCATTER);
-			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
+			Ghost->SetMarker(MyElapsedTime());
 		}
 		if( (Ghost->GetState() == Ghost::GhostState::SCARED || 
 			Ghost->GetState() == Ghost::GhostState::FLASHING) &&
@@ -215,7 +218,7 @@ void App::GhostStateProcess() {
 		if( Ghost->GetState() == Ghost::GhostState::DEAD &&
 			m_BackgroundImage->GetTileOfPosition(Ghost->GetPosition()) == std::pair{14, 11}){
 			Ghost->SetState(Ghost::GhostState::SCATTER);
-			Ghost->SetMarker(m_Time.GetElapsedTimeMs());
+			Ghost->SetMarker(MyElapsedTime());
 		}
 		
 	}
@@ -316,7 +319,7 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 }
 
 void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
-	if(g->IsBeenChasing()){
+	if(g->IsBeingChase()){
 		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
 	}
 	else{
@@ -352,10 +355,10 @@ void App::PacmanDead() {
 	m_Orange->SetVisible(false);
 	m_Pink->SetVisible(false);
 	for (auto& Food : m_SmallFood) {
-		Food->SetVisible(false);
+		Food->SetZIndex(-2);
 	}
 	for (auto& Food : m_LargeFood) {
-		Food->SetVisible(false);
+		Food->SetZIndex(-2);
 	}
 	// Start dead animation
 	m_PacmanDead->SetPosition(m_Pacman->GetPosition());
@@ -364,4 +367,5 @@ void App::PacmanDead() {
 	m_PacmanDead->SetPlaying(true);
 	m_PacmanDead->SetFrame(0);
 	m_CurrentState = State::DEAD;
+	m_Renderer.Update();
 }

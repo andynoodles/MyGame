@@ -15,6 +15,6 @@ unsigned long App::Update() {
         m_CurrentState = State::END;
     }
 
-    return m_Time.GetElapsedTimeMs();
+    return MyElapsedTime();
 }
 

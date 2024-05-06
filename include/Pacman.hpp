@@ -36,8 +36,8 @@ public:
 	void SetPosition(const glm::vec2& Position);
     void SetDirection(std::string Direction);
 	void SetSpeedMul(float mul);
-	void HpMinusOne(){hp--;}
-
+	void HpMinusOne(){ hp--; }
+    void SetHp(int value){ hp = value; };
 	//Getter
 	std::string GetDirection(){return MoveDirection;}
     glm::vec2 GetPosition(){return m_Transform.translation;}
@@ -45,16 +45,18 @@ public:
 
     [[nodiscard]] bool IfAnimationEnds() const;
     
+    
+	void Move(const std::string Direction);
+	void Stop();
+	bool IsDead(){return (GetHp() == 0)? true:false;} // Check if pacman is dead.
+	
+
+private:
+    void checkTp(); //Check transport on two side of map;
     void FaceNorth();
     void FaceSouth();
     void FaceWest();
     void FaceEast();
-	void Move(const std::string Direction);
-	void Stop();
-	bool IsDead(){return (GetHp() == 0)? true:false;} // Check if pacman is dead.
-	void checkTp(); //Check transport on two side of map;
-
-private:
     std::string MoveDirection = "East";
     glm::vec2 Speed;
 	float SpeedMultiplier = 1;
