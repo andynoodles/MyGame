@@ -36,8 +36,8 @@ public:
 	void SetPosition(const glm::vec2& Position);
     void SetDirection(std::string Direction);
 	void SetSpeedMul(float mul);
-	void HpMinusOne(){hp--;}
-
+	void HpMinusOne(){ hp--; }
+    void SetHp(int value){ hp = value; };
 	//Getter
 	std::string GetDirection(){return MoveDirection;}
     glm::vec2 GetPosition(){return m_Transform.translation;}

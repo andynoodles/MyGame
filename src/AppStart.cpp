@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include "Level.hpp"
 
 unsigned long App::Start(unsigned long InitTime) {
     // init setting
@@ -65,14 +66,19 @@ unsigned long App::Start(unsigned long InitTime) {
             Food->SetZIndex(10);
         }
 
-        // Reset scores
+        // Reset Values
         m_Score->SetFoodScore(0);
         m_Score->SetVisibleScore(0);
+        m_Pacman->SetHp(3);
+        currentLevel.SetLevel(1);
         
 		m_CurrentState = State::UPDATE;
 	}
 
 	m_Renderer.Update();
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
 	
 	return MyElapsedTime();
 }

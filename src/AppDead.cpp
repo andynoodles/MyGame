@@ -21,6 +21,9 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
     }
     
     m_Renderer.Update();
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
 
     return MyElapsedTime();
 }

@@ -50,5 +50,9 @@ unsigned long App::Revive(unsigned long ReviveTime) {
 	}
 
     m_Renderer.Update();
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
+
     return MyElapsedTime();
 }
