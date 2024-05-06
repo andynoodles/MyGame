@@ -45,16 +45,18 @@ public:
 
     [[nodiscard]] bool IfAnimationEnds() const;
     
+    
+	void Move(const std::string Direction);
+	void Stop();
+	bool IsDead(){return (GetHp() == 0)? true:false;} // Check if pacman is dead.
+	
+
+private:
+    void checkTp(); //Check transport on two side of map;
     void FaceNorth();
     void FaceSouth();
     void FaceWest();
     void FaceEast();
-	void Move(const std::string Direction);
-	void Stop();
-	bool IsDead(){return (GetHp() == 0)? true:false;} // Check if pacman is dead.
-	void checkTp(); //Check transport on two side of map;
-
-private:
     std::string MoveDirection = "East";
     glm::vec2 Speed;
 	float SpeedMultiplier = 1;
