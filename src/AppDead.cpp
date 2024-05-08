@@ -14,6 +14,8 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
         // Exit Dead state
         if (m_Pacman->IsDead()) {
             m_GameOverText->SetVisible(false);
+            m_ScoreBoard->addScore("Dev", m_Score->GetVisibleScore());
+            m_ScoreBoard->saveScores();
             m_CurrentState = State::SCORE_BOARD;
         }           
         else

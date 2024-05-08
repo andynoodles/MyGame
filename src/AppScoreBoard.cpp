@@ -6,13 +6,13 @@ void App::ScoreBoard(){
     std::string text = "";
     
     for(const auto& item : scores){
-        text.append(item.name + std::to_string(item.score) + "\n");
+        text.append(item.name + " " + std::to_string(item.score) + "\n");
     }
     m_ScoreBoard->SetText(text);
 
     m_Renderer2.Update();
 
-    if (Util::Input::IsKeyUp(Util::Keycode::BACKSPACE) || Util::Input::IfExit()) {
+    if (Util::Input::IsKeyUp(Util::Keycode::RETURN) || Util::Input::IfExit()) {
         m_CurrentState = State::START;
     }
 
