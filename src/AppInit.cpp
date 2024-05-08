@@ -168,7 +168,6 @@ unsigned long App::Init() {
 	m_Empty2->SetVisible(true);
 	m_Empty2-> SetPosition({TP_X2 , m_BackgroundImage->GetUpperLeftY() - (PIXELPERTILE*TP_TILE_Y)});
 
-    m_Renderer.AddChild(m_ScoreBoard);
     m_Renderer.AddChild(m_Score);
     m_Renderer.AddChild(m_ReadyText);
     m_Renderer.AddChild(m_GameOverText);
@@ -201,7 +200,7 @@ unsigned long App::Init() {
 
     currentLevel.SetLevel(1);
 
-    m_CurrentState = State::SCORE_BOARD;
+    m_CurrentState = State::START;
 
     return MyElapsedTime();
 }
