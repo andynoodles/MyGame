@@ -1,3 +1,6 @@
+#ifndef SCORE_HPP
+#define SCORE_HPP
+
 #include "ShowText.hpp"
 #include <string>
 #include "config.hpp"
@@ -34,3 +37,5 @@ private:
     unsigned long Marker = 0;
 
 };
+
+#endif

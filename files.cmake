@@ -14,6 +14,7 @@ set(SRC_FILES
     Level.cpp
 	SFX.cpp
 	BGM.cpp
+    RankSystem.cpp
 )
 
 set(INCLUDE_FILES
@@ -29,6 +30,7 @@ set(INCLUDE_FILES
 	SFX.hpp
 	BGM.hpp
 	Empty.hpp
+    RankSystem.hpp
 )
 
 set(TEST_FILES

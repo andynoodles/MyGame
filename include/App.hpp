@@ -26,6 +26,7 @@
 #include "BGM.hpp"
 #include "SFX.hpp"
 #include "Empty.hpp"
+#include "RankSystem.hpp"
 
 class App {
 public:
@@ -95,6 +96,7 @@ private:
     //custom classes
     unsigned long FoodEffectMarker = 0;
     Level currentLevel;
+    std::shared_ptr<RankSystem> m_ScoreBoard;
 };
 
 #endif
