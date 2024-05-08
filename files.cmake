@@ -2,6 +2,7 @@ set(SRC_FILES
 	AppInit.cpp
     AppStart.cpp
     AppUpdate.cpp
+    AppScoreBoard.cpp
     AppDead.cpp
     AppEnd.cpp
     AppRevive.cpp

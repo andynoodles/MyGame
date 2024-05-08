@@ -12,7 +12,7 @@ void RankSystem::readScores() {
     std::ifstream filein(filename);
     std::string name;
     int score;
-
+    
     scores.clear();
 
     while (filein >> name >> score) {
@@ -40,11 +40,13 @@ void RankSystem::saveScores() {
     }
 
     std::ofstream fileout(filename);
-    int index = 1;
     for (const auto& entry : scores) {
-        fileout << index << entry.name << "," << entry.score << std::endl;
-        index++;
+        fileout << entry.name << " " << entry.score << std::endl;
     }
 
     fileout.close();
+}
+
+std::vector<ScoreEntity> RankSystem::getScore(){
+    return scores;
 }

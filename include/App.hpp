@@ -36,6 +36,7 @@ public:
         UPDATE,
         DEAD,
         REVIVE,
+        SCORE_BOARD,
         END,
     };
 
@@ -46,7 +47,7 @@ public:
     unsigned long Update();
     unsigned long Dead(unsigned long InitTime);
     unsigned long Revive(unsigned long ReviveTime);
-
+    void ScoreBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
     //Misc 
@@ -78,7 +79,7 @@ public:
 
 private:
     State m_CurrentState = State::INIT;
-	Util::Renderer m_Renderer;
+	Util::Renderer m_Renderer, m_Renderer2;
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;

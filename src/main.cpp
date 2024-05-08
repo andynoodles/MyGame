@@ -27,6 +27,10 @@ int main(int, char**) {
                 timeMarker = app.Update();
                 break;
 
+            case App::State::SCORE_BOARD:
+                app.ScoreBoard();
+                break;
+
             case App::State::END:
                 app.End();
                 context->SetExit(true);

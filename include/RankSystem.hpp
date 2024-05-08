@@ -32,6 +32,7 @@ public:
     void readScores();
     void addScore(const std::string& name, int score);
     void saveScores();
+    std::vector<ScoreEntity> getScore();
 };
 
 #endif // RANK_SYSTEM_HPP
