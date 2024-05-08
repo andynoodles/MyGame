@@ -194,7 +194,7 @@ unsigned long App::Init() {
     m_ScoreBoard->SetVisible(true);
 
     m_ScoreBoard->readScores();
-    m_ScoreBoard->saveScores();
+
     m_Renderer2.AddChild(m_ScoreBoard);
 
     currentLevel.SetLevel(1);
