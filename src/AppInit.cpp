@@ -191,16 +191,15 @@ unsigned long App::Init() {
         Util::Color(255, 255, 255));
     m_ScoreBoard->SetZIndex(100);
     m_ScoreBoard->SetPosition({0, 0});
-    m_ScoreBoard->SetVisible(false);
+    m_ScoreBoard->SetVisible(true);
 
     m_ScoreBoard->readScores();
-    //m_ScoreBoard->addScore("andy", 1000000);
     m_ScoreBoard->saveScores();
     m_Renderer2.AddChild(m_ScoreBoard);
 
     currentLevel.SetLevel(1);
 
-    m_CurrentState = State::START;
+    m_CurrentState = State::SCORE_BOARD;
 
     return MyElapsedTime();
 }
