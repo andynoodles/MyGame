@@ -4,10 +4,15 @@
 void App::ScoreBoard(){
     std::vector<ScoreEntity> scores = m_ScoreBoard->getScore();
     std::string text = "";
-    
-    for(const auto& item : scores){
-        text.append(item.name + " " + std::to_string(item.score) + "\n");
+    if(scores.size() == 0){
+        text = "--Enter To Start--";
     }
+    else{
+        for(const auto& item : scores){
+        text.append(item.name + " " + std::to_string(item.score) + "\n");
+        }
+    }
+    
     m_ScoreBoard->SetText(text);
 
     m_Renderer2.Update();

@@ -184,7 +184,7 @@ unsigned long App::Init() {
 
 // Renderer 2
     m_ScoreBoard = std::make_shared<RankSystem>(
-        RESOURCE_DIR"/ScoreBoard/score.csv",
+        RESOURCE_DIR"/ScoreBoard/score.txt",
         RESOURCE_DIR"/Font/emulogic.ttf",
         20,
         "0",
