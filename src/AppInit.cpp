@@ -180,9 +180,8 @@ unsigned long App::Init() {
 	m_Renderer.AddChild(m_BackgroundImage);
 	m_Renderer.AddChild(m_Empty1);
 	m_Renderer.AddChild(m_Empty2);
-    m_Renderer.AddChild(m_PacmanDead);
 
-// Renderer 2
+    // m_Renderer_ScoreBorad 
     m_ScoreBoard = std::make_shared<RankSystem>(
         RESOURCE_DIR"/ScoreBoard/score.txt",
         RESOURCE_DIR"/Font/emulogic.ttf",
@@ -195,7 +194,7 @@ unsigned long App::Init() {
 
     m_ScoreBoard->readScores();
 
-    m_Renderer2.AddChild(m_ScoreBoard);
+    m_Renderer_ScoreBorad.AddChild(m_ScoreBoard);
 
     currentLevel.SetLevel(1);
 

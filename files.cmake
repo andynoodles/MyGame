@@ -16,6 +16,7 @@ set(SRC_FILES
 	SFX.cpp
 	BGM.cpp
     RankSystem.cpp
+    KeyBoard.cpp
 )
 
 set(INCLUDE_FILES
@@ -32,6 +33,7 @@ set(INCLUDE_FILES
 	BGM.hpp
 	Empty.hpp
     RankSystem.hpp
+    KeyBoard.hpp
 )
 
 set(TEST_FILES

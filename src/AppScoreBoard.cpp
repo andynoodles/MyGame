@@ -1,5 +1,4 @@
 #include "App.hpp"
-#include <string>
 
 void App::ScoreBoard(){
     std::vector<ScoreEntity> scores = m_ScoreBoard->getScore();
@@ -15,7 +14,7 @@ void App::ScoreBoard(){
     
     m_ScoreBoard->SetText(text);
 
-    m_Renderer2.Update();
+    m_Renderer_ScoreBorad.Update();
 
     if (Util::Input::IsKeyUp(Util::Keycode::RETURN) || Util::Input::IfExit()) {
         m_CurrentState = State::START;

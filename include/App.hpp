@@ -27,6 +27,7 @@
 #include "SFX.hpp"
 #include "Empty.hpp"
 #include "RankSystem.hpp"
+#include "KeyBoard.hpp"
 
 class App {
 public:
@@ -48,6 +49,7 @@ public:
     unsigned long Dead(unsigned long InitTime);
     unsigned long Revive(unsigned long ReviveTime);
     void ScoreBoard();
+    void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
     //Misc 
@@ -79,7 +81,7 @@ public:
 
 private:
     State m_CurrentState = State::INIT;
-	Util::Renderer m_Renderer, m_Renderer2;
+	Util::Renderer m_Renderer, m_Renderer_ScoreBorad;
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;
