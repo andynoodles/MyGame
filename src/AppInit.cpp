@@ -89,8 +89,6 @@ unsigned long App::Init() {
     m_Cyan->SetVisible(showCharacter);
     m_Cyan->SetLooping(true);
     m_Cyan->SetPlaying(false);
-    // m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
-    m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1 ,NUMBEROFTILESY-2));
     m_Cyan->SetState(Ghost::GhostState::SCATTER);
     m_Cyan->SetVisible(false);
 
@@ -99,8 +97,6 @@ unsigned long App::Init() {
     m_Orange->SetVisible(showCharacter);
     m_Orange->SetLooping(true);
     m_Orange->SetPlaying(false);
-    // m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
-    m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX-2 ,NUMBEROFTILESY-2));
     m_Orange->SetState(Ghost::GhostState::SCATTER);
     m_Orange->SetVisible(false);
 
@@ -109,8 +105,6 @@ unsigned long App::Init() {
     m_Pink->SetVisible(showCharacter);
     m_Pink->SetLooping(true);
     m_Pink->SetPlaying(false);
-    // m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(11, 14));
-    m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX-2 ,1));
     m_Pink->SetState(Ghost::GhostState::SCATTER);
     m_Pink->SetVisible(false);
 
@@ -119,8 +113,6 @@ unsigned long App::Init() {
     m_Red->SetVisible(showCharacter);
     m_Red->SetLooping(true);
     m_Red->SetPlaying(false);
-    // m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(6, 5));
-    m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1 ,1));
     m_Red->SetState(Ghost::GhostState::SCATTER);
     m_Red->SetVisible(false);
 
@@ -158,8 +150,6 @@ unsigned long App::Init() {
     m_GameOverText->SetPosition({ READY_TEXT_X, READY_TEXT_Y });
     m_GameOverText->SetVisible(false);
 
-    
-    
 	m_Empty1=std::make_shared<Empty>(RESOURCE_DIR"/image/empty.bmp");
 	m_Empty1->SetVisible(true);
 	m_Empty1-> SetPosition({TP_X1 , m_BackgroundImage->GetUpperLeftY() - (PIXELPERTILE*TP_TILE_Y)});
