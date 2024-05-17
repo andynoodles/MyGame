@@ -28,6 +28,7 @@
 #include "Empty.hpp"
 #include "RankSystem.hpp"
 #include "KeyBoard.hpp"
+#include "Bonus.hpp"
 
 class App {
 public:
@@ -66,8 +67,11 @@ public:
 	void SetGhostSpeedMul(std::shared_ptr<Ghost> g);
 
     //Pacman Related
-    bool IfCollides(const std::shared_ptr<Food>& other);
-    bool IfCollides(const std::shared_ptr<Ghost>& other);
+//    bool IfCollides(const std::shared_ptr<Food>& other);
+//	bool IfCollides(const std::shared_ptr<Ghost>& other);
+
+	template<class T>
+	bool IfCollides(const std::shared_ptr<T> other);
 	bool IfPacmanCollidesWall();
 	void PacmanMoveProcess();
 	std::string InputManager();
@@ -95,6 +99,7 @@ private:
 	std::shared_ptr<Empty> m_Empty1 ,m_Empty2; //16x16 black img.
     SFX m_SFX;
     BGM m_BGM;
+	std::shared_ptr<Bonus> m_Bouns;
 
     //custom classes
     unsigned long FoodEffectMarker = 0;

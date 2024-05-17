@@ -4,15 +4,8 @@ unsigned long App::MyElapsedTime(){
 	return m_Time.GetElapsedTimeMs() + 100000;
 }
 
-bool App::IfCollides(const std::shared_ptr<Food>& other){
-	glm::vec2 OtherPosition = other->GetPosition();
-	glm::vec2 ThisPosition = m_Pacman->GetPosition();
-	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition)) //Pacman and Ghost is on same tile.
-		return true;
-	return false;
-}
-
-bool App::IfCollides(const std::shared_ptr<Ghost>& other){
+template<class T>
+bool App::IfCollides(const std::shared_ptr<T> other){
 	glm::vec2 OtherPosition = other->GetPosition();
 	glm::vec2 ThisPosition = m_Pacman->GetPosition();
 	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
