@@ -9,12 +9,6 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         // Stop Display state on some obj
         m_ReadyText->SetVisible(false);
 
-        // Start Display state on some obj
-        m_Cyan->SetVisible(true);
-        m_Red->SetVisible(true);
-        m_Orange->SetVisible(true);
-        m_Pink->SetVisible(true);
-
         // Start Playing on Ghosts
         m_Cyan->SetLooping(true);
         m_Red->SetLooping(true);
@@ -30,22 +24,34 @@ unsigned long App::Revive(unsigned long ReviveTime) {
 
         // Reset FoodScore to 0
         m_Score->SetFoodScore(0);
-        // Reset Pacman Postion
-        m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X,PACMAN_STARTTILE_Y));
-        m_Pacman->SetVisible(true);
 
         // Stop animation for dead pacman
         m_PacmanDead->SetLooping(false);
         m_PacmanDead->SetVisible(false);
 
-        // Reset Ghosts Position
-        m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, NUMBEROFTILESY - 2));
-        m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
-        m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
-        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
+        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
+        m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
+        m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
+		m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, NUMBEROFTILESY - 2));
+        
+        m_Red->SetVisible(true);
+        m_Pink->SetVisible(true);
+        m_Orange->SetVisible(true);        
+        m_Cyan->SetVisible(true);
+		
+        m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
+        m_Pacman->SetVisible(true);
 
+        m_Red->SetMarker(MyElapsedTime());
+        m_Pink->SetMarker(MyElapsedTime());
+        m_Cyan->SetMarker(MyElapsedTime());
+        m_Orange->SetMarker(MyElapsedTime());
 
-
+        m_Red->SetState(Ghost::GhostState::SCATTER);
+        m_Pink->SetState(Ghost::GhostState::SCATTER);
+        m_Cyan->SetState(Ghost::GhostState::SCATTER);
+        m_Orange->SetState(Ghost::GhostState::SCATTER);
+        
         m_CurrentState = State::UPDATE;
 	}
 
@@ -53,6 +59,6 @@ unsigned long App::Revive(unsigned long ReviveTime) {
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-
+    
     return MyElapsedTime();
 }
