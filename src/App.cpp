@@ -249,7 +249,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		if(ghostState == Ghost::GhostState::CHASE){	
 			ghostTargetTile = pacmanTile;
 		}
-		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){	
+		else if(ghostState == Ghost::GhostState::SCARED || 
+				ghostState == Ghost::GhostState::FLASHING ||
+				ghostState == Ghost::GhostState::SCATTER){	
 			ghostTargetTile = {NUMBEROFTILESX-2 ,1}; //upper right at map
 		}
 	}
@@ -268,7 +270,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 				ghostTargetTile = {pacmanTile.first ,pacmanTile.second+4};
 			}
 		}
-		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){	
+		else if(ghostState == Ghost::GhostState::SCARED || 
+				ghostState == Ghost::GhostState::FLASHING ||
+				ghostState == Ghost::GhostState::SCATTER){	
 			ghostTargetTile = {1 ,1}; //upper left at map
 		}
 
@@ -295,7 +299,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 
 			ghostTargetTile = m_BackgroundImage->GetTileOfPosition({offsetTileCenter.x+(offsetTileCenter.x-redGhostTileCenter.x) ,offsetTileCenter.y+(offsetTileCenter.y-redGhostTileCenter.y)});
 		}
-		else if(ghostState == Ghost::GhostState::SCARED || ghostState == Ghost::GhostState::FLASHING){
+		else if(ghostState == Ghost::GhostState::SCARED ||
+				ghostState == Ghost::GhostState::FLASHING ||
+				ghostState == Ghost::GhostState::SCATTER){
 			ghostTargetTile = {NUMBEROFTILESX-2 ,NUMBEROFTILESY-2}; //lower right at map
 		}
 	}
@@ -306,7 +312,10 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		if(ghostState == Ghost::GhostState::CHASE && distance >= 8){
 			ghostTargetTile = pacmanTile;
 		}
-		else if(ghostState == Ghost::GhostState::SCARED || distance < 8 ||ghostState == Ghost::GhostState::FLASHING){
+		else if(ghostState == Ghost::GhostState::SCARED ||
+				ghostState == Ghost::GhostState::SCATTER ||
+				ghostState == Ghost::GhostState::FLASHING ||
+				distance < 8){
 			ghostTargetTile = {1,NUMBEROFTILESY-2}; //lower left at map
 		}
 	}

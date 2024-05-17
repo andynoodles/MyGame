@@ -27,16 +27,15 @@ unsigned long App::Start(unsigned long InitTime) {
 
 
 	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
-        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
-		m_Red->SetVisible(true);
 
-        m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
-        m_Pink->SetVisible(true);
-		
-        m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
-        m_Orange->SetVisible(true);
+        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
+        m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
+        m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
+		m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, NUMBEROFTILESY - 2));
         
-        m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, NUMBEROFTILESY - 2));
+        m_Red->SetVisible(true);
+        m_Pink->SetVisible(true);
+        m_Orange->SetVisible(true);        
         m_Cyan->SetVisible(true);
 		
         m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
@@ -65,6 +64,16 @@ unsigned long App::Start(unsigned long InitTime) {
             Food->SetVisible(true);
             Food->SetZIndex(10);
         }
+
+        m_Red->SetMarker(MyElapsedTime());
+        m_Pink->SetMarker(MyElapsedTime());
+        m_Cyan->SetMarker(MyElapsedTime());
+        m_Orange->SetMarker(MyElapsedTime());
+
+        m_Red->SetState(Ghost::GhostState::SCATTER);
+        m_Pink->SetState(Ghost::GhostState::SCATTER);
+        m_Cyan->SetState(Ghost::GhostState::SCATTER);
+        m_Orange->SetState(Ghost::GhostState::SCATTER);
 
         // Reset Values
         m_Score->SetFoodScore(0);
