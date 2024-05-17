@@ -500,3 +500,6 @@ docs/html/
 tags
 con.sh
 
+# Score Board Data
+Resources/ScoreBoard/score.txt
+

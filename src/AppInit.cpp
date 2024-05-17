@@ -131,26 +131,34 @@ unsigned long App::Init() {
     m_FlashText->SetVisible(false);
     m_FlashText->SetZIndex(100);
 
-    m_Score = std::make_shared<Score>(RESOURCE_DIR"/Font/emulogic.ttf",
-    20,
-    "0",
-    Util::Color(255, 255, 255));
+    m_Score = std::make_shared<Score>(
+        RESOURCE_DIR"/Font/emulogic.ttf",
+        20,
+        "0",
+        Util::Color(255, 255, 255));
+
     m_Score->SetPosition({400, 228});
     m_Score->SetVisible(true);
 
-    m_ReadyText = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
-    16,
-    "READY!",
-    Util::Color(255, 255, 0)); //yellow
+    m_ReadyText = std::make_shared<ShowText>(
+        RESOURCE_DIR"/Font/emulogic.ttf",
+        16,
+        "READY!",
+        Util::Color(255, 255, 0)); //yellow
+
     m_ReadyText->SetPosition({READY_TEXT_X, READY_TEXT_Y});
     m_ReadyText->SetVisible(true);
 
-    m_GameOverText = std::make_shared<ShowText>(RESOURCE_DIR"/Font/emulogic.ttf",
+    m_GameOverText = std::make_shared<ShowText>(
+        RESOURCE_DIR"/Font/emulogic.ttf",
         16,
         "GAME OVER",
         Util::Color(255, 0, 0)); //red
+
     m_GameOverText->SetPosition({ READY_TEXT_X, READY_TEXT_Y });
     m_GameOverText->SetVisible(false);
+
+    
     
 	m_Empty1=std::make_shared<Empty>(RESOURCE_DIR"/image/empty.bmp");
 	m_Empty1->SetVisible(true);
@@ -173,10 +181,24 @@ unsigned long App::Init() {
 	m_Renderer.AddChild(m_Empty1);
 	m_Renderer.AddChild(m_Empty2);
     m_Renderer.AddChild(m_PacmanDead);
+    // m_Renderer_ScoreBorad 
+    m_ScoreBoard = std::make_shared<RankSystem>(
+        RESOURCE_DIR"/ScoreBoard/score.txt",
+        RESOURCE_DIR"/Font/emulogic.ttf",
+        20,
+        "0",
+        Util::Color(255, 255, 255));
+    m_ScoreBoard->SetZIndex(100);
+    m_ScoreBoard->SetPosition({0, 0});
+    m_ScoreBoard->SetVisible(true);
+
+    m_ScoreBoard->readScores();
+
+    m_Renderer_ScoreBorad.AddChild(m_ScoreBoard);
 
     currentLevel.SetLevel(1);
 
-    m_CurrentState = State::START;
+    m_CurrentState = State::SCORE_BOARD;
 
     return MyElapsedTime();
 }

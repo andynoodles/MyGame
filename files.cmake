@@ -2,6 +2,7 @@ set(SRC_FILES
 	AppInit.cpp
     AppStart.cpp
     AppUpdate.cpp
+    AppScoreBoard.cpp
     AppDead.cpp
     AppEnd.cpp
     AppRevive.cpp
@@ -14,6 +15,8 @@ set(SRC_FILES
     Level.cpp
 	SFX.cpp
 	BGM.cpp
+    RankSystem.cpp
+    KeyBoard.cpp
 )
 
 set(INCLUDE_FILES
@@ -29,6 +32,8 @@ set(INCLUDE_FILES
 	SFX.hpp
 	BGM.hpp
 	Empty.hpp
+    RankSystem.hpp
+    KeyBoard.hpp
 )
 
 set(TEST_FILES

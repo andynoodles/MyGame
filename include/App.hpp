@@ -26,6 +26,8 @@
 #include "BGM.hpp"
 #include "SFX.hpp"
 #include "Empty.hpp"
+#include "RankSystem.hpp"
+#include "KeyBoard.hpp"
 
 class App {
 public:
@@ -35,6 +37,7 @@ public:
         UPDATE,
         DEAD,
         REVIVE,
+        SCORE_BOARD,
         END,
     };
 
@@ -45,7 +48,8 @@ public:
     unsigned long Update();
     unsigned long Dead(unsigned long InitTime);
     unsigned long Revive(unsigned long ReviveTime);
-
+    void ScoreBoard();
+    void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
     //Misc 
@@ -77,7 +81,7 @@ public:
 
 private:
     State m_CurrentState = State::INIT;
-	Util::Renderer m_Renderer;
+	Util::Renderer m_Renderer, m_Renderer_ScoreBorad;
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;
@@ -95,6 +99,7 @@ private:
     //custom classes
     unsigned long FoodEffectMarker = 0;
     Level currentLevel;
+    std::shared_ptr<RankSystem> m_ScoreBoard;
 };
 
 #endif
