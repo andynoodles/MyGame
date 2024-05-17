@@ -19,6 +19,7 @@ set(SRC_FILES
     RankSystem.cpp
     KeyBoard.cpp
     LevelUp.cpp
+	Bonus.cpp
 )
 
 set(INCLUDE_FILES
@@ -37,6 +38,7 @@ set(INCLUDE_FILES
     RankSystem.hpp
     KeyBoard.hpp
     LevelUp.hpp
+	Bonus.hpp
 )
 
 set(TEST_FILES
