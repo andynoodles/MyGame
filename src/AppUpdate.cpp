@@ -8,6 +8,7 @@ unsigned long App::Update() {
 	GhostCollision();
     GhostStateProcess(); //must be execute after ghost collsion
 	BGMCtrl();
+	BonusCtrl();
 
     m_Renderer.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {

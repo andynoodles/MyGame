@@ -34,6 +34,15 @@ void App::FoodCollision(){
 	}
 }
 
+int App::FoodEatenNum(){
+	int foodEatenNum=0;
+
+	for(auto f : m_SmallFood) if(f->GetVisibility() == false) foodEatenNum++;
+	for(auto f : m_LargeFood) if(f->GetVisibility() == false) foodEatenNum++;
+	
+	return foodEatenNum;
+}
+
 void App::GhostCollision(){
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Pink ,m_Cyan ,m_Orange};
 	for(auto g : vec){
@@ -370,4 +379,35 @@ void App::PacmanDead() {
 	m_PacmanDead->SetFrame(0);
 	m_CurrentState = State::DEAD;
 	m_Renderer.Update();
+}
+
+void App::BonusCtrl(){
+	static bool alreadyStage1 = false ,alreadyStage2 = false;
+
+	//Is Pacman ate enough Food?
+	if(FoodEatenNum() > BONUS_STAGE_1 && !alreadyStage1){
+		m_Bouns->SetVisible(true);
+		alreadyStage1 = true;
+	}
+	else if(FoodEatenNum() > BONUS_STAGE_2 && !alreadyStage2){
+		m_Bouns->SetVisible(true);
+		alreadyStage2 = true;
+	}
+
+	if(m_Bouns->GetVisibility() && IfCollides(m_Bouns)){	
+		m_Bouns->SetVisible(false);
+		m_Bouns->SetMarker(MyElapsedTime());
+		LOG_DEBUG("BONUS EATEN");
+		m_Score->AddVisibleScore(currentLevel.GetBounsScore());
+		m_FlashText->SetText(std::to_string(currentLevel.GetBounsScore()));
+		m_FlashText->SetPosition(m_Pacman->GetPosition());
+		m_FlashText->SetVisible(true);
+		m_FlashText->SetMarker(MyElapsedTime());
+		m_SFX.PlayEatBonus();
+	}
+
+	if(MyElapsedTime() - m_Bouns->GetMarker() > m_Bouns->GetAppearTime()){
+		m_Bouns->SetVisible(false);
+	}
+
 }
