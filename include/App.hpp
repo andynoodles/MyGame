@@ -58,7 +58,6 @@ public:
     //Misc 
     unsigned long MyElapsedTime();
     void ScoreUpdate();
-    void FoodCollision(); 	
 	void GhostCollision();//Pacman collided with ghost.
 	void BGMCtrl(); //BGM control.
 
@@ -68,10 +67,11 @@ public:
 	std::pair<int ,int> GetGhostTargetTile(std::shared_ptr<Ghost> ghost);
 	void SetGhostSpeedMul(std::shared_ptr<Ghost> g);
 
-    //Pacman Related
-//    bool IfCollides(const std::shared_ptr<Food>& other);
-//	bool IfCollides(const std::shared_ptr<Ghost>& other);
+	//Food
+    void FoodCollision(); 	
+	int FoodEatenNum(); //How many food be eaten.
 
+    //Pacman Related
 	template<class T>
 	bool IfCollides(const std::shared_ptr<T> other);
 	bool IfPacmanCollidesWall();
@@ -81,9 +81,10 @@ public:
 	void ChangeDirectionIfPossible();
 	void Stop();
     void PacmanDead();
-
-
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
+
+	//Bonus
+	void BonusCtrl();
 
 private:
     State m_CurrentState = State::INIT;

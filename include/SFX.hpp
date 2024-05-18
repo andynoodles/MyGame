@@ -10,10 +10,12 @@ public:
 
 	void PlayMunch();
 	void PlayEatGhost();
+	void PlayEatBonus();
 	void PlayPacmanDeath();
 private:
     std::shared_ptr<Util::SFX> munch;
     std::shared_ptr<Util::SFX> eatGhost;
+    std::shared_ptr<Util::SFX> eatBonus;
     std::shared_ptr<Util::SFX> pacmanDeath;
 };
 

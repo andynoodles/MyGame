@@ -2,9 +2,6 @@
 #define NUMBEROFTILESX 28
 #define NUMBEROFTILESY 31
 #define PIXELPERTILE 16
-#define TP_TILE_1_X 27
-#define TP_TILE_2_X 0
-#define TP_TILE_Y 14
 
 //Pacman Settings
 #define PACMAN_SPEED 2.5
@@ -32,9 +29,18 @@
 #define FOOD_SCORE 10
 #define FULL_FOOD_SCORE ((LARGE_FOOD_NUM + SMALL_FOOD_NUM) * FOOD_SCORE)
 
-//Other
+//Transport point
+#define TP_TILE_1_X 27
+#define TP_TILE_2_X 0
+#define TP_TILE_Y 14
 #define TP_X1 (MAP_WIDTH/2 + PIXELPERTILE) 
 #define TP_X2 (-MAP_WIDTH/2 - PIXELPERTILE) 
+
+//Bouns
+#define BONUS_STAGE_1 70
+#define BONUS_STAGE_2 170
+
+//Other
 #define GAME_OPENING_TIME_DURATION 4550
 #define PILL_DURATION 10000
 #define DONT_FLASH_DURATION 7000
