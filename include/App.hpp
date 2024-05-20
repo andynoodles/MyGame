@@ -37,6 +37,7 @@ public:
         UPDATE,
         DEAD,
         REVIVE,
+        LEVEL_UP,
         SCORE_BOARD,
         END,
     };
@@ -48,6 +49,7 @@ public:
     unsigned long Update();
     unsigned long Dead(unsigned long InitTime);
     unsigned long Revive(unsigned long ReviveTime);
+    unsigned long LevelUp(unsigned int InitTime);
     void ScoreBoard();
     void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)

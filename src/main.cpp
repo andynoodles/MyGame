@@ -31,6 +31,10 @@ int main(int, char**) {
                 app.ScoreBoard();
                 break;
 
+            case App::State::LEVEL_UP:
+                app.LevelUp(timeMarker);
+                break;
+
             case App::State::END:
                 app.End();
                 context->SetExit(true);
