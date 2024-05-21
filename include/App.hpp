@@ -100,7 +100,7 @@ private:
 	std::shared_ptr<Empty> m_Empty1 ,m_Empty2; //16x16 black img.
     SFX m_SFX;
     BGM m_BGM;
-	std::shared_ptr<Bonus> m_Bouns;
+	std::shared_ptr<Bonus> m_Bonus;
 
     //custom classes
     unsigned long FoodEffectMarker = 0;
