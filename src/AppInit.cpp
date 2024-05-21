@@ -161,6 +161,7 @@ unsigned long App::Init() {
 
 	m_Bonus = std::make_shared<Bonus>(currentLevel.GetBonusImgPath());
 	m_Bonus->SetVisible(false);
+	m_Bonus->SetAppearTime();
 
     m_Renderer.AddChild(m_Score);
     m_Renderer.AddChild(m_ReadyText);

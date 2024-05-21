@@ -41,7 +41,8 @@
 #define BONUS_STAGE_2 170
 
 //Level
-#define START_LEVEL 0
+#define START_LEVEL 5
+#define TOTAL_LEVEL 8
 
 //Other
 #define GAME_OPENING_TIME_DURATION 4550

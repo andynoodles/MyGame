@@ -2,6 +2,7 @@
 #define LEVEL_HPP
 #include<vector>
 #include<string>
+#include "config.hpp"
 
 class Level{
 public:
