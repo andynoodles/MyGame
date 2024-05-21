@@ -35,12 +35,7 @@ void App::FoodCollision(){
 }
 
 int App::FoodEatenNum(){
-	int foodEatenNum=0;
-
-	for(auto f : m_SmallFood) if(f->GetVisibility() == false) foodEatenNum++;
-	for(auto f : m_LargeFood) if(f->GetVisibility() == false) foodEatenNum++;
-	
-	return foodEatenNum;
+	return m_Score->GetFoodScore()/FOOD_SCORE;
 }
 
 void App::GhostCollision(){
@@ -409,5 +404,4 @@ void App::BonusCtrl(){
 	if(MyElapsedTime() - m_Bouns->GetMarker() > m_Bouns->GetAppearTime()){
 		m_Bouns->SetVisible(false);
 	}
-
 }
