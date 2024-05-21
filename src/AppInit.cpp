@@ -159,8 +159,8 @@ unsigned long App::Init() {
 	m_Empty2->SetVisible(true);
 	m_Empty2-> SetPosition({TP_X2 , m_BackgroundImage->GetUpperLeftY() - (PIXELPERTILE*TP_TILE_Y)});
 
-	m_Bouns = std::make_shared<Bonus>(currentLevel.GetBonusImgPath());
-	m_Bouns->SetVisible(false);
+	m_Bonus = std::make_shared<Bonus>(currentLevel.GetBonusImgPath());
+	m_Bonus->SetVisible(false);
 
     m_Renderer.AddChild(m_Score);
     m_Renderer.AddChild(m_ReadyText);
@@ -175,7 +175,7 @@ unsigned long App::Init() {
 	m_Renderer.AddChild(m_Empty1);
 	m_Renderer.AddChild(m_Empty2);
     m_Renderer.AddChild(m_PacmanDead);
-	m_Renderer.AddChild(m_Bouns);
+	m_Renderer.AddChild(m_Bonus);
     // m_Renderer_ScoreBorad 
     m_ScoreBoard = std::make_shared<RankSystem>(
         RESOURCE_DIR"/ScoreBoard/score.txt",

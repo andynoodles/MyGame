@@ -381,17 +381,20 @@ void App::BonusCtrl(){
 
 	//Is Pacman ate enough Food?
 	if(FoodEatenNum() > BONUS_STAGE_1 && !alreadyStage1){
-		m_Bouns->SetVisible(true);
+		LOG_DEBUG("In IF_1!");
+		m_Bonus->SetVisible(true);
 		alreadyStage1 = true;
 	}
 	else if(FoodEatenNum() > BONUS_STAGE_2 && !alreadyStage2){
-		m_Bouns->SetVisible(true);
+		LOG_DEBUG("In IF_2!");
+		m_Bonus->SetVisible(true);
 		alreadyStage2 = true;
 	}
 
-	if(m_Bouns->GetVisibility() && IfCollides(m_Bouns)){	
-		m_Bouns->SetVisible(false);
-		m_Bouns->SetMarker(MyElapsedTime());
+	if(m_Bonus->GetVisibility() && IfCollides(m_Bonus)){	
+		LOG_DEBUG("In IF_3!");
+		m_Bonus->SetVisible(false);
+		m_Bonus->SetMarker(MyElapsedTime());
 		LOG_DEBUG("BONUS EATEN");
 		m_Score->AddVisibleScore(currentLevel.GetBounsScore());
 		m_FlashText->SetText(std::to_string(currentLevel.GetBounsScore()));
@@ -401,7 +404,8 @@ void App::BonusCtrl(){
 		m_SFX.PlayEatBonus();
 	}
 
-	if(MyElapsedTime() - m_Bouns->GetMarker() > m_Bouns->GetAppearTime()){
-		m_Bouns->SetVisible(false);
+	if(MyElapsedTime() - m_Bonus->GetMarker() > m_Bonus->GetAppearTime()){
+		LOG_DEBUG("In IF_4!");
+		m_Bonus->SetVisible(false);
 	}
 }
