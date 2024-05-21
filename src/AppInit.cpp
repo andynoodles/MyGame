@@ -3,7 +3,7 @@
 unsigned long App::Init() {
     bool showCharacter = true;
     LOG_TRACE("Start");
-    currentLevel.SetLevel(0);
+    currentLevel.SetLevel(START_LEVEL);
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 
     std::vector<std::string> pacmanImage, pacmanDead, cyanImage, orangeImage, pinkImage, redImage;

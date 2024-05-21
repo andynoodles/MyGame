@@ -40,6 +40,9 @@
 #define BONUS_STAGE_1 70
 #define BONUS_STAGE_2 170
 
+//Level
+#define START_LEVEL 0
+
 //Other
 #define GAME_OPENING_TIME_DURATION 4550
 #define PILL_DURATION 10000
