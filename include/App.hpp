@@ -60,7 +60,7 @@ public:
     void ScoreUpdate();
 	void GhostCollision();//Pacman collided with ghost.
 	void BGMCtrl(); //BGM control.
-
+    void TimeOutFlashText();
     //Ghost
     void GhostStateProcess();
     void GhostMoveProcess();

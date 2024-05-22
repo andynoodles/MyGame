@@ -60,10 +60,6 @@ void App::GhostCollision(){
 			m_SFX.PlayEatGhost();
 		}
 	}
-
-	if(MyElapsedTime() - m_FlashText->GetMarker() > 2000){
-		m_FlashText->SetVisible(false);
-	}
 }
 
 void App::PacmanMoveProcess(){
@@ -407,4 +403,10 @@ void App::BonusCtrl(){
 	}
 	
 	
+}
+
+void App::TimeOutFlashText(){
+	if(MyElapsedTime() - m_FlashText->GetMarker() > 2000){
+		m_FlashText->SetVisible(false);
+	}
 }

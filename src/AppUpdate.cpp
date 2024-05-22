@@ -5,10 +5,11 @@ unsigned long App::Update() {
     PacmanMoveProcess();
     GhostMoveProcess();
     FoodCollision();
-	GhostCollision();
+	//GhostCollision();
     GhostStateProcess(); //must be execute after ghost collsion
 	BGMCtrl();
 	BonusCtrl();
+    TimeOutFlashText();
 
     m_Renderer.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
