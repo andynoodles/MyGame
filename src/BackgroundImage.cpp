@@ -24,7 +24,6 @@ unsigned int BackgroundImage::GetLayout(int x, int y){
 
 std::pair<int ,int> BackgroundImage::GetTileOfPosition(glm::vec2 position){
 	int newX = position.x+GetScaledSize().x/2 ,newY = GetScaledSize().y/2 - position.y;
-		
 	return {newX/PIXELPERTILE ,newY/PIXELPERTILE};
 }
 

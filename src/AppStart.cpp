@@ -79,7 +79,6 @@ unsigned long App::Start(unsigned long InitTime) {
         m_Score->SetFoodScore(0);
         m_Score->SetVisibleScore(0);
         m_Pacman->SetHp(3);
-        currentLevel.SetLevel(1);
         
 		m_CurrentState = State::UPDATE;
 	}

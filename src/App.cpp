@@ -4,15 +4,8 @@ unsigned long App::MyElapsedTime(){
 	return m_Time.GetElapsedTimeMs() + 100000;
 }
 
-bool App::IfCollides(const std::shared_ptr<Food>& other){
-	glm::vec2 OtherPosition = other->GetPosition();
-	glm::vec2 ThisPosition = m_Pacman->GetPosition();
-	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition)) //Pacman and Ghost is on same tile.
-		return true;
-	return false;
-}
-
-bool App::IfCollides(const std::shared_ptr<Ghost>& other){
+template<class T>
+bool App::IfCollides(const std::shared_ptr<T> other){
 	glm::vec2 OtherPosition = other->GetPosition();
 	glm::vec2 ThisPosition = m_Pacman->GetPosition();
 	if(m_BackgroundImage->GetTileOfPosition(ThisPosition) == m_BackgroundImage->GetTileOfPosition(OtherPosition))
@@ -39,6 +32,10 @@ void App::FoodCollision(){
 			m_FlashText->ResetScoreMultiplier();
 		}
 	}
+}
+
+int App::FoodEatenNum(){
+	return m_Score->GetFoodScore()/FOOD_SCORE;
 }
 
 void App::GhostCollision(){
@@ -377,4 +374,37 @@ void App::PacmanDead() {
 	m_PacmanDead->SetFrame(0);
 	m_CurrentState = State::DEAD;
 	m_Renderer.Update();
+}
+
+void App::BonusCtrl(){
+	static bool alreadyStage1 = false ,alreadyStage2 = false;
+
+	//Is Pacman ate enough Food?
+	if((FoodEatenNum() > BONUS_STAGE_1 && !alreadyStage1)){
+		m_Bonus->SetVisible(true);
+		m_Bonus->SetMarker(MyElapsedTime());
+		alreadyStage1 = true;
+	}
+	else if(FoodEatenNum() > BONUS_STAGE_2 && !alreadyStage2){
+		m_Bonus->SetVisible(true);
+		m_Bonus->SetMarker(MyElapsedTime());
+		alreadyStage2 = true;
+	}
+
+	if(m_Bonus->GetVisibility() && IfCollides(m_Bonus)){	
+		m_Bonus->SetVisible(false);
+		LOG_DEBUG("BONUS EATEN");
+		m_Score->AddVisibleScore(currentLevel.GetBounsScore());
+		m_FlashText->SetText(std::to_string(currentLevel.GetBounsScore()));
+		m_FlashText->SetPosition(m_Pacman->GetPosition());
+		m_FlashText->SetVisible(true);
+		m_FlashText->SetMarker(MyElapsedTime());
+		m_SFX.PlayEatBonus();
+	}
+	
+	if(MyElapsedTime() - m_Bonus->GetMarker() > m_Bonus->GetAppearTime()){
+		m_Bonus->SetVisible(false);
+	}
+	
+	
 }
