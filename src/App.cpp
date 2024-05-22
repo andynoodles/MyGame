@@ -30,6 +30,10 @@ void App::FoodCollision(){
 			m_Score->AddFoodScore(FOOD_SCORE);
 			m_SFX.PlayMunch();
 			m_FlashText->ResetScoreMultiplier();
+			m_Red->SetState(Ghost::GhostState::SCARED);
+			m_Orange->SetState(Ghost::GhostState::SCARED);
+			m_Cyan->SetState(Ghost::GhostState::SCARED);
+			m_Pink->SetState(Ghost::GhostState::SCARED);
 		}
 	}
 }
