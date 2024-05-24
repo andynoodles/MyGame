@@ -416,9 +416,6 @@ void App::TimeOutFlashText(){
 }
 
 unsigned long App::NextLevelInit(unsigned long InitTime){
-	currentLevel.AddLevel(1);
-    // init setting
-    m_BGM.PlayStart(); 
     m_ReadyText->SetVisible(true);
 
     // Stop animation for dead pacman
@@ -442,7 +439,15 @@ unsigned long App::NextLevelInit(unsigned long InitTime){
 
 
 	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
-
+		for (auto& Food : m_SmallFood) {
+			Food->SetVisible(true);
+			Food->SetZIndex(10);
+		}
+		for (auto& Food : m_LargeFood) {
+			Food->SetVisible(true);
+			Food->SetZIndex(10);
+		}
+		
         m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
         m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
         m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
@@ -471,14 +476,6 @@ unsigned long App::NextLevelInit(unsigned long InitTime){
 
 		m_Pacman->SetPlaying(true);
 		m_Pacman->SetLooping(true);
-		for (auto& Food : m_SmallFood) {
-			Food->SetVisible(true);
-			Food->SetZIndex(10);
-		}
-		for (auto& Food : m_LargeFood) {
-			Food->SetVisible(true);
-			Food->SetZIndex(10);
-		}
 
 		m_Red->SetMarker(MyElapsedTime());
 		m_Pink->SetMarker(MyElapsedTime());
@@ -492,9 +489,10 @@ unsigned long App::NextLevelInit(unsigned long InitTime){
 
 		// Reset Values
 		m_Score->SetFoodScore(0);
-	}
 
-	m_CurrentState = State::UPDATE;
+		m_CurrentState = State::UPDATE;
+	}
+	m_Renderer.Update();
 
 	return MyElapsedTime();
 }

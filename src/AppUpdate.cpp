@@ -12,6 +12,8 @@ unsigned long App::Update() {
     TimeOutFlashText();
 
     if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
+        currentLevel.AddLevel(1);
+        m_BGM.PlayStart(); 
         m_CurrentState = State::LEVEL_CHANGE;
         LOG_DEBUG("Win:)");
     }
