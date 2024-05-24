@@ -2,6 +2,7 @@ set(SRC_FILES
 	AppInit.cpp
     AppStart.cpp
     AppUpdate.cpp
+    AppLevelChange.cpp
     AppScoreBoard.cpp
     AppDead.cpp
     AppEnd.cpp
@@ -17,6 +18,7 @@ set(SRC_FILES
 	BGM.cpp
     RankSystem.cpp
     KeyBoard.cpp
+    LevelUp.cpp
 	Bonus.cpp
 )
 
@@ -35,6 +37,7 @@ set(INCLUDE_FILES
 	Empty.hpp
     RankSystem.hpp
     KeyBoard.hpp
+    LevelUp.hpp
 	Bonus.hpp
 )
 
