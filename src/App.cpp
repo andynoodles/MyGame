@@ -1,5 +1,5 @@
 #include "App.hpp"
-
+//conflict
 unsigned long App::MyElapsedTime(){
 	return m_Time.GetElapsedTimeMs() + 100000;
 }
