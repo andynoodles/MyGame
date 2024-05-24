@@ -187,10 +187,7 @@ unsigned long App::Init() {
 	m_Renderer.AddChild(m_Empty2);
     m_Renderer.AddChild(m_PacmanDead);
 	m_Renderer.AddChild(m_Bonus);
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
+    
     // m_Renderer_ScoreBorad 
     m_ScoreBoard = std::make_shared<RankSystem>(
         RESOURCE_DIR"/ScoreBoard/score.txt",
