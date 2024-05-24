@@ -1,7 +1,7 @@
 #include "BGM.hpp"
 
 BGM::BGM(){
-	bgm = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/ghost-normal-move.mp3");
+	bgm = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/normal_1.mp3");
 	curBGM = BGMState::NORMAL;	
 	lastBGM = BGMState::OTHER;
 }
@@ -14,13 +14,48 @@ void BGM::PlayStart(){
 		bgm->Play(loop);
 		lastBGM = curBGM;
 	}
-
 }
 
 void BGM::PlayNormal(){
 	curBGM = BGMState::NORMAL;
 	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/ghost-normal-move.mp3");
+		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_1.mp3");
+		bgm->Play();
+		lastBGM = curBGM;
+	}
+} 
+
+void BGM::PlayNormal(){
+	curBGM = BGMState::NORMAL;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_2.wav");
+		bgm->Play();
+		lastBGM = curBGM;
+	}
+} 
+
+void BGM::PlayNormal(){
+	curBGM = BGMState::NORMAL;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_3.wav");
+		bgm->Play();
+		lastBGM = curBGM;
+	}
+} 
+
+void BGM::PlayNormal(){
+	curBGM = BGMState::NORMAL;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_4.wav");
+		bgm->Play();
+		lastBGM = curBGM;
+	}
+} 
+
+void BGM::PlayNormal(){
+	curBGM = BGMState::NORMAL;
+	if(curBGM != lastBGM){
+		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_5.wav");
 		bgm->Play();
 		lastBGM = curBGM;
 	}

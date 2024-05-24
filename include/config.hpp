@@ -44,6 +44,9 @@
 #define START_LEVEL 5
 #define TOTAL_LEVEL 8
 
+//BGM
+#define BGM_INTERVAL 5
+
 //Other
 #define GAME_OPENING_TIME_DURATION 4550
 #define PILL_DURATION 10000
