@@ -29,6 +29,7 @@
 #include "RankSystem.hpp"
 #include "KeyBoard.hpp"
 #include "Bonus.hpp"
+#include "LevelUp.hpp"
 
 class App {
 public:
@@ -38,7 +39,8 @@ public:
         UPDATE,
         DEAD,
         REVIVE,
-        LEVEL_UP,
+        LEVEL_CHANGE,
+        NEXT_LEVEL_INIT,
         SCORE_BOARD,
         END,
     };
@@ -50,7 +52,8 @@ public:
     unsigned long Update();
     unsigned long Dead(unsigned long InitTime);
     unsigned long Revive(unsigned long ReviveTime);
-    unsigned long LevelUp(unsigned int InitTime);
+    unsigned long LevelChange(unsigned long InitTime);
+    unsigned long NextLevelInit(unsigned long InitTime);
     void ScoreBoard();
     void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
@@ -88,7 +91,7 @@ public:
 
 private:
     State m_CurrentState = State::INIT;
-	Util::Renderer m_Renderer, m_Renderer_ScoreBorad;
+	Util::Renderer m_Renderer, m_Renderer_ScoreBorad, m_Renderer_LevelUp;
     Util::Time m_Time;
     
     std::shared_ptr<Score> m_FlashText, m_Score;
@@ -96,6 +99,7 @@ private:
     std::shared_ptr<Food> m_SmallFood[SMALL_FOOD_NUM];
     std::shared_ptr<Food> m_LargeFood[LARGE_FOOD_NUM];
     
+    std::shared_ptr<LevelUp> m_LevelUp;
     std::shared_ptr<BackgroundImage> m_BackgroundImage;
     std::shared_ptr<Pacman> m_Pacman, m_PacmanDead;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;

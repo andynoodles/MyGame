@@ -1,5 +1,5 @@
-#ifndef NEXT_LEVEL_HPP
-#define NEXT_LEVEL_HPP
+#ifndef LEVEL_UP_HPP
+#define LEVEL_UP_HPP
 
 #include <vector>
 #include <string>
@@ -10,7 +10,7 @@
 class LevelUp : public Util::GameObject {
 
 public:
-    explicit LevelUp(const std::vector<std::string>& AnimationPaths);
+    LevelUp(const std::vector<std::string>& AnimationPaths);
 
     [[nodiscard]] bool IsLooping() const {
         return std::dynamic_pointer_cast<Util::Animation>(m_Drawable)->GetLooping();
@@ -35,9 +35,6 @@ public:
     }
 
     [[nodiscard]] bool IfAnimationEnds() const;
-
-private:
-
 };
 
-#endif //ANIMATED_CHARACTER_HPP
+#endif

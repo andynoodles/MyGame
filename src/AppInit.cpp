@@ -6,12 +6,22 @@ unsigned long App::Init() {
     currentLevel.SetLevel(START_LEVEL);
     m_BackgroundImage = std::make_shared<BackgroundImage>("/image/background.png");
 
-    std::vector<std::string> pacmanImage, pacmanDead, cyanImage, orangeImage, pinkImage, redImage;
+    std::vector<std::string> pacmanImage, pacmanDead, cyanImage, orangeImage, pinkImage, redImage, levelUpImage;
+    levelUpImage.reserve(LEVEL_UP_ANIMATION_RESERVE);
     pacmanImage.reserve(PACMAN_ASSETS_NUM);
     cyanImage.reserve(GHOST_ASSETS_RESERVE);
     orangeImage.reserve(GHOST_ASSETS_RESERVE);
     pinkImage.reserve(GHOST_ASSETS_RESERVE);
     redImage.reserve(GHOST_ASSETS_RESERVE);
+
+    levelUpImage.emplace_back(RESOURCE_DIR"/image/background.png");
+    levelUpImage.emplace_back(RESOURCE_DIR"/image/background2.jpg");
+
+    m_LevelUp = std::make_shared<LevelUp>(levelUpImage);
+    m_LevelUp->SetLooping(true);
+    m_LevelUp->SetPlaying(true);
+    m_LevelUp->SetVisible(true);
+
     for (int i = 0; i < PACMAN_ASSETS_NUM; ++i) {
         pacmanImage.emplace_back(RESOURCE_DIR"/image/Pac/Sprite (" + std::to_string(i + 1) + ").png");
     }
@@ -177,6 +187,7 @@ unsigned long App::Init() {
 	m_Renderer.AddChild(m_Empty2);
     m_Renderer.AddChild(m_PacmanDead);
 	m_Renderer.AddChild(m_Bonus);
+
     // m_Renderer_ScoreBorad 
     m_ScoreBoard = std::make_shared<RankSystem>(
         RESOURCE_DIR"/ScoreBoard/score.txt",
@@ -187,10 +198,12 @@ unsigned long App::Init() {
     m_ScoreBoard->SetZIndex(100);
     m_ScoreBoard->SetPosition({0, 0});
     m_ScoreBoard->SetVisible(true);
-
     m_ScoreBoard->readScores();
 
     m_Renderer_ScoreBorad.AddChild(m_ScoreBoard);
+
+    // m_Renderer_LevelUp
+    m_Renderer_LevelUp.AddChild(m_LevelUp);
 
 
     m_CurrentState = State::SCORE_BOARD;
