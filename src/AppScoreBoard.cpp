@@ -8,7 +8,7 @@ void App::ScoreBoard(){
     }
     else{
         for(const auto& item : scores){
-        text.append(item.name + " " + std::to_string(item.score) + "\n");
+	        text.append(item.name + " " + std::to_string(item.score) + "\n");
         }
     }
     
@@ -16,7 +16,7 @@ void App::ScoreBoard(){
 
     m_Renderer_ScoreBorad.Update();
 
-    if (Util::Input::IsKeyUp(Util::Keycode::RETURN) || Util::Input::IfExit()) {
+    if (Util::Input::IsKeyUp(Util::Keycode::RETURN)){
         m_CurrentState = State::START;
     }
 

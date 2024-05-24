@@ -27,7 +27,6 @@ unsigned long App::Start(unsigned long InitTime) {
 
 
 	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
-
         m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
         m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
         m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));

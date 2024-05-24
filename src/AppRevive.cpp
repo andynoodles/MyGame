@@ -53,8 +53,9 @@ unsigned long App::Revive(unsigned long ReviveTime) {
         m_Orange->SetState(Ghost::GhostState::SCATTER);
         
         m_CurrentState = State::UPDATE;
+		m_BGM.Resume();
 	}
-
+	
     m_Renderer.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;

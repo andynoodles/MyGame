@@ -2,6 +2,7 @@
 #define LEVEL_HPP
 #include<vector>
 #include<string>
+#include<cassert>
 #include "config.hpp"
 
 class Level{

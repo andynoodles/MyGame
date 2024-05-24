@@ -33,6 +33,7 @@ Level::Level(){
 }
 
 void Level::SetLevel(unsigned int level){
+	assert(level < TOTAL_LEVEL); //check if out of range	
     CurrentLevel = level;
 }
 

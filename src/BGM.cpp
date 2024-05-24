@@ -7,7 +7,7 @@ BGM::BGM(){
 }
 
 void BGM::PlayStart(){
-	curBGM = BGMState::NORMAL;
+	curBGM = BGMState::START;
 	int loop = 1;
 	if(curBGM != lastBGM){
 		bgm->LoadMedia(RESOURCE_DIR"/sound/game_start.wav");
@@ -45,12 +45,10 @@ void BGM::PlayPower(){
 
 }
 
-void BGM::PlayDeath(){
-	curBGM = BGMState::DEATH;
-	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/death.wav");
-		bgm->Play();
-		lastBGM = curBGM;
-	}
+void BGM::Pause(){
+	bgm->Pause();	
+}
 
+void BGM::Resume(){
+	bgm->Resume();	
 }

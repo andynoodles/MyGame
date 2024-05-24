@@ -1,7 +1,6 @@
 #include "App.hpp"
 
 unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mutate members in the future)
-//	m_BGM.PlayDeath();
     if (m_PacmanDead->IfAnimationEnds()) {
         m_PacmanDead->SetLooping(false);
     }
