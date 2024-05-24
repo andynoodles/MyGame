@@ -17,7 +17,7 @@ public:
 	BGM();
 
 	void PlayStart();
-	void PlayNormal();
+	void PlayNormal(unsigned int currentFoodScore);
 	void PlayRetreat();
 	void PlayPower();
 	void Pause();

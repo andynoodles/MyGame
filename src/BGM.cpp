@@ -16,46 +16,21 @@ void BGM::PlayStart(){
 	}
 }
 
-void BGM::PlayNormal(){
+void BGM::PlayNormal(unsigned int currentFoodScore){
 	curBGM = BGMState::NORMAL;
+	int n = currentFoodScore / NORMAL_BGM_CHANGE_SCORE_THRESHOLD;
 	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_1.mp3");
-		bgm->Play();
-		lastBGM = curBGM;
-	}
-} 
+		if(n < 1)
+			bgm->LoadMedia(RESOURCE_DIR"/sound/normal_1.wav");
+		else if(n < 2)
+			bgm->LoadMedia(RESOURCE_DIR"/sound/normal_2.wav");
+		else if(n < 3)
+			bgm->LoadMedia(RESOURCE_DIR"/sound/normal_3.wav");		
+		else if(n < 4)
+			bgm->LoadMedia(RESOURCE_DIR"/sound/normal_4.wav");		
+		else
+			bgm->LoadMedia(RESOURCE_DIR"/sound/normal_5.wav");
 
-void BGM::PlayNormal(){
-	curBGM = BGMState::NORMAL;
-	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_2.wav");
-		bgm->Play();
-		lastBGM = curBGM;
-	}
-} 
-
-void BGM::PlayNormal(){
-	curBGM = BGMState::NORMAL;
-	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_3.wav");
-		bgm->Play();
-		lastBGM = curBGM;
-	}
-} 
-
-void BGM::PlayNormal(){
-	curBGM = BGMState::NORMAL;
-	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_4.wav");
-		bgm->Play();
-		lastBGM = curBGM;
-	}
-} 
-
-void BGM::PlayNormal(){
-	curBGM = BGMState::NORMAL;
-	if(curBGM != lastBGM){
-		bgm->LoadMedia(RESOURCE_DIR"/sound/normal_5.wav");
 		bgm->Play();
 		lastBGM = curBGM;
 	}

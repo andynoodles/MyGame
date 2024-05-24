@@ -334,24 +334,21 @@ void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
 }
 
 void App::BGMCtrl(){
-	static unsigned long t = MyElapsedTime(); //How long is pacman been chased?
 	std::vector<std::shared_ptr<Ghost>> vec = {m_Red ,m_Cyan ,m_Pink ,m_Orange};
 	for(auto g : vec){
 		if(g->GetState() == Ghost::GhostState::DEAD){
 			m_BGM.PlayRetreat(); //Ghost is going home.
-			t = 0;
 			return;	
 		}
 	}
 	for(auto g:vec){
 		if(g->GetState() == Ghost::GhostState::SCARED || g->GetState() == Ghost::GhostState::FLASHING){
 			m_BGM.PlayPower();	//Pacman chase ghost.
-			t = 0;
 			return;
 		}
 	}
 	
-	m_BGM.PlayNormal();
+	m_BGM.PlayNormal(m_Score->GetFoodScore());
 }
 
 void App::PacmanDead() {
