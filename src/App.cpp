@@ -429,17 +429,23 @@ unsigned long App::LevelInit(unsigned long InitTime){
 	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION){
         m_ReadyText->SetVisible(false);
         
-		m_Red->SetPlaying(true);        
-		m_Pink->SetPlaying(true);	   
-		m_Orange->SetPlaying(true);    
-		m_Cyan->SetPlaying(true);
 		m_Pacman->SetPlaying(true);
+		m_Red->SetPlaying(true);
+		m_Pink->SetPlaying(true);
+		m_Orange->SetPlaying(true);
+		m_Cyan->SetPlaying(true);
 
 		m_Pacman->SetLooping(true);
 		m_Red->SetLooping(true);
 		m_Pink->SetLooping(true);
 		m_Orange->SetLooping(true);
 		m_Cyan->SetLooping(true);
+
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
 
 		m_Red->SetMarker(MyElapsedTime());
 		m_Pink->SetMarker(MyElapsedTime());
@@ -449,11 +455,17 @@ unsigned long App::LevelInit(unsigned long InitTime){
 		m_CurrentState = State::UPDATE;
 	}
 	else if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
-        m_Red->SetVisible(true);
+		m_Red->SetVisible(true);
         m_Pink->SetVisible(true);
         m_Orange->SetVisible(true);        
         m_Cyan->SetVisible(true);  
         m_Pacman->SetVisible(true);
+
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
 	}
 	else{
 		m_ReadyText->SetVisible(true);
@@ -495,7 +507,7 @@ unsigned long App::LevelInit(unsigned long InitTime){
 		m_Orange->SetFrame(0);
 		m_Cyan->SetFrame(0);
 		m_Pacman->SetFrame(0);
-
+		
 		m_Red->SetState(Ghost::GhostState::SCATTER);
 		m_Pink->SetState(Ghost::GhostState::SCATTER);
 		m_Cyan->SetState(Ghost::GhostState::SCATTER);
