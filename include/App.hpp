@@ -54,6 +54,7 @@ public:
     unsigned long Revive(unsigned long ReviveTime);
     unsigned long LevelChange(unsigned long InitTime);
     unsigned long NextLevelInit(unsigned long InitTime);
+    unsigned long LevelInit(unsigned long InitTime);
     void ScoreBoard();
     void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
