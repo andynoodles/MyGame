@@ -127,6 +127,12 @@ void Ghost::GhostMove(){
     case Ghost::GhostState::CHASE:
         GhostMoveNormal();
         break;
+    case Ghost::GhostState::SCATTER:
+        GhostMoveNormal();
+        break;
+    case Ghost::GhostState::REVIVE:
+        GhostMoveNormal();
+        break;
     case Ghost::GhostState::SCARED:
         GhostMoveScared();
         break;
