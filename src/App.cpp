@@ -329,6 +329,9 @@ void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
 	if(g->IsBeingChase()){
 		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
 	}
+	else if(g->GetState() == Ghost::GhostState::DEAD){
+		g->SetSpeedMul(1.5);
+	}
 	else{
 		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
 	}
