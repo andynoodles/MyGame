@@ -9,7 +9,14 @@ unsigned long App::Update() {
     GhostStateProcess(); //must be execute after ghost collsion
 	BGMCtrl();
 	BonusCtrl();
+    TimeOutFlashText();
 
+    if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
+        currentLevel.AddLevel(1);
+        m_BGM.PlayStart(); 
+        m_CurrentState = State::LEVEL_CHANGE;
+        LOG_DEBUG("Win:)");
+    }
     m_Renderer.Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;

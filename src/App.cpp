@@ -1,5 +1,6 @@
 #include "App.hpp"
-
+#include "SDL_mixer.h"
+//conflict
 unsigned long App::MyElapsedTime(){
 	return m_Time.GetElapsedTimeMs() + 100000;
 }
@@ -30,6 +31,10 @@ void App::FoodCollision(){
 			m_Score->AddFoodScore(FOOD_SCORE);
 			m_SFX.PlayMunch();
 			m_FlashText->ResetScoreMultiplier();
+			m_Red->SetState(Ghost::GhostState::SCARED);
+			m_Orange->SetState(Ghost::GhostState::SCARED);
+			m_Cyan->SetState(Ghost::GhostState::SCARED);
+			m_Pink->SetState(Ghost::GhostState::SCARED);
 		}
 	}
 }
@@ -59,10 +64,6 @@ void App::GhostCollision(){
 			m_FlashText->IncreaseScoreMultiplier(1);
 			m_SFX.PlayEatGhost();
 		}
-	}
-
-	if(MyElapsedTime() - m_FlashText->GetMarker() > 2000){
-		m_FlashText->SetVisible(false);
 	}
 }
 
@@ -407,4 +408,111 @@ void App::BonusCtrl(){
 	}
 	
 	
+}
+
+void App::TimeOutFlashText(){
+	if(MyElapsedTime() - m_FlashText->GetMarker() > 2000){
+		m_FlashText->SetVisible(false);
+	}
+}
+
+unsigned long App::NextLevelInit(unsigned long InitTime){
+	LevelInit(InitTime + LEVEL_UP_ANIMATION_DURATION);
+
+	// Reset level values
+	m_Score->SetFoodScore(0);
+	
+	return MyElapsedTime();
+}
+
+unsigned long App::LevelInit(unsigned long InitTime){
+	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION){
+        m_ReadyText->SetVisible(false);
+        
+		m_Pacman->SetPlaying(true);
+		m_Red->SetPlaying(true);
+		m_Pink->SetPlaying(true);
+		m_Orange->SetPlaying(true);
+		m_Cyan->SetPlaying(true);
+
+		m_Pacman->SetLooping(true);
+		m_Red->SetLooping(true);
+		m_Pink->SetLooping(true);
+		m_Orange->SetLooping(true);
+		m_Cyan->SetLooping(true);
+
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
+
+		m_Red->SetMarker(MyElapsedTime());
+		m_Pink->SetMarker(MyElapsedTime());
+		m_Cyan->SetMarker(MyElapsedTime());
+		m_Orange->SetMarker(MyElapsedTime());
+
+		m_CurrentState = State::UPDATE;
+	}
+	else if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
+		m_Red->SetVisible(true);
+        m_Pink->SetVisible(true);
+        m_Orange->SetVisible(true);        
+        m_Cyan->SetVisible(true);  
+        m_Pacman->SetVisible(true);
+
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
+	}
+	else{
+		m_ReadyText->SetVisible(true);
+
+		for (auto& Food : m_SmallFood) {
+			Food->SetVisible(true);
+			Food->SetZIndex(10);
+		}
+		for (auto& Food : m_LargeFood) {
+			Food->SetVisible(true);
+			Food->SetZIndex(10);
+		}
+
+		m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
+        m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
+        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
+        m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
+		m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, NUMBEROFTILESY - 2));
+
+		// Stop animation for dead pacman
+		m_PacmanDead->SetLooping(false);
+		m_PacmanDead->SetVisible(false);
+		m_PacmanDead->SetPlaying(false);
+
+		m_Pacman->SetPlaying(false);
+		m_Red->SetPlaying(false);
+		m_Pink->SetPlaying(false);
+		m_Orange->SetPlaying(false);
+		m_Cyan->SetPlaying(false);
+
+		m_Pacman->SetLooping(false);
+		m_Red->SetLooping(false);
+		m_Pink->SetLooping(false);
+		m_Orange->SetLooping(false);
+		m_Cyan->SetLooping(false);
+
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
+		
+		m_Red->SetState(Ghost::GhostState::SCATTER);
+		m_Pink->SetState(Ghost::GhostState::SCATTER);
+		m_Cyan->SetState(Ghost::GhostState::SCATTER);
+		m_Orange->SetState(Ghost::GhostState::SCATTER);
+	}
+	m_Renderer.Update();
+	return MyElapsedTime();
 }
