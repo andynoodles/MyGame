@@ -11,7 +11,7 @@ Level::Level(){
 	bonusImgPath.resize(TOTAL_LEVEL);
 
 	frightTime = {6 ,5 ,4 ,5 ,2 ,5 ,3 ,3 ,5 ,3};
-	bonusScore = {100 ,300 ,500 ,700 ,1000 ,2000 ,3000 ,5000 ,5000 ,500};
+	bonusScore = {100 ,300 ,500 ,700 ,1000 ,2000 ,3000 ,5000 ,5000 ,5000};
 
 	pacmanSpeedMul = {0.8 ,0.9 ,0.9 ,1 ,1 ,1 ,1 ,1 ,1 ,1};
 	pacmanFrightSpeedMul = {0.9 ,0.95 ,0.95 ,1 ,1 ,1 ,1 ,1 ,1 ,1};
