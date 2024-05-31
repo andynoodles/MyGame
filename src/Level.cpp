@@ -10,15 +10,15 @@ Level::Level(){
 	ghostTunnelSpeedMul.resize(TOTAL_LEVEL);
 	bonusImgPath.resize(TOTAL_LEVEL);
 
-	frightTime = {6 ,5 ,4 ,5 ,2 ,5 ,3 ,3};
-	bonusScore = {100 ,300 ,500 ,700 ,1000 ,2000 ,3000 ,5000};
+	frightTime = {6 ,5 ,4 ,5 ,2 ,5 ,3 ,3 ,5 ,3};
+	bonusScore = {100 ,300 ,500 ,700 ,1000 ,2000 ,3000 ,5000 ,5000 ,500};
 
-	pacmanSpeedMul = {0.8 ,0.9 ,0.9 ,1 ,1 ,1 ,1 ,1};
-	pacmanFrightSpeedMul = {0.9 ,0.95 ,0.95 ,1 ,1 ,1 ,1 ,1};
+	pacmanSpeedMul = {0.8 ,0.9 ,0.9 ,1 ,1 ,1 ,1 ,1 ,1 ,1};
+	pacmanFrightSpeedMul = {0.9 ,0.95 ,0.95 ,1 ,1 ,1 ,1 ,1 ,1 ,1};
 
-	ghostSpeedMul = {0.75 ,0.85 ,0.85 ,0.95 ,0.95 ,0.95 ,0.95 ,0.95};
-	ghostFrightSpeedMul = {0.5 ,0.55 ,0.55 ,0.6 ,0.6 ,0.6 ,0.6 ,0.6};
-	ghostTunnelSpeedMul = {0.4 ,0.45 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5};
+	ghostSpeedMul = {0.75 ,0.85 ,0.85 ,0.95 ,0.95 ,0.95 ,0.95 ,0.95 ,0.95 ,0.95};
+	ghostFrightSpeedMul = {0.5 ,0.55 ,0.55 ,0.6 ,0.6 ,0.6 ,0.6 ,0.6 ,0.6 ,0.6};
+	ghostTunnelSpeedMul = {0.4 ,0.45 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5 ,0.5};
 
 	bonusImgPath = {
 		RESOURCE_DIR"/image/Bonus/Cherries.png",
@@ -28,6 +28,8 @@ Level::Level(){
 		RESOURCE_DIR"/image/Bonus/Grapes.png",
 		RESOURCE_DIR"/image/Bonus/Galaxian.png",
 		RESOURCE_DIR"/image/Bonus/Bell.png",
+		RESOURCE_DIR"/image/Bonus/Key.png",
+		RESOURCE_DIR"/image/Bonus/Key.png",
 		RESOURCE_DIR"/image/Bonus/Key.png"
 	};
 }
