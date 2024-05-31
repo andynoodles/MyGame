@@ -43,7 +43,7 @@
 
 //Level
 #define START_LEVEL 5
-#define TOTAL_LEVEL 8
+#define TOTAL_LEVEL 10
 
 //Other
 #define GAME_OPENING_TIME_DURATION 4550

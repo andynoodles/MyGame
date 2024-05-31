@@ -378,8 +378,6 @@ void App::PacmanDead() {
 }
 
 void App::BonusCtrl(){
-	static bool alreadyStage1 = false ,alreadyStage2 = false;
-
 	//Is Pacman ate enough Food?
 	if((FoodEatenNum() > BONUS_STAGE_1 && !alreadyStage1)){
 		m_Bonus->SetVisible(true);
@@ -513,6 +511,12 @@ unsigned long App::LevelInit(unsigned long InitTime){
 		m_Cyan->SetState(Ghost::GhostState::SCATTER);
 		m_Orange->SetState(Ghost::GhostState::SCATTER);
 	}
+
+	alreadyStage1 = false;
+	alreadyStage2 = false;
+	m_Bonus->SetVisible(false);
+	m_Bonus->SetImage(currentLevel.GetBonusImgPath());
+
 	m_Renderer.Update();
 	return MyElapsedTime();
 }
