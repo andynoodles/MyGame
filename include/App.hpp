@@ -111,6 +111,7 @@ private:
 
     //custom classes
     unsigned long FoodEffectMarker = 0;
+    bool alreadyStage1 = false ,alreadyStage2 = false;
     Level currentLevel;
     std::shared_ptr<RankSystem> m_ScoreBoard;
 };
