@@ -48,7 +48,8 @@ void App::GhostCollision(){
 	for(auto g : vec){
 		bool collided = IfCollides(g);
 		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
-						g->GetState() == Ghost::GhostState::CHASE)){
+						g->GetState() == Ghost::GhostState::CHASE ||
+						g->GetState() == Ghost::GhostState::REVIVE)){
 			PacmanDead();
 			break;
 		}
@@ -215,7 +216,7 @@ void App::GhostStateProcess() {
 		//if DEAD and back home
 		if( Ghost->GetState() == Ghost::GhostState::DEAD &&
 			m_BackgroundImage->GetTileOfPosition(Ghost->GetPosition()) == std::pair{14, 11}){
-			Ghost->SetState(Ghost::GhostState::SCATTER);
+			Ghost->SetState(Ghost::GhostState::REVIVE);
 			Ghost->SetMarker(MyElapsedTime());
 		}
 		
@@ -244,7 +245,8 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		return {14 ,11}; //Target is located directly above the left side of the “door” to the ghost house.
 	}
 	if(ghost == m_Red){
-		if(ghostState == Ghost::GhostState::CHASE){	
+		if(ghostState == Ghost::GhostState::CHASE||
+			ghostState == Ghost::GhostState::REVIVE){	
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || 
@@ -254,7 +256,8 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		}
 	}
 	else if(ghost == m_Pink){
-		if(ghostState == Ghost::GhostState::CHASE){
+		if(ghostState == Ghost::GhostState::CHASE||
+			ghostState == Ghost::GhostState::REVIVE){
 			if(pacmanDir == "North"){
 				ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second-4};//It's not bug,it's feature.
 			}
@@ -276,7 +279,8 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 
 	}
 	else if(ghost == m_Cyan){
-		if(ghostState == Ghost::GhostState::CHASE){	
+		if(ghostState == Ghost::GhostState::CHASE||
+			ghostState == Ghost::GhostState::REVIVE){	
 			std::pair<int ,int> offsetTile;
 			if(pacmanDir == "North"){
 				offsetTile = {pacmanTile.first-2 ,pacmanTile.second-2};//It's not bug,it's feature.
@@ -307,7 +311,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		std::pair<int ,int> orangeGhostTile = m_BackgroundImage->GetTileOfPosition(m_Orange->GetPosition());
 		//Get Euclidean distance between orange's tile and Pacman's tile.
 		float distance = std::sqrt(std::pow(orangeGhostTile.first-pacmanTile.first ,2) + std::pow(orangeGhostTile.second-pacmanTile.second ,2));					
-		if(ghostState == Ghost::GhostState::CHASE && distance >= 8){
+		if( (ghostState == Ghost::GhostState::CHASE ||
+			ghostState == Ghost::GhostState::REVIVE) && 
+			distance >= 8){
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED ||
@@ -328,6 +334,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
 	if(g->IsBeingChase()){
 		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
+	}
+	else if(g->GetState() == Ghost::GhostState::DEAD){
+		g->SetSpeedMul(1.5);
 	}
 	else{
 		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
