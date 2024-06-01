@@ -28,7 +28,7 @@ int main(int, char**) {
                 break;
 
             case App::State::SCORE_BOARD:
-                app.ScoreBoard();
+                timeMarker = app.ScoreBoard();
                 break;
 
             case App::State::NEXT_LEVEL_INIT:
