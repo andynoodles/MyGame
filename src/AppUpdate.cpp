@@ -13,8 +13,16 @@ unsigned long App::Update() {
 
     if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
         currentLevel.AddLevel(1);
-        m_BGM.PlayStart(); 
-        m_CurrentState = State::LEVEL_CHANGE;
+        if(currentLevel.GetCurrentLevel() == TOTAL_LEVEL){
+            m_ScoreBoard->addScore("DEV", m_Score->GetVisibleScore());
+            m_ScoreBoard->saveScores();
+            m_CurrentState = State::SCORE_BOARD;    
+        }
+        else{
+            m_BGM.PlayStart(); 
+            m_CurrentState = State::LEVEL_CHANGE;    
+        }
+        
         LOG_DEBUG("Win:)");
     }
     m_Renderer.Update();

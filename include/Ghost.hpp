@@ -17,6 +17,7 @@ public:
         SCARED,
         SCATTER,
         FLASHING,
+        REVIVE,
         DEAD
     };
     explicit Ghost(const std::vector<std::string>& AnimationPaths);

@@ -1,4 +1,5 @@
 #include "RankSystem.hpp"
+#include <string>
 
 RankSystem::RankSystem(
             const std::string& file, 
@@ -39,9 +40,11 @@ void RankSystem::saveScores() {
         scores.pop_back();
     }
 
+    int index = 1;
+
     std::ofstream fileout(filename);
     for (const auto& entry : scores) {
-        fileout << entry.name << " " << entry.score << std::endl;
+        fileout << std::to_string(index++) << " " << entry.score << std::endl;
     }
 
     fileout.close();

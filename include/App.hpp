@@ -54,6 +54,7 @@ public:
     unsigned long Revive(unsigned long ReviveTime);
     unsigned long LevelChange(unsigned long InitTime);
     unsigned long NextLevelInit(unsigned long InitTime);
+    unsigned long LevelInit(unsigned long InitTime);
     void ScoreBoard();
     void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
@@ -110,6 +111,7 @@ private:
 
     //custom classes
     unsigned long FoodEffectMarker = 0;
+    bool alreadyStage1 = false ,alreadyStage2 = false;
     Level currentLevel;
     std::shared_ptr<RankSystem> m_ScoreBoard;
 };

@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include "SDL_mixer.h"
 //conflict
 unsigned long App::MyElapsedTime(){
 	return m_Time.GetElapsedTimeMs() + 100000;
@@ -47,7 +48,8 @@ void App::GhostCollision(){
 	for(auto g : vec){
 		bool collided = IfCollides(g);
 		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
-						g->GetState() == Ghost::GhostState::CHASE)){
+						g->GetState() == Ghost::GhostState::CHASE ||
+						g->GetState() == Ghost::GhostState::REVIVE)){
 			PacmanDead();
 			break;
 		}
@@ -214,7 +216,7 @@ void App::GhostStateProcess() {
 		//if DEAD and back home
 		if( Ghost->GetState() == Ghost::GhostState::DEAD &&
 			m_BackgroundImage->GetTileOfPosition(Ghost->GetPosition()) == std::pair{14, 11}){
-			Ghost->SetState(Ghost::GhostState::SCATTER);
+			Ghost->SetState(Ghost::GhostState::REVIVE);
 			Ghost->SetMarker(MyElapsedTime());
 		}
 		
@@ -243,7 +245,8 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		return {14 ,11}; //Target is located directly above the left side of the “door” to the ghost house.
 	}
 	if(ghost == m_Red){
-		if(ghostState == Ghost::GhostState::CHASE){	
+		if(ghostState == Ghost::GhostState::CHASE||
+			ghostState == Ghost::GhostState::REVIVE){	
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED || 
@@ -253,7 +256,8 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		}
 	}
 	else if(ghost == m_Pink){
-		if(ghostState == Ghost::GhostState::CHASE){
+		if(ghostState == Ghost::GhostState::CHASE||
+			ghostState == Ghost::GhostState::REVIVE){
 			if(pacmanDir == "North"){
 				ghostTargetTile = {pacmanTile.first-4 ,pacmanTile.second-4};//It's not bug,it's feature.
 			}
@@ -275,7 +279,8 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 
 	}
 	else if(ghost == m_Cyan){
-		if(ghostState == Ghost::GhostState::CHASE){	
+		if(ghostState == Ghost::GhostState::CHASE||
+			ghostState == Ghost::GhostState::REVIVE){	
 			std::pair<int ,int> offsetTile;
 			if(pacmanDir == "North"){
 				offsetTile = {pacmanTile.first-2 ,pacmanTile.second-2};//It's not bug,it's feature.
@@ -306,7 +311,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 		std::pair<int ,int> orangeGhostTile = m_BackgroundImage->GetTileOfPosition(m_Orange->GetPosition());
 		//Get Euclidean distance between orange's tile and Pacman's tile.
 		float distance = std::sqrt(std::pow(orangeGhostTile.first-pacmanTile.first ,2) + std::pow(orangeGhostTile.second-pacmanTile.second ,2));					
-		if(ghostState == Ghost::GhostState::CHASE && distance >= 8){
+		if( (ghostState == Ghost::GhostState::CHASE ||
+			ghostState == Ghost::GhostState::REVIVE) && 
+			distance >= 8){
 			ghostTargetTile = pacmanTile;
 		}
 		else if(ghostState == Ghost::GhostState::SCARED ||
@@ -327,6 +334,9 @@ std::pair<int, int> App::GetGhostTargetTile(std::shared_ptr<Ghost> ghost){
 void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
 	if(g->IsBeingChase()){
 		g->SetSpeedMul(currentLevel.GetGhostFrightSpeedMul());
+	}
+	else if(g->GetState() == Ghost::GhostState::DEAD){
+		g->SetSpeedMul(1.5);
 	}
 	else{
 		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
@@ -379,8 +389,6 @@ void App::PacmanDead() {
 }
 
 void App::BonusCtrl(){
-	static bool alreadyStage1 = false ,alreadyStage2 = false;
-
 	//Is Pacman ate enough Food?
 	if((FoodEatenNum() > BONUS_STAGE_1 && !alreadyStage1)){
 		m_Bonus->SetVisible(true);
@@ -418,29 +426,59 @@ void App::TimeOutFlashText(){
 }
 
 unsigned long App::NextLevelInit(unsigned long InitTime){
-    m_ReadyText->SetVisible(true);
+	LevelInit(InitTime + LEVEL_UP_ANIMATION_DURATION);
 
-    // Stop animation for dead pacman
-    m_PacmanDead->SetLooping(false);
-    m_PacmanDead->SetVisible(false);
-    m_PacmanDead->SetPlaying(false);
+	// Reset level values
+	m_Score->SetFoodScore(0);
+	
+	return MyElapsedTime();
+}
 
-    m_Red->SetLooping(false);
-    m_Red->SetFrame(1);
+unsigned long App::LevelInit(unsigned long InitTime){
+	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION){
+        m_ReadyText->SetVisible(false);
+        
+		m_Pacman->SetPlaying(true);
+		m_Red->SetPlaying(true);
+		m_Pink->SetPlaying(true);
+		m_Orange->SetPlaying(true);
+		m_Cyan->SetPlaying(true);
 
-    m_Pink->SetLooping(false);
-    m_Pink->SetFrame(1);
+		m_Pacman->SetLooping(true);
+		m_Red->SetLooping(true);
+		m_Pink->SetLooping(true);
+		m_Orange->SetLooping(true);
+		m_Cyan->SetLooping(true);
 
-    m_Orange->SetLooping(false);
-    m_Orange->SetFrame(1);
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
 
-    m_Cyan->SetLooping(false);
-    m_Cyan->SetFrame(1);
+		m_Red->SetMarker(MyElapsedTime());
+		m_Pink->SetMarker(MyElapsedTime());
+		m_Cyan->SetMarker(MyElapsedTime());
+		m_Orange->SetMarker(MyElapsedTime());
 
-    m_Pacman->SetLooping(false);
+		m_CurrentState = State::UPDATE;
+	}
+	else if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
+		m_Red->SetVisible(true);
+        m_Pink->SetVisible(true);
+        m_Orange->SetVisible(true);        
+        m_Cyan->SetVisible(true);  
+        m_Pacman->SetVisible(true);
 
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
+	}
+	else{
+		m_ReadyText->SetVisible(true);
 
-	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION/2.5){
 		for (auto& Food : m_SmallFood) {
 			Food->SetVisible(true);
 			Food->SetZIndex(10);
@@ -449,52 +487,47 @@ unsigned long App::NextLevelInit(unsigned long InitTime){
 			Food->SetVisible(true);
 			Food->SetZIndex(10);
 		}
-		
-        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
+
+		m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
         m_Pink->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, 1));
+        m_Red->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, 1));
         m_Cyan->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(NUMBEROFTILESX - 2, NUMBEROFTILESY - 2));
 		m_Orange->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(1, NUMBEROFTILESY - 2));
-        
-        m_Red->SetVisible(true);
-        m_Pink->SetVisible(true);
-        m_Orange->SetVisible(true);        
-        m_Cyan->SetVisible(true);
+
+		// Stop animation for dead pacman
+		m_PacmanDead->SetLooping(false);
+		m_PacmanDead->SetVisible(false);
+		m_PacmanDead->SetPlaying(false);
+
+		m_Pacman->SetPlaying(false);
+		m_Red->SetPlaying(false);
+		m_Pink->SetPlaying(false);
+		m_Orange->SetPlaying(false);
+		m_Cyan->SetPlaying(false);
+
+		m_Pacman->SetLooping(false);
+		m_Red->SetLooping(false);
+		m_Pink->SetLooping(false);
+		m_Orange->SetLooping(false);
+		m_Cyan->SetLooping(false);
+
+		m_Red->SetFrame(0);
+		m_Pink->SetFrame(0);
+		m_Orange->SetFrame(0);
+		m_Cyan->SetFrame(0);
+		m_Pacman->SetFrame(0);
 		
-        m_Pacman->SetPosition(m_BackgroundImage->GetCenterPositionOfTile(PACMAN_STARTTILE_X, PACMAN_STARTTILE_Y));
-        m_Pacman->SetVisible(true);
-	}
-	if(MyElapsedTime() - InitTime > GAME_OPENING_TIME_DURATION){
-        m_ReadyText->SetVisible(false);
-        
-		m_Red->SetPlaying(true);        
-		m_Pink->SetPlaying(true);	   
-		m_Orange->SetPlaying(true);    
-		m_Cyan->SetPlaying(true);
-
-		m_Red->SetLooping(true);        
-		m_Pink->SetLooping(true);	   
-		m_Orange->SetLooping(true);    
-		m_Cyan->SetLooping(true);
-
-		m_Pacman->SetPlaying(true);
-		m_Pacman->SetLooping(true);
-
-		m_Red->SetMarker(MyElapsedTime());
-		m_Pink->SetMarker(MyElapsedTime());
-		m_Cyan->SetMarker(MyElapsedTime());
-		m_Orange->SetMarker(MyElapsedTime());
-
 		m_Red->SetState(Ghost::GhostState::SCATTER);
 		m_Pink->SetState(Ghost::GhostState::SCATTER);
 		m_Cyan->SetState(Ghost::GhostState::SCATTER);
 		m_Orange->SetState(Ghost::GhostState::SCATTER);
-
-		// Reset Values
-		m_Score->SetFoodScore(0);
-
-		m_CurrentState = State::UPDATE;
 	}
-	m_Renderer.Update();
 
+	alreadyStage1 = false;
+	alreadyStage2 = false;
+	m_Bonus->SetVisible(false);
+	m_Bonus->SetImage(currentLevel.GetBonusImgPath());
+
+	m_Renderer.Update();
 	return MyElapsedTime();
 }
