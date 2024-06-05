@@ -7,6 +7,7 @@
 #define PACMAN_SPEED 2.5
 #define PACMAN_STARTTILE_X 13
 #define PACMAN_STARTTILE_Y 23
+#define PACMAN_LIFE 5
 
 //Ghost setting
 #define GHOST_SPEED 2.5

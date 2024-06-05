@@ -173,6 +173,14 @@ unsigned long App::Init() {
 	m_Bonus->SetVisible(false);
 	m_Bonus->SetAppearTime();
 
+	m_LifeIcons.resize(PACMAN_LIFE - 1); //show hp-1 life.
+	for(int i = 0 ;i < m_LifeIcons.size() ;i++){
+		std::shared_ptr<Empty> lifeIcon = std::make_shared<Empty>(RESOURCE_DIR"/image/Pac/LifeIcon.png");
+		lifeIcon->SetPosition({-MAP_WIDTH/2 + (i+1)*PIXELPERTILE*2 ,-MAP_HEIGHT/2 - (PIXELPERTILE)});
+		m_LifeIcons[i] = lifeIcon;
+		m_Renderer.AddChild(lifeIcon);
+	}
+
     m_Renderer.AddChild(m_Score);
     m_Renderer.AddChild(m_ReadyText);
     m_Renderer.AddChild(m_GameOverText);

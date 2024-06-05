@@ -105,6 +105,7 @@ private:
     std::shared_ptr<Pacman> m_Pacman, m_PacmanDead;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
 	std::shared_ptr<Empty> m_Empty1 ,m_Empty2; //16x16 black img.
+	std::vector<std::shared_ptr<Empty>> m_LifeIcons ,m_BonusIcons; 
     SFX m_SFX;
     BGM m_BGM;
 	std::shared_ptr<Bonus> m_Bonus;

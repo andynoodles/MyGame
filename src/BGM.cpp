@@ -1,7 +1,7 @@
 #include "BGM.hpp"
 
 BGM::BGM(){
-	bgm = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/normal_1.mp3");
+	bgm = std::make_shared<Util::BGM>(RESOURCE_DIR"/sound/normal_1.wav");
 	curBGM = BGMState::NORMAL;	
 	lastBGM = BGMState::OTHER;
 }

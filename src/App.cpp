@@ -365,7 +365,7 @@ void App::PacmanDead() {
 	m_SFX.PlayPacmanDeath();
 	m_BGM.Pause();
 	LOG_DEBUG("PACMAN EATEN");
-	m_Pacman->HpMinusOne();
+	m_Pacman->HpMinusOne();	
 	// Undisplay some objs
 	m_Pacman->SetVisible(false);
 	m_Cyan->SetVisible(false);
