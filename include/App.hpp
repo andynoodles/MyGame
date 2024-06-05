@@ -55,7 +55,7 @@ public:
     unsigned long LevelChange(unsigned long InitTime);
     unsigned long NextLevelInit(unsigned long InitTime);
     unsigned long LevelInit(unsigned long InitTime);
-    void ScoreBoard();
+    unsigned long ScoreBoard();
     void ReadKeyBoard();
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 

@@ -468,7 +468,6 @@ unsigned long App::LevelInit(unsigned long InitTime){
         m_Pink->SetVisible(true);
         m_Orange->SetVisible(true);        
         m_Cyan->SetVisible(true);  
-        m_Pacman->SetVisible(true);
 
 		m_Red->SetFrame(0);
 		m_Pink->SetFrame(0);
@@ -521,6 +520,8 @@ unsigned long App::LevelInit(unsigned long InitTime){
 		m_Pink->SetState(Ghost::GhostState::SCATTER);
 		m_Cyan->SetState(Ghost::GhostState::SCATTER);
 		m_Orange->SetState(Ghost::GhostState::SCATTER);
+
+		m_Pacman->SetVisible(true);
 	}
 
 	alreadyStage1 = false;

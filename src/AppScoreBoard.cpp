@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-void App::ScoreBoard(){
+unsigned long App::ScoreBoard(){
     std::vector<ScoreEntity> scores = m_ScoreBoard->getScore();
     std::string text = "";
     if(scores.size() == 0){
@@ -23,4 +23,6 @@ void App::ScoreBoard(){
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
+
+    return MyElapsedTime();
 }
