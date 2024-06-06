@@ -2,6 +2,9 @@
 
 unsigned long App::ScoreBoard(){
     std::vector<ScoreEntity> scores = m_ScoreBoard->getScore();
+	for(auto lifeIcon : m_LifeIcons){
+		lifeIcon->SetVisible(false);
+	}
     std::string text = "";
     if(scores.size() == 0){
         text = "--Enter To Start--";

@@ -3,7 +3,8 @@
 unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mutate members in the future)
     if (m_PacmanDead->IfAnimationEnds()) {
         m_PacmanDead->SetLooping(false);
-		m_LifeIcons[m_Pacman->GetHp()-1]->SetVisible(false); 
+		if(m_Pacman->GetHp() != 0)
+			m_LifeIcons[m_Pacman->GetHp()-1]->SetVisible(false); 
     }
     
     if (m_Pacman->IsDead()) {
