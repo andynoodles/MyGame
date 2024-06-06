@@ -341,6 +341,12 @@ void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
 	else{
 		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
 	}
+
+	glm::vec2 pos = g->GetPosition();
+	std::pair tile = g->GetTileOfPosition(pos);
+	if(tile.second == TUNNEL_TILE_Y && (tile.first >= TUNNEL_TILE_1_X || tile.first <= TUNNEL_TILE_2_X)){ //Is in tunnel.
+		g->SetSpeedMul(currentLevel.GetGhostTunnelSpeedMul());	
+	}
 }
 
 void App::BGMCtrl(){

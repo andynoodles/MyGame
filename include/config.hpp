@@ -39,6 +39,11 @@
 #define TP_X1 (MAP_WIDTH/2 + PIXELPERTILE) 
 #define TP_X2 (-MAP_WIDTH/2 - PIXELPERTILE) 
 
+//Tunnel
+#define TUNNEL_TILE_1_X (TP_TILE_1_X - 5)
+#define TUNNEL_TILE_2_X (TP_TILE_2_X + 5)
+#define TUNNEL_TILE_Y TP_TILE_Y
+
 //Bouns
 #define BONUS_STAGE_1 70
 #define BONUS_STAGE_2 170

@@ -44,7 +44,8 @@ void Ghost::GhostMoveNormal(){
     if(temp->GetCurrentFrameIndex() == StartIndex + 2){
         temp->SetCurrentFrame(StartIndex);
     }
-    m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
+	
+	m_Transform.translation = m_Transform.translation + (Speed * SpeedMultiplier); 
 }
 
 void Ghost::GhostMoveScared(){
