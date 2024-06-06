@@ -366,6 +366,7 @@ void App::PacmanDead() {
 	m_BGM.Pause();
 	LOG_DEBUG("PACMAN EATEN");
 	m_Pacman->HpMinusOne();	
+
 	// Undisplay some objs
 	m_Pacman->SetVisible(false);
 	m_Cyan->SetVisible(false);
@@ -532,3 +533,13 @@ unsigned long App::LevelInit(unsigned long InitTime){
 	m_Renderer.Update();
 	return MyElapsedTime();
 }
+
+void App::AddLifeDetect(){
+	if(alreadyAddIife == false && m_Score->GetVisibleScore() >= ADD_LIFE_BOUNDARY){
+		m_SFX.PlayExtent();
+		m_LifeIcons[m_Pacman->GetHp()-1]->SetVisible(true); 
+		alreadyAddIife = true;	
+		m_Pacman->HpAddOne();
+	}
+}
+

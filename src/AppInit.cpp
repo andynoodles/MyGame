@@ -173,10 +173,11 @@ unsigned long App::Init() {
 	m_Bonus->SetVisible(false);
 	m_Bonus->SetAppearTime();
 
-	m_LifeIcons.resize(PACMAN_LIFE - 1); //show hp-1 life.
-	for(int i = 0 ;i < m_LifeIcons.size() ;i++){
+	m_LifeIcons.resize(PACMAN_LIFE);
+	for(int i = 0 ;i < PACMAN_LIFE ;i++){ //Life icon indicates how many life are left to die.
 		std::shared_ptr<Empty> lifeIcon = std::make_shared<Empty>(RESOURCE_DIR"/image/Pac/LifeIcon.png");
 		lifeIcon->SetPosition({-MAP_WIDTH/2 + (i+1)*PIXELPERTILE*2 ,-MAP_HEIGHT/2 - (PIXELPERTILE)});
+		lifeIcon->SetVisible(false);
 		m_LifeIcons[i] = lifeIcon;
 		m_Renderer.AddChild(lifeIcon);
 	}

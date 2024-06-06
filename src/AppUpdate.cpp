@@ -10,6 +10,7 @@ unsigned long App::Update() {
 	BGMCtrl();
 	BonusCtrl();
     TimeOutFlashText();
+	AddLifeDetect();
 
     if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
         currentLevel.AddLevel(1);

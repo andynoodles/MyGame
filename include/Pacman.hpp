@@ -37,6 +37,7 @@ public:
     void SetDirection(std::string Direction);
 	void SetSpeedMul(float mul);
 	void HpMinusOne(){ hp--; }
+	void HpAddOne(){ hp++; }
     void SetHp(int value){ hp = value; };
 	//Getter
 	std::string GetDirection(){return MoveDirection;}

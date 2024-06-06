@@ -3,6 +3,7 @@
 unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mutate members in the future)
     if (m_PacmanDead->IfAnimationEnds()) {
         m_PacmanDead->SetLooping(false);
+		m_LifeIcons[m_Pacman->GetHp()-1]->SetVisible(false); 
     }
     
     if (m_Pacman->IsDead()) {
@@ -20,8 +21,9 @@ unsigned long App::Dead(unsigned long InitTime) { // NOLINT(this method will mut
         else
             m_CurrentState = State::REVIVE;
     }
-    
+
     m_Renderer.Update();
+
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }

@@ -86,6 +86,7 @@ public:
 	void Stop();
     void PacmanDead();
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
+	void AddLifeDetect();
 
 	//Bonus
 	void BonusCtrl();
@@ -112,7 +113,7 @@ private:
 
     //custom classes
     unsigned long FoodEffectMarker = 0;
-    bool alreadyStage1 = false ,alreadyStage2 = false;
+    bool alreadyStage1 = false ,alreadyStage2 = false ,alreadyAddIife;
     Level currentLevel;
     std::shared_ptr<RankSystem> m_ScoreBoard;
 };
