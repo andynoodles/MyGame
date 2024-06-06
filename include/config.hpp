@@ -44,7 +44,7 @@
 #define BONUS_STAGE_2 170
 
 //Level
-#define START_LEVEL 5
+#define START_LEVEL 0
 #define TOTAL_LEVEL 10
 
 //BGM

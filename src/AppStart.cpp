@@ -8,8 +8,6 @@ unsigned long App::Start(unsigned long InitTime) {
 	for(int i = 0 ;i < PACMAN_LIFE-1 ;i++){
 		m_LifeIcons[i]->SetVisible(true);
 	}
-	
-
     LevelInit(InitTime);
     // Reset Values
     m_Score->SetFoodScore(0);

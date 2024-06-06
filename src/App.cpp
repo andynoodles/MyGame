@@ -529,6 +529,8 @@ unsigned long App::LevelInit(unsigned long InitTime){
 	alreadyStage2 = false;
 	m_Bonus->SetVisible(false);
 	m_Bonus->SetImage(currentLevel.GetBonusImgPath());
+	if(currentLevel.GetCurrentLevel() < TOTAL_LEVEL-2)//The bonuses for the last three levels are same and don't need to displayed repeately.
+		m_BonusIcons[currentLevel.GetCurrentLevel()]->SetVisible(true);
 
 	m_Renderer.Update();
 	return MyElapsedTime();

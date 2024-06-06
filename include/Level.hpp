@@ -23,6 +23,7 @@ public:
 	float GetGhostFrightSpeedMul();
 	float GetGhostTunnelSpeedMul();
 	std::string GetBonusImgPath();
+	std::string GetBonusImgPath(unsigned int index);
 
 private:
     unsigned int CurrentLevel;

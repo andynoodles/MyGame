@@ -78,3 +78,8 @@ float Level::GetGhostTunnelSpeedMul(){
 std::string Level::GetBonusImgPath(){
 	return bonusImgPath[CurrentLevel];
 }
+
+std::string Level::GetBonusImgPath(unsigned int index){
+	assert(index < TOTAL_LEVEL);
+	return bonusImgPath[index];
+}
