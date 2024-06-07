@@ -42,12 +42,15 @@ public:
 	//Getter
 	std::string GetDirection(){return MoveDirection;}
     glm::vec2 GetPosition(){return m_Transform.translation;}
+    float GetAngle(){ return angle; }
+    void SetAngle(float x){ angle = x; }
 	int GetHp(){return hp;}
 
     [[nodiscard]] bool IfAnimationEnds() const;
     
     
 	void Move(const std::string Direction);
+    void CheatMove(const std::string Direction, float x);
 	void Stop();
 	bool IsDead(){return (GetHp() == 0)? true:false;} // Check if pacman is dead.
 	
@@ -58,10 +61,12 @@ private:
     void FaceSouth();
     void FaceWest();
     void FaceEast();
+    void FaceCheat(float x);
     std::string MoveDirection = "East";
     glm::vec2 Speed;
 	float SpeedMultiplier = 1;
 	int hp;
+    float angle = 0;
 };
 
 #endif //ANIMATED_CHARACTER_HPP
