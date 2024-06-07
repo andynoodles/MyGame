@@ -58,7 +58,7 @@ void Pacman::Move(const std::string Direction){
 
 void Pacman::CheatMove(const std::string Direction, float x){ 
     if(Direction == "East") {
-        FaceCheat(x);
+        FaceCheat(-x);
         Speed = {PACMAN_SPEED, 0};
     }
     else if(Direction == "West") {
@@ -66,7 +66,7 @@ void Pacman::CheatMove(const std::string Direction, float x){
         Speed = {-PACMAN_SPEED, 0};
     }
     else if(Direction == "North") {
-        FaceCheat(x);
+        FaceCheat(-x);
         Speed = {0, PACMAN_SPEED};
     }
     else if(Direction == "South") {
