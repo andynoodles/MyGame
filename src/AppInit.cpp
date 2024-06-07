@@ -173,6 +173,24 @@ unsigned long App::Init() {
 	m_Bonus->SetVisible(false);
 	m_Bonus->SetAppearTime();
 
+	m_LifeIcons.resize(PACMAN_LIFE);
+	for(int i = 0 ;i < PACMAN_LIFE ;i++){ //Life icon indicates how many life are left to die.
+		std::shared_ptr<Empty> lifeIcon = std::make_shared<Empty>(RESOURCE_DIR"/image/Pac/LifeIcon.png");
+		lifeIcon->SetPosition({-MAP_WIDTH/2 + (i+1)*PIXELPERTILE*2 ,-MAP_HEIGHT/2 - PIXELPERTILE});
+		lifeIcon->SetVisible(false);
+		m_LifeIcons[i] = lifeIcon;
+		m_Renderer.AddChild(lifeIcon);
+	}
+
+	m_BonusIcons.resize(TOTAL_LEVEL);
+	for(int i = 0 ; i < m_BonusIcons.size() ; i++){
+		std::shared_ptr<Empty> bonusIcon= std::make_shared<Empty>(currentLevel.GetBonusImgPath(i));
+		bonusIcon->SetPosition({MAP_WIDTH/2-(i+1)*PIXELPERTILE*2 ,-MAP_HEIGHT/2 - PIXELPERTILE});
+		bonusIcon->SetVisible(false);
+		m_BonusIcons[i] = bonusIcon;
+		m_Renderer.AddChild(bonusIcon);	
+	}
+
     m_Renderer.AddChild(m_Score);
     m_Renderer.AddChild(m_ReadyText);
     m_Renderer.AddChild(m_GameOverText);

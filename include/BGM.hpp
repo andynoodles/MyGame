@@ -11,18 +11,22 @@ public:
 		NORMAL, //Ghost is chasing Pacman.
 		RETREAT, //Ghost is going home.
 		POWER, //Pacman is chasing ghost.
-		DEATH, //Pacman is dieing.
 		OTHER
 	};
 
 	BGM();
 
 	void PlayStart();
-	void PlayNormal();
+	void PlayNormal(unsigned int currentFoodScore);
 	void PlayRetreat();
 	void PlayPower();
-	void PlayDeath();
+	void Pause();
+	void Resume();
+	
+	//Setter
+	void SetLastBGM(BGMState st){lastBGM = st;}
 
+	//Getter
 	BGMState GetCurBGM(){return curBGM;} 
 private:
 	std::shared_ptr<Util::BGM> bgm; //Current BGM.

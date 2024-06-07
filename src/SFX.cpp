@@ -5,6 +5,7 @@ SFX::SFX(){
 	eatGhost = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/eat_ghost.wav");
 	eatBonus = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/eat_fruit.wav");
 	pacmanDeath = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/Death.mp3");
+	extend = std::make_shared<Util::SFX>(RESOURCE_DIR"/sound/extend.wav");
 }
 
 void SFX::PlayMunch(){
@@ -21,4 +22,8 @@ void SFX::PlayEatBonus(){
 
 void SFX::PlayPacmanDeath(){
 	pacmanDeath->Play();
+}
+
+void SFX::PlayExtent(){
+	extend->Play();
 }

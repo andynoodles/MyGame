@@ -37,6 +37,7 @@ public:
     void SetDirection(std::string Direction);
 	void SetSpeedMul(float mul);
 	void HpMinusOne(){ hp--; }
+	void HpAddOne(){ hp++; }
     void SetHp(int value){ hp = value; };
 	//Getter
 	std::string GetDirection(){return MoveDirection;}
@@ -60,7 +61,7 @@ private:
     std::string MoveDirection = "East";
     glm::vec2 Speed;
 	float SpeedMultiplier = 1;
-	int hp = 2;
+	int hp;
 };
 
 #endif //ANIMATED_CHARACTER_HPP

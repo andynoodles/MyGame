@@ -86,6 +86,7 @@ public:
 	void Stop();
     void PacmanDead();
 	std::pair<int ,int> GetTileIntented(std::string newDirection);
+	void AddLifeDetect();
 
 	//Bonus
 	void BonusCtrl();
@@ -105,13 +106,14 @@ private:
     std::shared_ptr<Pacman> m_Pacman, m_PacmanDead;
     std::shared_ptr<Ghost> m_Red, m_Pink, m_Cyan, m_Orange;
 	std::shared_ptr<Empty> m_Empty1 ,m_Empty2; //16x16 black img.
+	std::vector<std::shared_ptr<Empty>> m_LifeIcons ,m_BonusIcons; 
     SFX m_SFX;
     BGM m_BGM;
 	std::shared_ptr<Bonus> m_Bonus;
 
     //custom classes
     unsigned long FoodEffectMarker = 0;
-    bool alreadyStage1 = false ,alreadyStage2 = false;
+    bool alreadyStage1 = false ,alreadyStage2 = false ,alreadyAddIife;
     Level currentLevel;
     std::shared_ptr<RankSystem> m_ScoreBoard;
 };

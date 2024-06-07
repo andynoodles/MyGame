@@ -35,6 +35,7 @@ Level::Level(){
 }
 
 void Level::SetLevel(unsigned int level){
+	assert(level < TOTAL_LEVEL); //check if out of range	
     CurrentLevel = level;
 }
 
@@ -47,7 +48,7 @@ unsigned int Level::GetCurrentLevel(){
 }
 
 int Level::GetFrightTime(){
-	return frightTime[CurrentLevel];
+	return frightTime[CurrentLevel]*1000;
 }
 
 int Level::GetBounsScore(){
@@ -76,4 +77,9 @@ float Level::GetGhostTunnelSpeedMul(){
 
 std::string Level::GetBonusImgPath(){
 	return bonusImgPath[CurrentLevel];
+}
+
+std::string Level::GetBonusImgPath(unsigned int index){
+	assert(index < TOTAL_LEVEL);
+	return bonusImgPath[index];
 }

@@ -2,6 +2,7 @@
 #define LEVEL_HPP
 #include<vector>
 #include<string>
+#include<cassert>
 #include "config.hpp"
 
 class Level{
@@ -22,6 +23,7 @@ public:
 	float GetGhostFrightSpeedMul();
 	float GetGhostTunnelSpeedMul();
 	std::string GetBonusImgPath();
+	std::string GetBonusImgPath(unsigned int index);
 
 private:
     unsigned int CurrentLevel;

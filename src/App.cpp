@@ -341,6 +341,12 @@ void App::SetGhostSpeedMul(std::shared_ptr<Ghost> g){
 	else{
 		g->SetSpeedMul(currentLevel.GetGhostSpeedMul());
 	}
+
+	glm::vec2 pos = g->GetPosition();
+	std::pair tile = g->GetTileOfPosition(pos);
+	if(tile.second == TUNNEL_TILE_Y && (tile.first >= TUNNEL_TILE_1_X || tile.first <= TUNNEL_TILE_2_X)){ //Is in tunnel.
+		g->SetSpeedMul(currentLevel.GetGhostTunnelSpeedMul());	
+	}
 }
 
 void App::BGMCtrl(){
@@ -357,13 +363,16 @@ void App::BGMCtrl(){
 			return;
 		}
 	}
-	m_BGM.PlayNormal();
+	
+	m_BGM.PlayNormal(m_Score->GetFoodScore());
 }
 
 void App::PacmanDead() {
 	m_SFX.PlayPacmanDeath();
+	m_BGM.Pause();
 	LOG_DEBUG("PACMAN EATEN");
-	m_Pacman->HpMinusOne();
+	m_Pacman->HpMinusOne();	
+
 	// Undisplay some objs
 	m_Pacman->SetVisible(false);
 	m_Cyan->SetVisible(false);
@@ -526,7 +535,19 @@ unsigned long App::LevelInit(unsigned long InitTime){
 	alreadyStage2 = false;
 	m_Bonus->SetVisible(false);
 	m_Bonus->SetImage(currentLevel.GetBonusImgPath());
+	if(currentLevel.GetCurrentLevel() < TOTAL_LEVEL-2)//The bonuses for the last three levels are same and don't need to displayed repeately.
+		m_BonusIcons[currentLevel.GetCurrentLevel()]->SetVisible(true);
 
 	m_Renderer.Update();
 	return MyElapsedTime();
 }
+
+void App::AddLifeDetect(){
+	if(alreadyAddIife == false && m_Score->GetVisibleScore() >= ADD_LIFE_BOUNDARY){
+		m_SFX.PlayExtent();
+		m_LifeIcons[m_Pacman->GetHp()-1]->SetVisible(true); 
+		alreadyAddIife = true;	
+		m_Pacman->HpAddOne();
+	}
+}
+

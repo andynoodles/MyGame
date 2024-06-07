@@ -7,6 +7,7 @@
 #define PACMAN_SPEED 2.5
 #define PACMAN_STARTTILE_X 13
 #define PACMAN_STARTTILE_Y 23
+#define PACMAN_LIFE 5
 
 //Ghost setting
 #define GHOST_SPEED 2.5
@@ -29,6 +30,7 @@
 //Score
 #define FOOD_SCORE 10
 #define FULL_FOOD_SCORE ((LARGE_FOOD_NUM + SMALL_FOOD_NUM) * FOOD_SCORE)
+#define ADD_LIFE_BOUNDARY 10000
 
 //Transport point
 #define TP_TILE_1_X 27
@@ -37,13 +39,21 @@
 #define TP_X1 (MAP_WIDTH/2 + PIXELPERTILE) 
 #define TP_X2 (-MAP_WIDTH/2 - PIXELPERTILE) 
 
+//Tunnel
+#define TUNNEL_TILE_1_X (TP_TILE_1_X - 5)
+#define TUNNEL_TILE_2_X (TP_TILE_2_X + 5)
+#define TUNNEL_TILE_Y TP_TILE_Y
+
 //Bouns
 #define BONUS_STAGE_1 70
 #define BONUS_STAGE_2 170
 
 //Level
-#define START_LEVEL 5
+#define START_LEVEL 0
 #define TOTAL_LEVEL 10
+
+//BGM
+#define NORMAL_BGM_CHANGE_SCORE_THRESHOLD 1000
 
 //Other
 #define GAME_OPENING_TIME_DURATION 4550
