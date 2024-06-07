@@ -1,4 +1,5 @@
 #include "App.hpp"
+#include <string>
 
 unsigned long App::ScoreBoard(){
     std::vector<ScoreEntity> scores = m_ScoreBoard->getScore();
@@ -15,8 +16,9 @@ unsigned long App::ScoreBoard(){
         text = "--Enter To Start--";
     }
     else{
+        int index = 1;
         for(const auto& item : scores){
-	        text.append(item.name + " " + std::to_string(item.score) + "\n");
+	        text.append(std::to_string(index++) + std::to_string(item.score) + "\n");
         }
     }
     
