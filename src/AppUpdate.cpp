@@ -15,7 +15,7 @@ unsigned long App::Update() {
     if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
         currentLevel.AddLevel(1);
         if(currentLevel.GetCurrentLevel() == TOTAL_LEVEL){
-            m_ScoreBoard->addScore("DEV", m_Score->GetVisibleScore());
+            m_ScoreBoard->addScore("", m_Score->GetVisibleScore());
             m_ScoreBoard->saveScores();
             m_CurrentState = State::SCORE_BOARD;    
         }
