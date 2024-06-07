@@ -5,6 +5,7 @@ unsigned long App::Start(unsigned long InitTime) {
     // init setting
     m_BGM.PlayStart(); 
     m_ReadyText->SetVisible(true);
+	currentLevel.SetLevel(START_LEVEL);
 	for(int i = 0 ;i < PACMAN_LIFE-1 ;i++){
 		m_LifeIcons[i]->SetVisible(true);
 	}
