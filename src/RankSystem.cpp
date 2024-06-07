@@ -40,11 +40,9 @@ void RankSystem::saveScores() {
         scores.pop_back();
     }
 
-    int index = 1;
-
     std::ofstream fileout(filename);
     for (const auto& entry : scores) {
-        fileout << std::to_string(index++) << " " << entry.score << std::endl;
+        fileout << entry.score << std::endl;
     }
 
     fileout.close();
