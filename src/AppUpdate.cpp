@@ -12,6 +12,17 @@ unsigned long App::Update() {
     TimeOutFlashText();
 	AddLifeDetect();
 
+    // Press C to turn on cheat
+    if(Util::Input::IsKeyUp(Util::Keycode::C) ) {
+        if (cheatMode){
+            cheatMode = false;
+        }
+        else{
+            cheatMode = true;
+        }
+    }
+
+    // skip level cheat(Press J to skip)
     if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
         currentLevel.AddLevel(1);
         if(currentLevel.GetCurrentLevel() == TOTAL_LEVEL){

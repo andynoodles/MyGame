@@ -18,7 +18,7 @@ unsigned long App::ScoreBoard(){
     else{
         int index = 1;
         for(const auto& item : scores){
-	        text.append(std::to_string(index++) + std::to_string(item.score) + "\n");
+	        text.append(std::to_string(index++)+ " " + std::to_string(item.score) + "\n");
         }
     }
     

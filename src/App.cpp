@@ -50,7 +50,9 @@ void App::GhostCollision(){
 		if( collided && (g->GetState() == Ghost::GhostState::SCATTER || 
 						g->GetState() == Ghost::GhostState::CHASE ||
 						g->GetState() == Ghost::GhostState::REVIVE)){
-			PacmanDead();
+			if(!cheatMode){
+				PacmanDead();
+			}
 			break;
 		}
 		else if (collided && (g->GetState() == Ghost::GhostState::FLASHING ||
@@ -75,7 +77,16 @@ void App::PacmanMoveProcess(){
 	}
 	else{
 		SetPacmanSpeedMul();
-		m_Pacman->Move(m_Pacman->GetDirection());
+		if(cheatMode){
+			m_Pacman->CheatMove(m_Pacman->GetDirection(), m_Pacman->GetAngle());
+			m_Pacman->SetAngle( m_Pacman->GetAngle() + 0.3);
+			if (m_Pacman->GetAngle() > 2 * PI) {
+				m_Pacman->SetAngle(0);
+			}
+		}
+		else{
+			m_Pacman->Move(m_Pacman->GetDirection());
+		}
 	}
 }
 

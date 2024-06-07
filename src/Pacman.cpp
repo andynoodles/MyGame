@@ -23,6 +23,10 @@ void Pacman::FaceEast(){
     m_Transform.rotation = 0;
 }
 
+void Pacman::FaceCheat(float x){
+    m_Transform.rotation = x;
+}
+
 void Pacman::SetPosition(const glm::vec2& Position){ 
     m_Transform.translation = Position; 
 }
@@ -46,6 +50,27 @@ void Pacman::Move(const std::string Direction){
     }
     else if(Direction == "South") {
         FaceSouth();
+        Speed = {0, -PACMAN_SPEED};
+    }
+	SetPosition(m_Transform.translation + (Speed * this->SpeedMultiplier)); 
+	checkTp();
+}
+
+void Pacman::CheatMove(const std::string Direction, float x){ 
+    if(Direction == "East") {
+        FaceCheat(x);
+        Speed = {PACMAN_SPEED, 0};
+    }
+    else if(Direction == "West") {
+        FaceCheat(x);
+        Speed = {-PACMAN_SPEED, 0};
+    }
+    else if(Direction == "North") {
+        FaceCheat(x);
+        Speed = {0, PACMAN_SPEED};
+    }
+    else if(Direction == "South") {
+        FaceCheat(x);
         Speed = {0, -PACMAN_SPEED};
     }
 	SetPosition(m_Transform.translation + (Speed * this->SpeedMultiplier)); 
