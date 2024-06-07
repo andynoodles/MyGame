@@ -22,9 +22,6 @@ unsigned long App::Revive(unsigned long ReviveTime) {
             Food->SetZIndex(10);
         }
 
-        // Reset FoodScore to 0
-        m_Score->SetFoodScore(0);
-
         // Stop animation for dead pacman
         m_PacmanDead->SetLooping(false);
         m_PacmanDead->SetVisible(false);
