@@ -30,7 +30,7 @@
 //Score
 #define FOOD_SCORE 10
 #define FULL_FOOD_SCORE ((LARGE_FOOD_NUM + SMALL_FOOD_NUM) * FOOD_SCORE)
-#define ADD_LIFE_BOUNDARY 1000
+#define ADD_LIFE_BOUNDARY 10000
 
 //Transport point
 #define TP_TILE_1_X 27

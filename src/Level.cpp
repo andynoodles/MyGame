@@ -48,7 +48,7 @@ unsigned int Level::GetCurrentLevel(){
 }
 
 int Level::GetFrightTime(){
-	return frightTime[CurrentLevel];
+	return frightTime[CurrentLevel]*1000;
 }
 
 int Level::GetBounsScore(){
