@@ -2,6 +2,7 @@
 #include <string>
 
 unsigned long App::ScoreBoard(){
+	m_BGM.Pause();
     std::vector<ScoreEntity> scores = m_ScoreBoard->getScore();
 
 	for(auto lifeIcon : m_LifeIcons){
