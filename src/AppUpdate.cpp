@@ -25,6 +25,7 @@ unsigned long App::Update() {
     // skip level cheat(Press J to skip)
     if(m_Score->IsFoodAllEaten() || Util::Input::IsKeyUp(Util::Keycode::J) ) {
         currentLevel.AddLevel(1);
+        FoodEffectMarker = 0;
         if(currentLevel.GetCurrentLevel() == TOTAL_LEVEL){
             m_ScoreBoard->addScore("", m_Score->GetVisibleScore());
             m_ScoreBoard->saveScores();

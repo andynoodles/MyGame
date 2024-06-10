@@ -390,6 +390,7 @@ void App::PacmanDead() {
 	m_Red->SetVisible(false);
 	m_Orange->SetVisible(false);
 	m_Pink->SetVisible(false);
+	m_Bonus->SetVisible(false);
 	for (auto& Food : m_SmallFood) {
 		Food->SetZIndex(-2);
 	}
