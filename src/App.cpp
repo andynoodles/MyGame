@@ -1,5 +1,5 @@
 #include "App.hpp"
-#include "SDL_mixer.h"
+
 //conflict
 unsigned long App::MyElapsedTime(){
 	return m_Time.GetElapsedTimeMs() + 100000;
