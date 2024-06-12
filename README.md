@@ -17,6 +17,6 @@ Using Windows
 cmake -DCMAKE_BUILD_TYPE=Debug -B build ^ cmake --build build  ^ ./build/pacman
 ```
 ## Final
+[Video Demo](https://drive.google.com/file/d/1ewmeeTJDQ6CmqO4AfkSdTUK3Ckl6wSQm/view?usp=sharing)
 
-[Video](https://drive.google.com/file/d/1ewmeeTJDQ6CmqO4AfkSdTUK3Ckl6wSQm/view?usp=sharing)
 [Report](https://drive.google.com/file/d/1JN6xUezAYm4XA7u94xWzpUjpeHiNk0bL/view?usp=drive_link)
